@@ -26,4 +26,9 @@ public class MatchBoardService {
 	public List<MatchBoard> findMatchBoard(String mb_stat, String mb_Type){
 		return dao.findByMbStatAndMbType(mb_stat, mb_Type);
 	}
+	
+	//매치등록
+	public void saveBoard(MatchBoard mb) {
+		dao.save(mb);
+	}
 }

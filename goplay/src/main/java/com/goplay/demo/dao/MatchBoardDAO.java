@@ -10,9 +10,8 @@ import com.goplay.demo.vo.MatchBoard;
 public interface MatchBoardDAO extends JpaRepository<MatchBoard, Integer> {
 	public List<MatchBoard> findAllByOrderByMbDate();
 	
-
 	public List<MatchBoard> findByMbStat(@Param("mb_stat") String mb_stat);
 	
 	public List<MatchBoard> findByMbStatAndMbType(@Param("mb_stat") String mb_stat, @Param("mb_type") String mb_type);
-
+	
 }

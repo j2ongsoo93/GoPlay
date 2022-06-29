@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goplay.demo.service.MatchBoardService;
@@ -32,6 +33,12 @@ public class MatchBoardController {
 	@GetMapping("/findMatchBoard")
 	public List<MatchBoard> findBy(){
 		return ms.findMatchBoardByMbStat("종료");
+	}
+	
+	
+	@PostMapping("/insertBoard")
+	public void insertBoard(MatchBoard mb) {
+		ms.saveBoard(mb);
 	}
 
 }
