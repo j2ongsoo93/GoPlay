@@ -4,8 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 추가: Querydsl dependency" />
-
+    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 추가: Querydsl dependency">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/QuerydslConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/MatchBoardSearchCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/GoplayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/GoplayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -25,7 +38,6 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
-
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,8 +52,8 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
@@ -68,27 +80,27 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "ed2f642897ffccf8febe2b67a2a7a190"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ed2f642897ffccf8febe2b67a2a7a190&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\j2ong\Documents\GitHub\GoPlay\goplay\src\main\resources" />
@@ -114,6 +126,9 @@
       <workItem from="1656513433097" duration="3617000" />
       <workItem from="1656518555648" duration="50000" />
       <workItem from="1656547176191" duration="15975000" />
+      <workItem from="1656574052589" duration="4015000" />
+      <workItem from="1656591852686" duration="1353000" />
+      <workItem from="1656593230310" duration="9003000" />
     </task>
     <task id="LOCAL-00001" summary="[박정수] 추가: Querydsl dependency">
       <created>1656569367336</created>
@@ -139,7 +154,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/PJS" />
+                        <option value="PJS" />
                       </list>
                     </value>
                   </entry>
