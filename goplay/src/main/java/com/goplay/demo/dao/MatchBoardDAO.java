@@ -27,6 +27,4 @@ public interface MatchBoardDAO extends JpaRepository<MatchBoard, Integer>{
 
 
 
-
-
 }
