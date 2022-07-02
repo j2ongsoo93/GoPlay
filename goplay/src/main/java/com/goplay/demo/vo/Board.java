@@ -35,7 +35,7 @@ public class Board {
 	private	int	bHit	;
 	private	Date	schDate	;
 	private	String	schPlace	;
-	
+	 
 	@ManyToOne
 	@JoinColumn(name="c_no" ,insertable = true, updatable = true)
 	@JsonBackReference

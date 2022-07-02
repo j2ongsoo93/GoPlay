@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 	@Id
 	private	String	id	;
+	
 	private	String	pwd	;
 	private	String	phone	;
 	private	String	email	;
