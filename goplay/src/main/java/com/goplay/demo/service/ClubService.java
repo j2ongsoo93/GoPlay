@@ -3,6 +3,8 @@ package com.goplay.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.ClubDAOCustom;
@@ -21,7 +23,7 @@ public class ClubService {
 	private ClubDAOCustom daoCustom;
 	
 	//클럽 검색 기능
-	public List<ClubDTO> searchClub(ClubSearchCondition condition) {
-		return daoCustom.searchClub(condition);
+	public Page<ClubDTO> searchClub(Pageable pageable,ClubSearchCondition condition) {
+		return daoCustom.searchClub(pageable, condition);
 	}
 }

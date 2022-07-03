@@ -19,4 +19,5 @@ public class ClubDTO {
 	private	String	cImg	;
 	private	String	cIntro	;
 	private	String	cStat	;
+	
 }
