@@ -1,17 +1,13 @@
 package com.goplay.demo.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -23,12 +19,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "match_board")
+@SequenceGenerator(
+		name = "seq_match_board",
+		sequenceName = "seq_match_board",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class MatchBoard {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	mb_no	;
 	
-	@ManyToOne
-	@JoinColumn(name = "home_club", insertable = true, updatable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "home_club")
 	@JsonBackReference
 	private	Club 	club;
 	
@@ -49,15 +51,12 @@ public class MatchBoard {
 	private	Integer	aScore	;
 	private	String	mbStat	;
 	
-	@OneToMany(mappedBy = "match_board", fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private List<MatchOffer> match_offer;
+	@OneToMany(mappedBy = "match_board")
+	private List<MatchOffer> match_offer = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "match_board", fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private List<MatchMember> match_member;
+	@OneToMany(mappedBy = "match_board")
+	private List<MatchMember> match_member = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "match_board", fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private List<MatchRecord> match_record;
+	@OneToMany(mappedBy = "match_board")
+	private List<MatchRecord> match_record = new ArrayList<>();
 }

@@ -3,13 +3,7 @@ package com.goplay.demo.vo;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,8 +17,14 @@ import lombok.NoArgsConstructor;
 @Table(name="board")
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(
+		name = "seq_board",
+		sequenceName = "seq_board",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class Board {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	bNo	;
 	private	String	bTitle	;
 	private	String	bContent	;
@@ -36,18 +36,18 @@ public class Board {
 	private	Date	schDate	;
 	private	String	schPlace	;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="c_no" ,insertable = true, updatable = true)
 	@JsonBackReference
 	private	Club club	;
 	
 	private	Integer	bType	;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Member member	;
 	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "board")
 	@JsonManagedReference
 	private List<Reply> reply;
 

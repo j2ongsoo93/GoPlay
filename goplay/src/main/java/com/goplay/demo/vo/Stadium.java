@@ -1,8 +1,6 @@
 package com.goplay.demo.vo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +11,14 @@ import lombok.NoArgsConstructor;
 @Table(name="stadium")
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(
+		name = "seq_stadium",
+		sequenceName = "seq_stadium",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class Stadium {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int		stdNo	;
 	private	String	stdName	;
 	private	String	stdType	;

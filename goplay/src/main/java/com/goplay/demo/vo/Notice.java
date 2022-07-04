@@ -1,11 +1,7 @@
 package com.goplay.demo.vo;
 
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,8 +14,14 @@ import lombok.NoArgsConstructor;
 @Table(name="notice")
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(
+		name = "seq_notice",
+		sequenceName = "seq_notice",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class Notice {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	nNo;
 	private	String			nTitle;
 	private	String			nContent;
@@ -29,7 +31,7 @@ public class Notice {
 	private	LocalDateTime	nDate;
 	private	Integer			nHit;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Member member	;

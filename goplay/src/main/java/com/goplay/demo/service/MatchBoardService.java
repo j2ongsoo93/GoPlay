@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.goplay.demo.dao.MatchBoardDAOCustom;
+import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
