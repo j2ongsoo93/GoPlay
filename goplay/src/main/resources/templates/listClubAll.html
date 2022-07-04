@@ -215,15 +215,58 @@
             </div>
          </div>
       </div>
+
+<div> 
+	<form method="GET" th:action="@{/listClubAll}">
+		<!-- 라디오버튼   -->
+		<div class="form-check" data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>종목을 선택하세요 </legend>
+				<input type="radio" name="radio" id="soccer" value="축구" checked="checked" />
+					<label for="soccer">축구</label>
+				<input type="radio" name="radio" id="footVolleyball" value="족구" />
+					<label for="footVolleyball">족구</label>
+				<input type="radio" name="radio" id="futsal" value="풋살" />
+					<label for="futsal">풋살</label>
+				<input type="radio" name="radio" id="basketball" value="농구" />
+					<label for="basketball">농구</label>
+			</fieldset>
+		</div>
+	시도 선택 
+		<div class="col-md-3 mb-3">
+			<label for="validationCustom01">시/도</label>
+			<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01">
+			   <option selected=""   th:value="인천시" th:text="인천시" ></option>
+			</select>
+			<div class="invalid-feedback">
+			   Please select a valid state.
+			</div>
+			
+			<label for="validationCustom02">도 / 구</label>
+			<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02">
+			   <option selected="" th:value="연수구" th:text="연수구"  ></option>
+			</select>
+			<div class="invalid-feedback">
+			   Please select a valid state.
+			</div>
+		</div>
+		
+		<!--키워드 검색 -->
+		<div class="col-auto">
+			<input type="text" id="searchText" name="searchText" style="width:200px" class="form-control"  placeholder="키워드 입력" >
+		</div>
+		<div class="col-auto">
+		 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button>
+		</div>
+	</form>
+</div> 
+
       <div class="py-5">
          <div class="container">
             <div class="row">
-            
-			
 			<div class="col-lg-12 col-md-12">
-			
-			
-			<!-- 			개수 만큼 띄우기 -->
+
+		<!-- 개수 만큼 띄우기 버튼-->
 			 <div class="btn-group">
                   <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Action
@@ -236,7 +279,6 @@
                      <a class="dropdown-item" href="#">Separated link</a>
                   </div>
 			 </div>
-			
 			<!-- 페이징  -->
 			
 			<div class="row" > 
@@ -264,8 +306,8 @@
 	<!--   페이지 왼쪽 버튼 -->
     <li class="page-item" th:classappend="${1 == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' ">
       <a class="page-link" href="#" 
-      	th:href="@{/pagingTestblog(page=${clubDTOPage.pageable.pageNumber-1})}" tabindex="-1">
-      	<i class="feather-arrow-left"></i></a>
+      	th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber-1})}" tabindex="-1">
+      	<i class="feather-arrow-left"></i>Previous</a>
     </li>
     
     <!--   페이지 이동 -->
@@ -274,7 +316,7 @@
 	    th:each="i:${#numbers.sequence(startPage, endPage)}">
 	    	<a class="page-link" href="#" 
 	    		th:text="${i}" 
-	    		th:href="@{/pagingTestblog(page=${i-1})}"> 
+	    		th:href="@{/listClubAll(page=${i-1})}"> 
 	    	</a>
     </li>
     
@@ -282,8 +324,8 @@
     <li class="page-item" 
     	th:classappend="${clubDTOPage.TotalPages == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' ">
       		<a class="page-link" href="#" 
-      			th:href="@{/pagingTestblog(page=${clubDTOPage.pageable.pageNumber+1})}">
-      				<i class="feather-arrow-right"></i></a>
+      			th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber+1})}">
+      				<i class="feather-arrow-right">Next</i></a>
     </li>
   </ul>
 </nav>

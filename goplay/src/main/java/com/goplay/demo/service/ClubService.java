@@ -23,7 +23,7 @@ public class ClubService {
 	private ClubDAOCustom daoCustom;
 	
 	//클럽 검색 기능
-	public Page<ClubDTO> searchClub(Pageable pageable,ClubSearchCondition condition) {
-		return daoCustom.searchClub(pageable, condition);
+	public Page<ClubDTO> listClubAll(Pageable pageable,ClubSearchCondition condition) {
+		return daoCustom.listClubAll(pageable, condition);
 	}
 }

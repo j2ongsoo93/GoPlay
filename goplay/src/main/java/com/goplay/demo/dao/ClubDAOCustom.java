@@ -25,11 +25,7 @@ public class ClubDAOCustom {
 	QClub qClub = QClub.club;
 	
 	//클럽 검색 기능
-	public Page<ClubDTO> searchClub(Pageable pageable, ClubSearchCondition condition) {
-//		System.out.println("getOffset : " + pageable.getOffset());
-//		System.out.println("getPageSize : " + pageable.getPageSize());
-//		System.out.println("getPageSize : " + pageable.getPageNumber());
-		
+	public Page<ClubDTO> listClubAll(Pageable pageable, ClubSearchCondition condition) {
 //		return new PageImpl<ClubDTO>(queryFactory
 //		    .select(Projections.constructor(ClubDTO.class, qClub.c_no, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 //		    .from(qClub)
@@ -48,17 +44,17 @@ public class ClubDAOCustom {
 			    .from(qClub)
 			    .where(
 			    		(cTypeEq(condition.getC_type())
-			    		//.and(cLoc1Eq(condition.getC_loc1()))
-			    		//.and(cLoc2Eq(condition.getC_loc2()))).and
-			    		//((qClub.cLoc1.contains(condition.getC_keyword()))
-			    		//.or(qClub.cLoc2.contains(condition.getC_keyword()))
-			    		//.or(qClub.cName.contains(condition.getC_keyword()))
-			    		//.or(qClub.cType.contains(condition.getC_keyword())))
-			    		)).offset(pageable.getOffset()).limit(pageable.getPageSize())
+			    		.and(cLoc1Eq(condition.getC_loc1()))
+			    		.and(cLoc2Eq(condition.getC_loc2()))).and
+			    		((qClub.cLoc1.contains(condition.getC_keyword()))
+			    		.or(qClub.cLoc2.contains(condition.getC_keyword()))
+			    		.or(qClub.cName.contains(condition.getC_keyword()))
+			    		.or(qClub.cType.contains(condition.getC_keyword())))
+			    		).offset(pageable.getOffset()).limit(pageable.getPageSize())
 			    .fetchResults();
 		List<ClubDTO> content = results.getResults();
 		long total = results.getTotal();
-		return new PageImpl<>(content,pageable,total);
+		return new PageImpl<>(content, pageable, total);
 	  }
     private BooleanExpression cTypeEq(String cType){
         if(cType == null || cType.equals("")){
