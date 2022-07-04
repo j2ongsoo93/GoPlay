@@ -1,12 +1,9 @@
 package com.goplay.demo.vo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,18 +13,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="match_record")
+@SequenceGenerator(
+		name = "seq_match_record",
+		sequenceName = "seq_match_record",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class MatchRecord {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	recNo	;
 	
-	@ManyToOne
-	@JoinColumn(name = "mb_no", insertable = true, updatable = true)
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mb_no")
+	@JsonIgnore
 	private	MatchBoard match_board;
 	
-	@ManyToOne
-	@JoinColumn(name = "c_no", insertable = true, updatable = true)
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "c_no")
+	@JsonIgnore
 	private	Club club;
 	
 	private	int	win	;

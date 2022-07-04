@@ -1,11 +1,7 @@
 package com.goplay.demo.vo;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,18 +14,24 @@ import lombok.NoArgsConstructor;
 @Table(name="reply")
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(
+		name = "seq_reply",
+		sequenceName = "seq_reply",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class Reply {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	rNo	;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "b_no", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Board board	;
 	
 	private	String	rContent	;
 	private	Date	rDate	;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Member member	;

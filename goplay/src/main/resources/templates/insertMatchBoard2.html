@@ -16,57 +16,7 @@
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-         $(function(){
-            $.ajax({
-               url:"/listCity",
-               success: function(data){
-                  $.each(data,function(){
-                     let option = $("<option></option>");
-                     option.html(this.acName);
-                     option.attr("value",this.acName);
-                     $("#loc1").append(option);
 
-
-                  });
-               }
-            });
-
-            $.ajax({
-               url:"/listDistrict/"+"서울특별시",
-               success: function(data) {
-                  let district = data[0].address_district;
-                  console.log(district)
-                  $.each(district,function(){
-                     let option = $("<option></option>");
-                     option.html(this.adName);
-                     option.attr("value",this.adName);
-                     $("#loc2").append(option);
-                  });
-               }
-            });
-
-            $(document).on("change", "#loc1", function (){
-               $("#loc2").empty();
-               let acName = $(this).val()
-               console.log(acName);
-               $.ajax({
-                  url:"/listDistrict/"+acName,
-                  success: function(data) {
-                     let district = data[0].address_district;
-                     console.log(district)
-                     $.each(district,function(){
-                        let option = $("<option></option>");
-                        option.html(this.adName);
-                        option.attr("value",this.adName);
-                        $("#loc2").append(option);
-                     });
-                  }
-               });
-            });
-         });
-      </script>
    </head>
    <body>
       <!-- Navigation -->
@@ -267,137 +217,44 @@
                      </div>
                      <div class="box-body p-3">
                         <form class="js-validate" novalidate="novalidate">
-
-                           <!-- Input 경기일자 -->
-                           <label class="form-label">
-                              경기일자
-                              <span class="text-danger">*</span>
-                           </label>
-
+                           <!-- 날짜, 시간 -->
                            <div class="row">
-                              <!-- Input 날짜 -->
-                              <div class="col-md-6 mb-3 mb-sm-6">
+                              <!-- input 날짜 -->
+                              <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
+                                    <label id="dateLabel" class="form-label">
+                                       날짜
+                                       <span class="text-danger">*</span>
+                                    </label>
                                     <div class="form-group">
-                                       <input type="date" id="mbDate" class="form-control" th:name="mbDate">
+                                       <input type="date" class="form-control" th:name="mbDate">
                                     </div>
                                  </div>
                               </div>
                               <!-- End Input 날짜 -->
+
                               <!-- input 시간 -->
-                              <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
+                              <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <div class="form-group">
-                                       <select class="form-control custom-select">
-                                          <option th:each="hour:${#numbers.sequence(0,24)}" th:text="${hour}+'시'", th:value="${hour}"></option>
-                                       </select>
-                                    </div>
+                                    <label id="timeLabel" class="form-label">
+                                       시간
+                                       <span class="text-danger">*</span>
+                                    </label>
+
+                                       <div class="js-form-message">
+                                          <div class="form-group">
+                                             <select class="form-control custom-select" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
+                                                <option th:each="hour:${#numbers.sequence(0,24)}" th:text="${hour}", th:value="${hour}"></option>
+                                             </select>
+                                             <select class="form-control custom-select" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
+                                                <option th:each="min:${#numbers.sequence(0,30,30)}" th:text="${min}" th:value="${min}"></option>
+                                             </select>
+                                          </div>
+                                       </div>
                                  </div>
                               </div>
                               <!-- End Input 시간 -->
-                              <!-- Input 분 -->
-                              <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
-                                 <div class="js-form-message">
-                                    <div class="form-group">
-                                       <select class="form-control custom-select">
-                                          <option th:each="min:${#numbers.sequence(0,30,30)}" th:text="${min}+'분'" th:value="${min}"></option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- End Input 분-->
                            </div>
-                           <!-- End Input 경기일자-->
-
-                           <!-- Input 종목 -->
-                           <div class="row">
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                       종목 선택
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select">
-                                          <option value="languageSelect1" selected="">축구</option>
-                                          <option value="languageSelect2">풋살</option>
-                                          <option value="languageSelect3">농구</option>
-                                          <option value="languageSelect4">족구</option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- End Input 종목 -->
-
-                           <!-- Input 지역 -->
-                           <div class="row">
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                       지역 선택
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select" id="loc1">
-
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                       세부지역 선택
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select" id="loc2">
-
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- End Input 지역 -->
-
-                           <!-- Input 인원선택 -->
-                           <div class="row">
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                       경기인원
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select">
-                                          <option th:each="players:${#numbers.sequence(1,15)}" th:text="${players}" th:value="${players}"></option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- End Input 인원선택 -->
-
-                              <!-- input 시간 -->
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                       &nbsp;
-                                       <span class="text-danger"></span>
-                                    </label>
-                                    <div class="form-group">
-                                       <button type="button" class="btn btn-primary pl-4 pr-4"> 인원선택 </button>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- End Input 시간 -->
-
-
-
-
-
-
 
                            <div class="row">
                               <!-- Input 이름 -->
@@ -429,6 +286,71 @@
                               <!-- End Input 닉네임 -->
                            </div>
 
+                           <label class="form-label">
+                           Birth date
+                           <span class="text-danger">*</span>
+                           </label>
+
+                           <div class="row">
+                              <!-- 월 Input -->
+                              <div class="col-md-6 mb-3 mb-sm-6">
+                                 <div class="js-form-message">
+                                    <div class="form-group">
+                                       <select class="form-control custom-select" required="" data-msg="Please select month." data-error-class="u-has-error" data-success-class="u-has-success">
+                                          <option value="">Select month</option>
+                                          <option value="birthMonthSelect1">January</option>
+                                          <option value="birthMonthSelect2">February</option>
+                                          <option value="birthMonthSelect3">March</option>
+                                          <option value="birthMonthSelect4" selected="selected">April</option>
+                                          <option value="birthMonthSelect5">May</option>
+                                          <option value="birthMonthSelect6">June</option>
+                                          <option value="birthMonthSelect7">July</option>
+                                          <option value="birthMonthSelect8">August</option>
+                                          <option value="birthMonthSelect9">September</option>
+                                          <option value="birthMonthSelect10">October</option>
+                                          <option value="birthMonthSelect11">November</option>
+                                          <option value="birthMonthSelect12">December</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- End Input 월 -->
+                              <!-- input 날짜 -->
+                              <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
+                                 <div class="js-form-message">
+                                    <div class="form-group">
+                                       <select class="form-control custom-select" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
+                                          <option th:each="date:${#numbers.sequence(1,31)}" th:text="${date}", th:value="${date}"></option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- End Input 날짜 -->
+                              <!-- Input 년도-->
+                              <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
+                                 <div class="js-form-message">
+                                    <div class="form-group">
+                                       <select class="form-control custom-select" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
+                                          <option th:each="year:${#numbers.sequence(2022,1922,-1)}" th:text="${year}" th:value="${year}"></option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- End Input 년도-->
+                              <!-- Input -->
+                              <div class="col-sm-4 col-md-2 mb-2">
+                                 <div class="js-form-message">
+                                    <div class="form-group">
+                                       <select class="form-control custom-select" required="" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success">
+                                          <option value="genderSelect1" selected="">Male</option>
+                                          <option value="genderSelect2">Female</option>
+                                          <option value="genderSelect3">Other</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- End Input -->
+                           </div>
                            <div class="row">
                               <!-- Input -->
                               <div class="col-sm-6 mb-2">

@@ -2,13 +2,7 @@ package com.goplay.demo.vo;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,21 +12,27 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="club_memberlist")
+@SequenceGenerator(
+		name = "seq_club_memberlist",
+		sequenceName = "seq_club_memberlist",
+		initialValue = 1,
+		allocationSize = 1
+)
 public class ClubMemberlist {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	listNo	;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "c_no", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Club club	;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Member member	;
 	
-	@OneToMany(mappedBy = "club_memberlist", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "club_memberlist")
 	@JsonManagedReference
 	private List<MatchMember> match_member;
 }
