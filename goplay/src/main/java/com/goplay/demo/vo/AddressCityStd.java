@@ -1,27 +1,28 @@
 package com.goplay.demo.vo;
 
-import java.util.List;
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Data
-@Table(name="address_city")
+@Table(name="address_city_std")
 @AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(
-		name = "seq_address_city",
-		sequenceName = "seq_address_city",
+		name = "seq_address_city_std",
+		sequenceName = "seq_address_city_std",
 		allocationSize = 1
 )
-public class AddressCity {
+public class AddressCityStd {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	acNo	;
 	private	String	acName	;
 	
-	@OneToMany(mappedBy = "address_city")
-	private List<AddressDistrict> address_district;
+	@OneToMany(mappedBy = "address_city_std")
+	private List<AddressDistrictStd> address_district_std;
 }

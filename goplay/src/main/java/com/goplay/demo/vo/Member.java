@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-	@Id
+	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	String	id	;
 	
 	private	String	pwd	;
@@ -42,31 +43,31 @@ public class Member {
 	private	String	mStat	;
 	private	String	role	;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<Club> club;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<ClubMemberlist> club_memberlist;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<Notice> notice;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<Board> board;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<ChatRoomJoin> chatroomjoin;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<ChatMessage> chatmessage;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member")
 	@JsonManagedReference
 	private List<Reply> reply;
 	
