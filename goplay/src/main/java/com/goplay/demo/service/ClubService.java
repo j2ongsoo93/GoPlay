@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.ClubDAOCustom;
+import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.vo.Club;
-import com.goplay.demo.vo.ClubDTO;
 
 import lombok.Setter;
 

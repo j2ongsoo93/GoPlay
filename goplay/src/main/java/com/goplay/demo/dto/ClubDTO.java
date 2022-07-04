@@ -1,4 +1,4 @@
-package com.goplay.demo.vo;
+package com.goplay.demo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

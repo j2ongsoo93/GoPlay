@@ -204,65 +204,115 @@
             </ul>
          </div>
       </nav>
-      <div class="py-5 bg-primary">
+      <div class="py-5 bg-light">
          <div class="container">
             <div class="row">
-               <div class="col-md-12 mx-auto">
-                  <h1 class="text-white font-weight-light"><span class="font-weight-bold">Olink</span> Blog</h1>
-                  <p class="mb-2 text-white-50">Last modified: March 27, 202 (view archived versions)
-                  </p>
+               <div class="col-md-12 mx-auto"  style="padding-right:90px">
+<!--                   <h1 class="text-white font-weight-light"><span class="font-weight-bold">Olink</span> Blog</h1> -->
+<!--                   <p class="mb-2 text-white-50">Last modified: March 27, 202 (view archived versions) -->
+<!--                   </p> -->
+				<div style="float:right; border:solid 1px; padding:20px"> 
+					<form method="GET" th:action="@{/listClubAll}">
+							<!-- 라디오버튼   -->
+							<div data-role="fieldcontain" >
+								<fieldset data-role="controlgroup" data-type="horizontal">
+									<legend>종목을 선택하세요 </legend>
+									
+									<input type="radio" name="radio" id="soccer" value="축구" checked="checked" />
+										<label for="soccer">축구</label>
+									<input type="radio" name="radio" id="footVolleyball" value="족구" />
+										<label for="footVolleyball">족구</label>
+									<input type="radio" name="radio" id="futsal" value="풋살" />
+										<label for="futsal">풋살</label>
+									<input type="radio" name="radio" id="basketball" value="농구" />
+										<label for="basketball">농구</label>
+								</fieldset>
+							</div>
+						<hr>
+							<div>
+								<legend> 지역을 선택하세요  </legend>
+								<label for="validationCustom01">시/도</label>
+								<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01">
+								   <option selected=""   th:value="인천시" th:text="인천시" ></option>
+								</select>
+								<div class="invalid-feedback">
+								   Please select a valid state.
+								</div>
+								
+								<label for="validationCustom02">도 / 구</label>
+								<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02">
+								   <option selected="" th:value="연수구" th:text="연수구"  ></option>
+								</select>
+								<div class="invalid-feedback">
+								   Please select a valid state.
+								</div>
+							</div>
+							<hr>
+							<!--키워드 검색 -->
+							<span>
+								<legend> 검색 할 키워드를 입력하세요  </legend>
+								<input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >
+							</span>
+							<span>
+							 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button>
+							</span>
+						</form>
+					</div>
+
                </div>
             </div>
          </div>
       </div>
 
-<div> 
-	<form method="GET" th:action="@{/listClubAll}">
-		<!-- 라디오버튼   -->
-		<div class="form-check" data-role="fieldcontain">
-			<fieldset data-role="controlgroup" data-type="horizontal">
-				<legend>종목을 선택하세요 </legend>
-				<input type="radio" name="radio" id="soccer" value="축구" checked="checked" />
-					<label for="soccer">축구</label>
-				<input type="radio" name="radio" id="footVolleyball" value="족구" />
-					<label for="footVolleyball">족구</label>
-				<input type="radio" name="radio" id="futsal" value="풋살" />
-					<label for="futsal">풋살</label>
-				<input type="radio" name="radio" id="basketball" value="농구" />
-					<label for="basketball">농구</label>
-			</fieldset>
-		</div>
-	시도 선택 
-		<div class="col-md-3 mb-3">
-			<label for="validationCustom01">시/도</label>
-			<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01">
-			   <option selected=""   th:value="인천시" th:text="인천시" ></option>
-			</select>
-			<div class="invalid-feedback">
-			   Please select a valid state.
-			</div>
+
+<!-- <div class="container"  style="border: solid 1px;">  -->
+<!-- 	<form method="GET" th:action="@{/listClubAll}" > -->
+<!-- 		<!-- 라디오버튼   --> 
+<!-- 		<div class="form-check" data-role="fieldcontain" > -->
+<!-- 			<fieldset data-role="controlgroup" data-type="horizontal"> -->
+<!-- 				<legend>종목을 선택하세요 </legend> -->
+<!-- 				<input type="radio" name="radio" id="soccer" value="축구" checked="checked" /> -->
+<!-- 					<label for="soccer">축구</label> -->
+<!-- 				<input type="radio" name="radio" id="footVolleyball" value="족구" /> -->
+<!-- 					<label for="footVolleyball">족구</label> -->
+<!-- 				<input type="radio" name="radio" id="futsal" value="풋살" /> -->
+<!-- 					<label for="futsal">풋살</label> -->
+<!-- 				<input type="radio" name="radio" id="basketball" value="농구" /> -->
+<!-- 					<label for="basketball">농구</label> -->
+<!-- 			</fieldset> -->
+<!-- 		</div> -->
+	
+<!-- 		<div> -->
+<!-- 			<legend> 지역을 선택하세요  </legend> -->
+<!-- 			<label for="validationCustom01">시/도</label> -->
+<!-- 			<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01"> -->
+<!-- 			   <option selected=""   th:value="인천시" th:text="인천시" ></option> -->
+<!-- 			</select> -->
+<!-- 			<div class="invalid-feedback"> -->
+<!-- 			   Please select a valid state. -->
+<!-- 			</div> -->
 			
-			<label for="validationCustom02">도 / 구</label>
-			<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02">
-			   <option selected="" th:value="연수구" th:text="연수구"  ></option>
-			</select>
-			<div class="invalid-feedback">
-			   Please select a valid state.
-			</div>
-		</div>
+<!-- 			<label for="validationCustom02">도 / 구</label> -->
+<!-- 			<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02"> -->
+<!-- 			   <option selected="" th:value="연수구" th:text="연수구"  ></option> -->
+<!-- 			</select> -->
+<!-- 			<div class="invalid-feedback"> -->
+<!-- 			   Please select a valid state. -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
-		<!--키워드 검색 -->
-		<div class="col-auto">
-			<input type="text" id="searchText" name="searchText" style="width:200px" class="form-control"  placeholder="키워드 입력" >
-		</div>
-		<div class="col-auto">
-		 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button>
-		</div>
-	</form>
-</div> 
+<!-- 		<!--키워드 검색 -->
+<!-- 		<span> -->
+<!-- 			<input type="text" id="searchText" name="searchText" style="width:200px" class="form-control"  placeholder="키워드 입력" > -->
+<!-- 		</span> -->
+<!-- 		<div> -->
+<!-- 		 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button> -->
+<!-- 		</div> -->
+<!-- 	</form> -->
+<!-- </div>  -->
 
       <div class="py-5">
-         <div class="container">
+         <div class="container" style="padding-left:100px;padding-right:100px">
             <div class="row">
 			<div class="col-lg-12 col-md-12">
 
@@ -279,8 +329,8 @@
                      <a class="dropdown-item" href="#">Separated link</a>
                   </div>
 			 </div>
-			<!-- 페이징  -->
-			
+			 
+			<!-- 동호회 리스트 화면에 띄우기 -->
 			<div class="row" > 
                <div class="col-lg-4 col-md-4" th:each="b:${list}">
                  <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0">
