@@ -1,11 +1,14 @@
 package com.goplay.demo.vo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +34,9 @@ public class Board {
 	private	String	bImg	;
 	private	String	bVideo	;
 	private	String	bFile	;
-	private	Date	bDate	;
+
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+	private LocalDateTime bDate	;
 	private	int	bHit	;
 	private	Date	schDate	;
 	private	String	schPlace	;

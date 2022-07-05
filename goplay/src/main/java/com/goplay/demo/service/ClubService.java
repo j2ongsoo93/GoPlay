@@ -28,6 +28,6 @@ public class ClubService {
 
 	//클럽찾기
 	public Club findClub(int cNo){
-		return dao.getOne(cNo);
+		return dao.findBycNo(cNo);
 	}
 }

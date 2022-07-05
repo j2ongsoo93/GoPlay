@@ -1,5 +1,6 @@
 package com.goplay.demo.controller;
 
+import com.goplay.demo.dto.ClubMemberlistDTO;
 import com.goplay.demo.service.ClubMemberlistService;
 import com.goplay.demo.vo.ClubMemberlist;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class ClubMemberlistController {
     private ClubMemberlistService cs;
 
     @GetMapping("/listClubMemberlist/{cNo}")
-    public List<ClubMemberlist> listClubMemberlist(@PathVariable int cNo){
+    public List<ClubMemberlistDTO> listClubMemberlist(@PathVariable int cNo){
         return cs.findByCno(cNo);
     }
 }
