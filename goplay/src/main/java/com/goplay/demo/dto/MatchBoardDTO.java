@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class MatchBoardDTO {
     private	int	mb_no	;
-    private Club club;
+    private int homeClub;
     private	Integer	awayClub;
     private Date mbDate	;
     private	String	mbType	;
@@ -32,9 +32,9 @@ public class MatchBoardDTO {
     private	String	mbStat	;
 
     @QueryProjection
-    public MatchBoardDTO(int mb_no, Club club, Integer awayClub, Date mbDate, String mbType, String mbLoc1, String mbLoc2, String mbStadium, int mbFee, String homeUcolor, String awayUcolor, String homeLevel, String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
+    public MatchBoardDTO(int mb_no, int homeClub, Integer awayClub, Date mbDate, String mbType, String mbLoc1, String mbLoc2, String mbStadium, int mbFee, String homeUcolor, String awayUcolor, String homeLevel, String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
         this.mb_no = mb_no;
-        this.club = club;
+        this.homeClub = homeClub;
         this.awayClub = awayClub;
         this.mbDate = mbDate;
         this.mbType = mbType;
@@ -51,9 +51,5 @@ public class MatchBoardDTO {
         this.hScore = hScore;
         this.aScore = aScore;
         this.mbStat = mbStat;
-    }
-    @QueryProjection
-    public MatchBoardDTO() {
-
     }
 }

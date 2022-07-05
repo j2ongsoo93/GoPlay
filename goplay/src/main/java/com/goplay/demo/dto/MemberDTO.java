@@ -1,4 +1,4 @@
-package com.goplay.demo.vo;
+package com.goplay.demo.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

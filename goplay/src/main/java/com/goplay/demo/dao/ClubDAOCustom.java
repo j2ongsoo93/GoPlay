@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.goplay.demo.searchCondition.ClubSearchCondition;
-import com.goplay.demo.vo.Club;
-import com.goplay.demo.vo.ClubDTO;
+import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.vo.QClub;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
@@ -40,7 +39,7 @@ public class ClubDAOCustom {
 //		    		)).offset(pageable.getOffset()).limit(pageable.getPageSize())
 //		    .fetch());
 		QueryResults<ClubDTO> results = queryFactory
-				.select(Projections.constructor(ClubDTO.class, qClub.c_no, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+				.select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 			    .from(qClub)
 			    .where(
 			    		(cTypeEq(condition.getC_type())

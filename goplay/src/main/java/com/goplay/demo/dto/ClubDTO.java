@@ -1,4 +1,4 @@
-package com.goplay.demo.vo;
+package com.goplay.demo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClubDTO {
-	private	int	c_no	;
+	private	int	cNo	;
 	private	String id;
 	private	String	cName	;
 	private	String	cType	;

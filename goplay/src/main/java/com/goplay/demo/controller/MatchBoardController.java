@@ -33,7 +33,7 @@ public class MatchBoardController {
 	//매치검색
 	@GetMapping("/findMatch")
 	@ResponseBody
-	public List<MatchBoard> findMatchBoard(){
+	public List<MatchBoardDTO> findMatchBoard(){
 		MatchBoardSearchCondition condition1 = new MatchBoardSearchCondition();
 		condition1.setMbType("축구");
 		condition1.setMbLoc1("인천시");

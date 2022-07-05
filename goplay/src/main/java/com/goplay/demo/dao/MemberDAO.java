@@ -1,9 +1,10 @@
 package com.goplay.demo.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.goplay.demo.vo.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MemberDAO extends JpaRepository<Member, String>{
+@Repository
+public interface MemberDAO extends JpaRepository<Member, Integer>{
 
 }

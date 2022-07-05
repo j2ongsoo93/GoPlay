@@ -65,7 +65,13 @@
                   }
                });
             });
+
+            $('#selectMember').click(function(){
+               console.log("클릭");
+
+            });
          });
+
       </script>
    </head>
    <body>
@@ -361,7 +367,7 @@
                            </div>
                            <!-- End Input 지역 -->
 
-                           <!-- Input 인원선택 -->
+                           <!-- Input 인원수선택 -->
                            <div class="row">
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
@@ -376,9 +382,9 @@
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input 인원선택 -->
+                              <!-- End Input 인원수선택 -->
 
-                              <!-- input 시간 -->
+                              <!-- input 인원지정 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label class="form-label">
@@ -386,13 +392,34 @@
                                        <span class="text-danger"></span>
                                     </label>
                                     <div class="form-group">
-                                       <button type="button" class="btn btn-primary pl-4 pr-4"> 인원선택 </button>
+                                       <button type="button" class="btn btn-primary pl-4 pr-4" data-toggle="modal" data-target="#memberPopup" id="selectMember"> 인원선택 </button>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <!-- End Input 시간 -->
+                           <!-- End Input 인원지정 -->
 
+                           <!-- Modal 인원지정 -->
+                           <div class="modal fade" id="memberPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="font-weight-bold" id="myModalLabel"> 참여인원선택 </h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body" >
+                                       <div class="row" id="memberList">
+
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- End Modal 인원지정 -->
 
 
 
