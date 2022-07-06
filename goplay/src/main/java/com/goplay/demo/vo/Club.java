@@ -30,7 +30,7 @@ import lombok.Setter;
 )
 public class Club {
 	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private	int	c_no	;
+	private	int	cNo	;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)

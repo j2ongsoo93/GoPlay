@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClubDTO {
-	private	int	c_no	;
+	private	int	cNo	;
 	private	String id;
 	private	String	cName	;
 	private	String	cType	;
