@@ -30,7 +30,7 @@ import lombok.Setter;
 )
 public class Club {
 	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private	int	c_no	;
+	private	int	cNo	;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)
@@ -46,26 +46,20 @@ public class Club {
 	private	String	cStat	;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<ClubMemberlist> club_memberList;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<MatchBoard> match_board;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<MatchOffer> match_offer;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<MatchRecord> match_record;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<ChatRoom> chatroom;
 	
 	@OneToMany(mappedBy = "club")
-	@JsonManagedReference
 	private List<Board> board;
 }

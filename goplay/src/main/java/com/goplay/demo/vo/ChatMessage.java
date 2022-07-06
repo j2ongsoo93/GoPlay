@@ -11,6 +11,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,8 @@ public class ChatMessage {
 	private	String	msgImg	;
 	private	String	msgVideo	;
 	private	String	msgFile	;
+
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private	LocalDateTime	msgTime	;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id", insertable = true, updatable = true)

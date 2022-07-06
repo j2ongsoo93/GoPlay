@@ -32,7 +32,7 @@ public class MatchBoardService {
 	}
 
 	//매치검색
-	public List<MatchBoard> searchMatchBoard(MatchBoardSearchCondition condition) {
+	public List<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition) {
 		return daoCustom.searchMatchBoard(condition);
 	}
 }

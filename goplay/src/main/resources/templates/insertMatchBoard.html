@@ -19,6 +19,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
          $(function(){
+            //시도 지역선택 드롭다운 리스트
             $.ajax({
                url:"/listCity",
                success: function(data){
@@ -27,35 +28,18 @@
                      option.html(this.acName);
                      option.attr("value",this.acName);
                      $("#loc1").append(option);
-
-
                   });
                }
             });
 
-            $.ajax({
-               url:"/listDistrict/"+"서울특별시",
-               success: function(data) {
-                  let district = data[0].address_district;
-                  console.log(district)
-                  $.each(district,function(){
-                     let option = $("<option></option>");
-                     option.html(this.adName);
-                     option.attr("value",this.adName);
-                     $("#loc2").append(option);
-                  });
-               }
-            });
-
+            //시도 지역분류 선택 시 세부지역 출력
             $(document).on("change", "#loc1", function (){
                $("#loc2").empty();
                let acName = $(this).val()
-               console.log(acName);
                $.ajax({
                   url:"/listDistrict/"+acName,
                   success: function(data) {
                      let district = data[0].address_district;
-                     console.log(district)
                      $.each(district,function(){
                         let option = $("<option></option>");
                         option.html(this.adName);
@@ -65,7 +49,46 @@
                   }
                });
             });
+
+            //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
+            $.ajax({
+               url:"/listDistrict/"+"서울특별시",
+               success: function(data) {
+                  let district = data[0].address_district;
+                  $.each(district,function(){
+                     let option = $("<option></option>");
+                     option.html(this.adName);
+                     option.attr("value",this.adName);
+                     $("#loc2").append(option);
+                  });
+               }
+            });
+
+            //인원선택 버튼 클릭 시 동호회 회원 표시
+            $('#selectMember').click(function(){
+               $("#memberList").empty();
+               let cNo =  1;
+               $.ajax({
+                  url:"/listClubMemberlist/"+cNo,
+                  success: function(data){
+                     $.each(data, function(){
+                        let div = $("<div></div>").addClass("col-sm-4 div-memberList");
+                        let checkBox = $("<input>").attr("type","checkbox").attr("value", this.id).attr("id",this.id).addClass("memberCheck");
+                        let label = $("<label></label>").addClass("form-check-label").attr("for",this.id).html("&nbsp;&nbsp;"+this.id);
+                        $(div).append(checkBox);
+                        $(div).append(label);
+                        $("#memberList").append(div);
+                     });
+                  }
+               });
+            });
+
+
+
+
+
          });
+
       </script>
    </head>
    <body>
@@ -262,14 +285,14 @@
                <main class="col-md-8">
                   <div class="border rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
-                        <h3 class="m-0">매치등록</h3>
+                        <h3 class="m-0 font-weight-normal">매치등록</h3>
                         </p>
                      </div>
                      <div class="box-body p-3">
                         <form class="js-validate" novalidate="novalidate">
 
                            <!-- Input 경기일자 -->
-                           <label class="form-label">
+                           <label class="form-label font-weight-bold">
                               경기일자
                               <span class="text-danger">*</span>
                            </label>
@@ -279,7 +302,7 @@
                               <div class="col-md-6 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <input type="date" id="mbDate" class="form-control" th:name="mbDate">
+                                       <input type="date" id="mbDate" class="form-control">
                                     </div>
                                  </div>
                               </div>
@@ -288,7 +311,7 @@
                               <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select">
+                                       <select class="form-control custom-select" id="mbTime_hh">
                                           <option th:each="hour:${#numbers.sequence(0,24)}" th:text="${hour}+'시'", th:value="${hour}"></option>
                                        </select>
                                     </div>
@@ -299,7 +322,7 @@
                               <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select">
+                                       <select class="form-control custom-select" id="mbTime_mm">
                                           <option th:each="min:${#numbers.sequence(0,30,30)}" th:text="${min}+'분'" th:value="${min}"></option>
                                        </select>
                                     </div>
@@ -313,12 +336,12 @@
                            <div class="row">
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label class="form-label">
+                                    <label class="form-label font-weight-bold">
                                        종목 선택
                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <select class="custom-select">
+                                       <select class="custom-select" id="mbType">
                                           <option value="languageSelect1" selected="">축구</option>
                                           <option value="languageSelect2">풋살</option>
                                           <option value="languageSelect3">농구</option>
@@ -334,12 +357,12 @@
                            <div class="row">
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label class="form-label">
+                                    <label class="form-label font-weight-bold">
                                        지역 선택
                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <select class="custom-select" id="loc1">
+                                       <select class="custom-select" id="mbLoc1">
 
                                        </select>
                                     </div>
@@ -347,12 +370,12 @@
                               </div>
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label class="form-label">
+                                    <label class="form-label font-weight-bold">
                                        세부지역 선택
                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <select class="custom-select" id="loc2">
+                                       <select class="custom-select" id="mbLoc2">
 
                                        </select>
                                     </div>
@@ -361,11 +384,11 @@
                            </div>
                            <!-- End Input 지역 -->
 
-                           <!-- Input 인원선택 -->
+                           <!-- Input 인원수선택 -->
                            <div class="row">
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label class="form-label">
+                                    <label class="form-label font-weight-bold">
                                        경기인원
                                        <span class="text-danger">*</span>
                                     </label>
@@ -376,9 +399,9 @@
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input 인원선택 -->
+                              <!-- End Input 인원수선택 -->
 
-                              <!-- input 시간 -->
+                              <!-- input 인원지정 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label class="form-label">
@@ -386,192 +409,111 @@
                                        <span class="text-danger"></span>
                                     </label>
                                     <div class="form-group">
-                                       <button type="button" class="btn btn-primary pl-4 pr-4"> 인원선택 </button>
+                                       <button type="button" class="btn btn-primary pl-4 pr-4 font-weight-bolder" data-toggle="modal" data-target="#memberPopup" id="selectMember"> 인원선택 </button>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <!-- End Input 시간 -->
+                           <!-- End Input 인원지정 -->
 
-
-
-
-
-
+                           <!-- Modal 인원지정 -->
+                           <div class="modal fade" id="memberPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="font-weight-bold" id="myModalLabel"> 참여인원선택 </h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body" >
+                                       <div class="row" id="memberList">
+                                         <!-- 동적으로 삽입 -->
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- End Modal 인원지정 -->
 
                            <div class="row">
-                              <!-- Input 이름 -->
+                              <!-- input 경기장 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label id="nameLabel" class="form-label">
-                                    Name
-                                    <span class="text-danger">*</span>
+                                    <label class="form-label font-weight-bold">
+                                       경기장
+                                       <span class="text-danger"> </span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="name" value="Gurdeep Osahan" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
-                                       <small class="form-text text-muted">Displayed on your public profile, notifications and other places.</small>
+                                       <input type="text" id="mbStadium" class="form-control">
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input 이름 -->
-                              <!-- Input 닉네임 -->
+                              <!-- End input 경기장 -->
+                              <!-- input 참가비 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label id="usernameLabel" class="form-label">
-                                    Username
-                                    <span class="text-danger">*</span>
+                                    <label class="form-label font-weight-bold">
+                                       참가비
+                                       <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="username" value="iamosahan" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input type="number" id="mbFee" class="form-control">
+                                       <small class="form-text text-muted"> ex) 인당 10000원 </small>
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input 닉네임 -->
+                              <!-- End input 참가비 -->
                            </div>
 
                            <div class="row">
-                              <!-- Input -->
+                              <!-- input 유니폼색상 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label id="emailLabel" class="form-label">
-                                    Email address
-                                    <span class="text-danger">*</span>
+                                    <label class="form-label font-weight-bold">
+                                       유니폼색상
+                                       <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="email" class="form-control" name="email" value="iamosahan@gmail.com" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
-                                       <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                       <input type="text" id="homeUcolor" class="form-control">
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input -->
-                              <!-- Input -->
+                              <!-- End input 유니폼색상 -->
+                              <!-- input 실력 -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label id="locationLabel" class="form-label">
-                                    Location
-                                    <span class="text-danger">*</span>
+                                    <label class="form-label font-weight-bold">
+                                       실력
+                                       <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input type="text" id="home_Level" class="form-control">
+                                       <small class="form-text text-muted"> ex) 상 중 하 </small>
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input -->
+                              <!-- End input 실력 -->
                            </div>
+
                            <div class="row">
-                              <!-- Input -->
-                              <div class="col-sm-6 mb-2">
+                              <!-- input 하고싶은말 -->
+                              <div class="col-sm-12 mb-2">
                                  <div class="js-form-message">
-                                    <label id="organizationLabel" class="form-label">
-                                    Organization
-                                    <span class="text-danger">*</span>
+                                    <label id="nameLabel" class="form-label font-weight-bold">
+                                       하고싶은말
+                                       <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="organization" value="Wrapbootstrap Ltd." placeholder="Enter your organization name" aria-label="Enter your organization name" required="" aria-describedby="organizationLabel" data-msg="Please enter your organization name" data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <textarea class="form-control" rows="5"></textarea>
                                     </div>
                                  </div>
                               </div>
-                              <!-- End Input -->
-                              <!-- Input -->
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label id="websiteLabel" class="form-label">
-                                    Website
-                                    <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <input class="form-control" type="url" name="website" value="https://wrapbootstrap.com/" placeholder="Enter your website" aria-label="Enter your website" required="" aria-describedby="websiteLabel" data-msg="Password enter a valid website" data-error-class="u-has-error" data-success-class="u-has-success">
-                                       <small class="form-text text-muted">Your home page, blog or company site, e.g. http://example.com</small>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- End Input -->
-                           </div>
-                           <div class="row">
-                              <!-- Input -->
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label id="phoneNumberLabel" class="form-label">
-                                    Phone number
-                                    <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <input class="form-control" type="tel" name="phoneNumber" value="+91 85680 79956" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
-                                    </div>
-                                 </div>
-                                 <a class="d-inline-block u-text-muted" href="#">
-                                 <span class="mr-1">+</span>
-                                 Add phone number
-                                 </a>
-                              </div>
-                              <!-- End Input -->
-                              <!-- Input -->
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label">
-                                    Preferred language
-                                    <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select">
-                                          <option value="">Select language</option>
-                                          <option value="languageSelect1" selected="">English</option>
-                                          <option value="languageSelect2">Français</option>
-                                          <option value="languageSelect3">Deutsch</option>
-                                          <option value="languageSelect4">Português</option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- End Input -->
+                              <!-- End input 하고싶은말 -->
                            </div>
                         </form>
-                     </div>
-                  </div>
-                  <div class="border rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Experience
-                        </h6>
-                        <p class="mb-0 mt-0 small">Tell about your work, job, and other experiences.
-                        </p>
-                     </div>
-                     <div class="box-body px-3 pt-3 pb-0">
-                        <div class="row">
-                           <div class="col-sm-6 mb-4">
-                              <label id="FROM" class="form-label">FROM</label>
-                              <!-- Input -->
-                              <div class="input-group">
-                                 <input type="text" class="form-control" placeholder="From" aria-label="FROM" aria-describedby="FROM">
-                              </div>
-                              <!-- End Input -->
-                           </div>
-                           <div class="col-sm-6 mb-4">
-                              <label id="TO" class="form-label">TO</label>
-                              <!-- Input -->
-                              <div class="input-group">
-                                 <input type="text" class="form-control" placeholder="TO" aria-label="TO" aria-describedby="TO">
-                              </div>
-                              <!-- End Input -->
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-sm-6 mb-4">
-                              <label id="companyLabel" class="form-label">Company</label>
-                              <!-- Input -->
-                              <div class="input-group">
-                                 <input type="text" class="form-control" placeholder="Enter your company title" aria-label="Enter your company title" aria-describedby="companyLabel">
-                              </div>
-                              <!-- End Input -->
-                           </div>
-                           <div class="col-sm-6 mb-4">
-                              <label id="positionLabel" class="form-label">Position</label>
-                              <!-- Input -->
-                              <div class="input-group">
-                                 <input type="text" class="form-control" placeholder="Enter your position" aria-label="Enter your position" aria-describedby="positionLabel">
-                              </div>
-                              <!-- End Input -->
-                           </div>
-                        </div>
                      </div>
                   </div>
                   <div class="mb-3 text-right">

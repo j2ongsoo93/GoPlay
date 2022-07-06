@@ -23,11 +23,11 @@ import lombok.RequiredArgsConstructor;
 public class ClubDAOCustom {
 	private final JPAQueryFactory queryFactory;
 	QClub qClub = QClub.club;
-	
 	//클럽 검색 기능
 	public Page<ClubDTO> listClubAll(Pageable pageable, ClubSearchCondition condition) {
+
 		QueryResults<ClubDTO> results = queryFactory
-				.select(Projections.constructor(ClubDTO.class, qClub.c_no, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+				.select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 			    .from(qClub)
 			    .where(
 			    		(cTypeEq(condition.getC_type())
@@ -39,6 +39,10 @@ public class ClubDAOCustom {
 			    		.or(qClub.cType.contains(condition.getC_keyword())))
 			    		).offset(pageable.getOffset()).limit(pageable.getPageSize())
 			    .fetchResults();
+		
+//		System.out.println("cTypeEq " + cTypeEq(condition.getC_type()));
+//		System.out.println("cLoc1Eq " + cLoc1Eq(condition.getC_loc1()));
+//		System.out.println("cLoc2Eq " + cLoc2Eq(condition.getC_loc2()));
 		List<ClubDTO> content = results.getResults();
 		long total = results.getTotal();
 		return new PageImpl<>(content, pageable, total);

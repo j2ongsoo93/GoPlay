@@ -2,11 +2,12 @@ package com.goplay.demo.searchCondition;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 public class MatchBoardSearchCondition {
-    private Date mbDate;
+    private LocalDateTime mbDate;
     private String mbType;
     private String mbLoc1;
     private String mbLoc2;

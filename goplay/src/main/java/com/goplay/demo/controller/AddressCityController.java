@@ -1,5 +1,6 @@
 package com.goplay.demo.controller;
 
+import com.goplay.demo.dto.AddressCityDTO;
 import com.goplay.demo.service.AddressCityService;
 import com.goplay.demo.vo.AddressCity;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class AddressCityController {
     private AddressCityService as;
 
     @GetMapping("/listCity")
-    public List<AddressCity> listAddress(){
+    public List<AddressCityDTO> listAddress(){
         return as.listAddress();
     }
 
@@ -25,4 +26,5 @@ public class AddressCityController {
     public List<AddressCity> findByAcName(@PathVariable String acName){
         return as.findByAcName(acName);
     }
+    
 }

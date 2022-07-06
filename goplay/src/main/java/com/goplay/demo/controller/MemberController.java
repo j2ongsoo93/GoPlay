@@ -15,7 +15,7 @@ import com.goplay.demo.vo.Member;
 
 import lombok.Setter;
 
-@RestController
+@RestController 
 @Setter
 public class MemberController {
 	@Autowired

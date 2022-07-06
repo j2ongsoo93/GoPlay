@@ -3,13 +3,13 @@ package com.goplay.demo.dao;
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.dto.QMatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
-import com.goplay.demo.vo.MatchBoard;
 import com.goplay.demo.vo.QMatchBoard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,11 +19,27 @@ public class MatchBoardDAOCustom {
     private final JPAQueryFactory queryFactory;
     QMatchBoard matchBoard = QMatchBoard.matchBoard;
 
-    public List<MatchBoard> searchMatchBoard(MatchBoardSearchCondition condition) {
-        System.out.println("dao");
-
+    public List<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition) {
         return queryFactory
-                .select(matchBoard)
+                .select(new QMatchBoardDTO(
+                        matchBoard.mb_no,
+                        matchBoard.club.cNo,
+                        matchBoard.awayClub,
+                        matchBoard.mbDate,
+                        matchBoard.mbType,
+                        matchBoard.mbLoc1,
+                        matchBoard.mbLoc2,
+                        matchBoard.mbStadium,
+                        matchBoard.mbFee,
+                        matchBoard.homeUcolor,
+                        matchBoard.awayUcolor,
+                        matchBoard.homeLevel,
+                        matchBoard.awayLevel,
+                        matchBoard.homeSay,
+                        matchBoard.awaySay,
+                        matchBoard.hScore,
+                        matchBoard.aScore,
+                        matchBoard.mbStat))
                 .from(matchBoard)
                 .where(mbDateEq(condition.getMbDate()),
                         mbTypeEq(condition.getMbType()),
@@ -31,11 +47,9 @@ public class MatchBoardDAOCustom {
                         mbLoc2Eq(condition.getMbLoc2()),
                         mbStatEq(condition.getMbStat()))
                 .fetch();
-
-
     }
 
-    private BooleanExpression mbDateEq(Date mbDate){
+    private BooleanExpression mbDateEq(LocalDateTime mbDate){
         if(mbDate == null){
             return null;
         }
