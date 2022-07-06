@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class MatchBoardDAOCustom {
                 .fetch();
     }
 
-    private BooleanExpression mbDateEq(Date mbDate){
+    private BooleanExpression mbDateEq(LocalDateTime mbDate){
         if(mbDate == null){
             return null;
         }

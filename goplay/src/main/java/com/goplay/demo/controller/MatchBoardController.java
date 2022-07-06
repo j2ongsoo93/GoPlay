@@ -22,12 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchBoardController {
 	@Autowired
 	private MatchBoardService ms;
-	
-	//매치검색 초기목록
+
+	//매치검색페이지로 이동
 	@GetMapping("/listMatchBoard")
-	@ResponseBody
-	public List<MatchBoard> listMatchBoard(){
-		return ms.listMatchBoard();
+	public String listMatchBoard(Model model){
+		return "listMatchBoard";
 	}
 
 	//매치검색
@@ -46,11 +45,13 @@ public class MatchBoardController {
 	public void insertBoard(MatchBoard mb) {
 		ms.saveBoard(mb);
 	}
+
 	//매치등록화면으로 이동
 	@GetMapping("/insertMatchBoard")
 	public String insertBoard(Model model){
 		return "insertMatchBoard";
 	}
+
 	//매치수정화면으로 이동
 	@GetMapping("/updateMatchBoard")
 	public void updateBoard(){

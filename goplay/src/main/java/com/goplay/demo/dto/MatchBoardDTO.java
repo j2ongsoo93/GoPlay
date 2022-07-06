@@ -1,26 +1,21 @@
 package com.goplay.demo.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.goplay.demo.vo.Club;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class MatchBoardDTO {
     private	int	mb_no	;
     private int homeClub;
     private	Integer	awayClub;
-    private Date mbDate	;
+    private LocalDateTime mbDate	;
     private	String	mbType	;
     private	String	mbLoc1	;
     private	String	mbLoc2	;
     private	String	mbStadium	;
-    private	int		mbFee	;
+    private	String		mbFee	;
     private	String	homeUcolor	;
     private	String	awayUcolor	;
     private	String	homeLevel	;
@@ -32,7 +27,7 @@ public class MatchBoardDTO {
     private	String	mbStat	;
 
     @QueryProjection
-    public MatchBoardDTO(int mb_no, int homeClub, Integer awayClub, Date mbDate, String mbType, String mbLoc1, String mbLoc2, String mbStadium, int mbFee, String homeUcolor, String awayUcolor, String homeLevel, String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
+    public MatchBoardDTO(int mb_no, int homeClub, Integer awayClub, LocalDateTime mbDate, String mbType, String mbLoc1, String mbLoc2, String mbStadium, String mbFee, String homeUcolor, String awayUcolor, String homeLevel, String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
         this.mb_no = mb_no;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
