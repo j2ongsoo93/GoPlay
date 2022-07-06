@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" type="image/png" href="img/fav.png">
+      <title>동호회 검색</title>
+      <!-- Slick Slider -->
+      <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css"/>
+      <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css"/>
+      <!-- Feather Icon-->
+      <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
+      <!-- Bootstrap core CSS -->
+      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link href="css/style.css" rel="stylesheet">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+      <script th:inline="javascript">
+      	$(function(){
+      		
+            // 동호회 리스트 동적 노드 생성
+            function listAppend(data){
+      			$("#clubList").append($("<div></div>").addClass("col-lg-4 col-md-4")
+          					.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-3 blog-card border-0")
+          	      					.append($("<a></a>")
+          	      					.append($("<img></img>").addClass("card-img-top").attr("src","img/blog/7.png"))
+          	      					.append($("<div></div>").addClass("card-body")
+          	      					.append($("<span></span>").addClass("badge badge-success").html(data.ctype))
+          	      					.append($("<h6></h6>").addClass("text-dark").html(data.id))
+          	      					.append($("<p></p>").addClass("mb-0").html(data.cintro)))
+          	      					.append($("<div></div>").addClass("card-footer border-0")
+          	      					.append($("<p></p>").addClass("mb-0")
+          	      					.append($("<img></img>").addClass("rounded-circle").attr("src","img/user/3.jpg"))
+          	      					.append($("<strong></strong>").html(data.cloc1))
+          	      					.append($("<strong></strong>").html(" "+ data.cloc2))
+          	      					)
+          	      					)
+          	      					)));
+            }
+            
+      		let acName="인천광역시"; //시 도 지역
+      		let ctype="축구";  //종목
+      		let acName2="계양구"; //도 구 지역
+      		let startPage;   
+      		let endpage;
+      		
+      		//처음에 페이지 로딩 시 동호회 리스트 출력
+          	$.ajax({
+        		url:"/listClubAll2",
+				data : {
+					cType : ctype,
+					cloc1 : acName,
+					cloc2 : acName2, 
+				},
+				success: function(data){
+					console.log("firstLoad");
+					pageNumber= data.pageable.pageNumber;
+					totalPages = data.totalPages;
+					
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+					
+					var li =$("#pageNumberMain").addClass("page-item");
+					var li2;
+					for(var i = startPage-1; i < endpage; i++){
+						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+// 							"href": "listClubAll2?page="+i+"&size="+1
+ 							"href": "listClubAll2.html"
+						}).html(i)
+						li.append(li2);
+					}
+	
+	      			$.each(data.content, function(){
+	      				listAppend(this);
+	      			})
+				 }
+        	})
+        	
+      		$.ajax({
+                url:"/listCity",
+                success: function(data){
+                   $.each(data,function(){
+                      let option = $("<option></option>");
+                      option.html(this.acName);
+                      option.attr("value",this.acName);
+                      $("#cloc1").append(option);
+
+                   });
+                }
+             });
+
+			//종목 선택
+			$(document).on("change", "input[name='cType']", function (){
+       		 ctype = $(this).val();
+      		  $.ajax({
+					url:"/listClubAll2",
+					data : {
+						cType : ctype,
+						cloc1 : acName,
+						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+					},
+      			  success: function(data){
+      				console.log("LoadType");
+  					pageNumber= data.pageable.pageNumber;
+					totalPages = data.totalPages;
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+      				$("#clubList").empty();
+      				$("#pageNumberMain").empty();
+					var li =$("#pageNumberMain").addClass("page-item");
+					var li2;
+					
+					for(var i = startPage-1; i < endpage; i++){
+						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+// 							"href": "listClubAll2?page="+i+"&size="+1
+ 							"href": "listClubAll2.html"
+						}).html(i)
+						li.append(li2);
+					}
+      				$.each(data.content, function(){
+      					listAppend(this);
+      				})
+      			  }
+      		  })
+       	  })
+             
+             //지역1 선택 - '시/도' 선택 시 '도/구' 받아옴 
+             
+             $(document).on("change", "#cloc1", function (){
+                 $("#cloc2").empty();
+                 acName = $(this).val()
+                 $.ajax({
+                    url:"/listDistrict/"+acName,
+                    success: function(data) {
+                        let district = data[0].address_district;
+                        $.each(district,function(){
+                           let option = $("<option></option>");
+                           option.html(this.adName);
+                           option.attr("value",this.adName);
+                           $("#cloc2").append(option);
+                        });
+                    	$.ajax({
+                    		url:"/listClubAll2",
+        					data : {
+        						cType : ctype,
+        						cloc1 : acName,
+        						cloc2 : acName2,
+        						size : 1,
+        						page : pageNumber
+        					},
+        					 success: function(data){
+        						 $("#clubList").empty();
+        		      				$.each(data.content, function(){
+        		      					listAppend(this);
+        		      				})
+        					 }
+                    	})
+                    }
+                 });
+              });   
+             
+             //지역2 선택
+             $(document).on("change", "#cloc2", function (){
+          	   $.ajax({
+          		   url:"/listClubAll2",
+					 data : {
+						cType : ctype,
+						cloc1 : acName,
+						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+					},
+          		   success: function(item) {
+          			console.log("LoadLoc2");
+   					pageNumber= item.pageable.pageNumber;
+					totalPages = item.totalPages;
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+            				$("#clubList").empty();
+              				$("#pageNumberMain").empty();
+        					var li =$("#pageNumberMain").addClass("page-item");
+        					var li2;
+        					for(var i = startPage-1; i < endpage; i++){
+        						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+//         							"href": "listClubAll2?page="+i+"&size="+1
+         							"href": "listClubAll2.html"
+        						}).html(i)
+        						li.append(li2);
+        					}
+            				$.each(item.content, function(){
+            					listAppend(this);
+            				})
+          		   }
+          	   });
+             });
+             
+             //페이징
+             $(document).on("click", ".pageingClass", function (){
+            	   $.ajax({
+            		 url:"/listClubPageing",
+  					 data : {
+  						cType : ctype,
+  						cloc1 : acName,
+  						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+  					},
+            		   success: function(item) {
+            			    console.log("page");
+         					pageNumber= item.pageable.pageNumber;
+        					totalPages = item.totalPages;
+        					
+        					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+        					endpage = Math.min(totalPages, pageNumber + 4); //
+              				$("#clubList").empty();
+              				$("#pageNumberMain").empty();
+          					var li =$("#pageNumberMain").addClass("page-item");
+        					var li2;
+        					for(var i = startPage-1; i < endpage; i++){
+        						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+//         							"href": "listClubAll2?page="+i+"&size="+1
+         							"href": "listClubAll2.html"
+        						}).html(i)
+        						li.append(li2);
+        					}
+              				$.each(item.content, function(){
+              						listAppend(this);
+              				})
+            		   }
+            	   });
+               });
+      	})
+      </script>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand navbar-light bg-white osahan-nav-top p-0">
+         <div class="container">
+            <a class="navbar-brand mr-2" href="index.html"><img src="img/logo.svg" alt="">
+            </a>
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+               <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+               <li class="nav-item dropdown no-arrow d-sm-none">
+                  <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="feather-search mr-2"></i>
+                  </a>
+                  <!-- Dropdown - Messages -->
+                  <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in" aria-labelledby="searchDropdown">
+                     <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                           <input type="text" class="form-control border-0 shadow-none" placeholder="Search people, jobs and more..." aria-label="Search" aria-describedby="basic-addon2">
+                           <div class="input-group-append">
+                              <button class="btn" type="button">
+                              <i class="feather-search"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="jobs.html"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Jobs</span></a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="connection.html"><i class="feather-users mr-2"></i><span class="d-none d-lg-inline">Connection</span></a>
+               </li>
+               <li class="nav-item dropdown mr-2">
+                  <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="feather-file-text mr-2"></i><span class="d-none d-lg-inline">Pages</span>
+                  </a>
+                  <!-- Dropdown - User Information -->
+                  <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                     <a class="dropdown-item" href="jobs.html"><i class="feather-briefcase mr-1"></i> Jobs</a>
+                     <a class="dropdown-item" href="profile.html"><i class="feather-user mr-1"></i> Profile</a>
+                     <a class="dropdown-item" href="connection.html"><i class="feather-users mr-1"></i> Connection</a>
+                     <a class="dropdown-item" href="company-profile.html"><i class="feather-user-plus mr-1"></i> Company Profile</a>
+                     <a class="dropdown-item" href="job-profile.html"><i class="feather-globe mr-1"></i> Job Profile</a>
+                     <a class="dropdown-item" href="messages.html"><i class="feather-message-circle mr-1"></i> Messages</a>
+                     <a class="dropdown-item" href="notifications.html"><i class="feather-bell mr-1"></i> Notifications</a>
+                     <a class="dropdown-item" href="not-found.html"><i class="feather-alert-triangle mr-1"></i> 404 Not Found</a>
+                     <a class="dropdown-item" href="faq.html"><i class="feather-help-circle mr-1"></i> FAQ</a>
+                     <a class="dropdown-item" href="terms.html"><i class="feather-book mr-1"></i> Terms</a>
+                     <a class="dropdown-item" href="privacy.html"><i class="feather-list mr-1"></i> Privacy</a><a class="dropdown-item" href="blog.html"><i class="feather-book mr-1"></i> Blog</a>
+                     <a class="dropdown-item" href="blog-single.html"><i class="feather-book-open mr-1"></i> Blog Single</a>
+                     <a class="dropdown-item" href="contact.html"><i class="feather-mail mr-1"></i> Contact</a>
+                     <a class="dropdown-item" href="pricing.html"><i class="feather-credit-card mr-1"></i> Pricing</a>
+                     <a class="dropdown-item" href="maintence.html"><i class="feather-clock mr-1"></i> Maintence</a>
+                     <a class="dropdown-item" href="coming-soon.html"><i class="feather-cloud mr-1"></i> Coming Soon</a>
+                     <a class="dropdown-item" href="components.html"><i class="feather-list mr-1"></i> Components</a>
+                     <a class="dropdown-item" href="sign-in.html"><i class="feather-log-in mr-1"></i> Sign In</a>
+                     <a class="dropdown-item" href="sign-up.html"><i class="feather-lock mr-1"></i> Sign Up</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="feather-message-square"></i>
+                     <!-- Counter - Alerts -->
+                     <span class="badge badge-danger badge-counter">8</span>
+                  </a>
+                  <!-- Dropdown - Alerts -->
+                  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
+                     <h6 class="dropdown-header">
+                        Message Center
+                     </h6>
+                     <a class="dropdown-item d-flex align-items-center" href="messages.html">
+                        <div class="dropdown-list-image mr-3">
+                           <img class="rounded-circle" src="img/p1.png" alt="">
+                           <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div class="font-weight-bold overflow-hidden">
+                           <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                           <div class="small text-gray-500">Emily Fowler · 58m</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item d-flex align-items-center" href="messages.html">
+                        <div class="dropdown-list-image mr-3">
+                           <img class="rounded-circle" src="img/p2.png" alt="">
+                           <div class="status-indicator"></div>
+                        </div>
+                        <div class="overflow-hidden">
+                           <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                           <div class="small text-gray-500">Jae Chun · 1d</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item d-flex align-items-center" href="messages.html">
+                        <div class="dropdown-list-image mr-3">
+                           <img class="rounded-circle" src="img/p3.png" alt="">
+                           <div class="status-indicator bg-warning"></div>
+                        </div>
+                        <div class="overflow-hidden">
+                           <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                           <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item d-flex align-items-center" href="messages.html">
+                        <div class="dropdown-list-image mr-3">
+                           <img class="rounded-circle" src="img/p4.png" alt="">
+                           <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div class="overflow-hidden">
+                           <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                           <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item text-center small text-gray-500" href="messages.html">Read More Messages</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="feather-bell"></i>
+                     <!-- Counter - Alerts -->
+                     <span class="badge badge-info badge-counter">6</span>
+                  </a>
+                  <!-- Dropdown - Alerts -->
+                  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
+                     <h6 class="dropdown-header">
+                        Alerts Center
+                     </h6>
+                     <a class="dropdown-item d-flex align-items-center" href="notifications.html">
+                        <div class="mr-3">
+                           <div class="icon-circle bg-primary">
+                              <i class="feather-download-cloud text-white"></i>
+                           </div>
+                        </div>
+                        <div>
+                           <div class="small text-gray-500">December 12, 2019</div>
+                           <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        </div>
+                     </a>
+                     <a class="dropdown-item d-flex align-items-center" href="notifications.html">
+                        <div class="mr-3">
+                           <div class="icon-circle bg-success">
+                              <i class="feather-edit text-white"></i>
+                           </div>
+                        </div>
+                        <div>
+                           <div class="small text-gray-500">December 7, 2019</div>
+                           $290.29 has been deposited into your account!
+                        </div>
+                     </a>
+                     <a class="dropdown-item d-flex align-items-center" href="notifications.html">
+                        <div class="mr-3">
+                           <div class="icon-circle bg-warning">
+                              <i class="feather-folder text-white"></i>
+                           </div>
+                        </div>
+                        <div>
+                           <div class="small text-gray-500">December 2, 2019</div>
+                           Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                     </a>
+                     <a class="dropdown-item text-center small text-gray-500" href="notifications.html">Show All Alerts</a>
+                  </div>
+               </li>
+               <!-- Nav Item - User Information -->
+               <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
+                  <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img class="img-profile rounded-circle" src="img/p13.png">
+                  </a>
+                  <!-- Dropdown - User Information -->
+                  <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                     <div class="p-3 d-flex align-items-center">
+                        <div class="dropdown-list-image mr-3">
+                           <img class="rounded-circle" src="img/user.png" alt="">
+                           <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div class="font-weight-bold">
+                           <div class="text-truncate">Gurdeep Osahan</div>
+                           <div class="small text-gray-500">UI/UX Designer</div>
+                        </div>
+                     </div>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="profile.html"><i class="feather-edit mr-1"></i> My Account</a>
+                     <a class="dropdown-item" href="edit-profile.html"><i class="feather-user mr-1"></i> Edit Profile</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="sign-in.html"><i class="feather-log-out mr-1"></i> Logout</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="py-5 bg-light">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 mx-auto"  style="padding-right:90px">
+<!--                   <h1 class="text-white font-weight-light"><span class="font-weight-bold">Olink</span> Blog</h1> -->
+<!--                   <p class="mb-2 text-white-50">Last modified: March 27, 202 (view archived versions) -->
+<!--                   </p> -->
+				<div style="float:right; border:solid 1px; padding:20px"> 
+					<form method="GET" th:action="@{/listClubAll}">
+							<!-- 라디오버튼   -->
+							<div data-role="fieldcontain" >
+								<fieldset data-role="controlgroup" data-type="horizontal">
+									<legend>종목을 선택하세요 </legend>
+									
+									<input type="radio" name="cType" id="soccer" value="축구" checked="checked" />
+										<label for="soccer">축구</label>
+									<input type="radio" name="cType" id="footVolleyball" value="족구" />
+										<label for="footVolleyball">족구</label>
+									<input type="radio" name="cType" id="futsal" value="풋살" />
+										<label for="futsal">풋살</label>
+									<input type="radio" name="cType" id="basketball" value="농구" />
+										<label for="basketball">농구</label>
+								</fieldset>
+							</div>
+						<hr>
+						
+							<div>
+								<legend> 지역을 선택하세요  </legend>
+								<label for="validationCustom01">시/도</label>
+								<select style="width:100px;" class="custom-select" id="cloc1" name="cloc1">
+								   <option selected=""   th:value="인천시" th:text="인천시" ></option>
+								</select>
+								<div class="invalid-feedback">
+								   Please select a valid state.
+								</div>
+								
+								<label for="validationCustom02">도 / 구</label>
+								<select style="width:100px;" class="custom-select" id="cloc2" name="cloc2">
+								   <option selected="" th:value="연수구" th:text="연수구"  ></option>
+								</select>
+								<div class="invalid-feedback">
+								   Please select a valid state.
+								</div>
+							</div>
+							<hr>
+							<!--키워드 검색 -->
+							<span>
+								<legend> 검색 할 키워드를 입력하세요  </legend>
+								<input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >
+							</span>
+							<span>
+							 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button>
+							</span>
+						</form>
+					</div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+<!-- <div class="container"  style="border: solid 1px;">  -->
+<!-- 	<form method="GET" th:action="@{/listClubAll}" > -->
+<!-- 		<!-- 라디오버튼   --> 
+<!-- 		<div class="form-check" data-role="fieldcontain" > -->
+<!-- 			<fieldset data-role="controlgroup" data-type="horizontal"> -->
+<!-- 				<legend>종목을 선택하세요 </legend> -->
+<!-- 				<input type="radio" name="radio" id="soccer" value="축구" checked="checked" /> -->
+<!-- 					<label for="soccer">축구</label> -->
+<!-- 				<input type="radio" name="radio" id="footVolleyball" value="족구" /> -->
+<!-- 					<label for="footVolleyball">족구</label> -->
+<!-- 				<input type="radio" name="radio" id="futsal" value="풋살" /> -->
+<!-- 					<label for="futsal">풋살</label> -->
+<!-- 				<input type="radio" name="radio" id="basketball" value="농구" /> -->
+<!-- 					<label for="basketball">농구</label> -->
+<!-- 			</fieldset> -->
+<!-- 		</div> -->
+	
+<!-- 		<div> -->
+<!-- 			<legend> 지역을 선택하세요  </legend> -->
+<!-- 			<label for="validationCustom01">시/도</label> -->
+<!-- 			<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01"> -->
+<!-- 			   <option selected=""   th:value="인천시" th:text="인천시" ></option> -->
+<!-- 			</select> -->
+<!-- 			<div class="invalid-feedback"> -->
+<!-- 			   Please select a valid state. -->
+<!-- 			</div> -->
+			
+<!-- 			<label for="validationCustom02">도 / 구</label> -->
+<!-- 			<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02"> -->
+<!-- 			   <option selected="" th:value="연수구" th:text="연수구"  ></option> -->
+<!-- 			</select> -->
+<!-- 			<div class="invalid-feedback"> -->
+<!-- 			   Please select a valid state. -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+<!-- 		<!--키워드 검색 -->
+<!-- 		<span> -->
+<!-- 			<input type="text" id="searchText" name="searchText" style="width:200px" class="form-control"  placeholder="키워드 입력" > -->
+<!-- 		</span> -->
+<!-- 		<div> -->
+<!-- 		 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button> -->
+<!-- 		</div> -->
+<!-- 	</form> -->
+<!-- </div>  -->
+
+      <div class="py-5">
+         <div class="container" style="padding-left:100px;padding-right:100px">
+            <div class="row">
+			<div class="col-lg-12 col-md-12">
+
+		<!-- 개수 만큼 띄우기 버튼-->
+			 <div class="btn-group">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Action
+                  </button>
+                  <div class="dropdown-menu" style="">
+                     <a class="dropdown-item" href="#">3개씩 보기</a>
+                     <a class="dropdown-item" href="#">6개씩 보기</a>
+                     <a class="dropdown-item" href="#">9개씩 보기</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+			 </div>
+			 
+			<!-- 동호회 리스트 화면에 띄우기 -->
+			<div class="row" id="clubList"> 
+<!--                <div class="col-lg-4 col-md-4"> -->
+<!--                  <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0"> -->
+<!--                         <a href="#"><img class="card-img-top" src="img/blog/7.png" alt="Card image cap"> -->
+<!--                         <div class="card-body" id="cType"> -->
+<!-- <!--                            <span class="badge badge-success"></span> --> 
+                           
+<!-- <!--                            <h6 class="text-dark" id="cName"></h6> --> 
+<!-- <!--                            <p class="mb-0" id="cIntro"></p> --> 
+<!--                         </div> -->
+<!-- 						<div class="card-footer border-0"> -->
+<!--                               <p class="mb-0"><img class="rounded-circle" src="img/user/4.jpg" alt="Card image cap"> <strong th:text="${b.cLoc1}"></strong> <strong th:text="${b.cLoc2}"></strong></p> -->
+<!--                            </div> -->
+<!-- 						</a> -->
+<!--                      </div> -->
+<!--                </div> -->
+            </div>
+              
+		
+<!-- 페이징 -->
+<!-- <nav class="mt-5"> -->
+<!--   <ul class="pagination justify-content-center"> -->
+<!-- 	<!--   페이지 왼쪽 버튼 --> -->
+<!--     <li class="page-item" th:classappend="${1 == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "> -->
+<!--       <a class="page-link" href="#"  -->
+<!--       	th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber-1})}" tabindex="-1"> -->
+<!--       	<i class="feather-arrow-left"></i>Previous</a> -->
+<!--     </li> -->
+    
+<!--       페이지 번호 -->
+<!--     <li class="page-item"  -->
+<!-- 	    th:classappend="${i == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "  -->
+<!-- 	    th:each="i:${#numbers.sequence(startPage, endPage)}"> -->
+<!-- 	    	<a class="page-link" href="#"  -->
+<!-- 	    		th:text="${i}"  -->
+<!-- 	    		th:href="@{/listClubAll(page=${i-1})}">  -->
+<!-- 	    	</a> -->
+<!--     </li> -->
+    
+<!--       페이지 오른쪽 버튼 -->
+<!--     <li class="page-item"  -->
+<!--     	th:classappend="${clubDTOPage.TotalPages == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "> -->
+<!--       		<a class="page-link" href="#"  -->
+<!--       			th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber+1})}"> -->
+<!--       				<i class="feather-arrow-right">Next</i></a> -->
+<!--     </li> -->
+<!--   </ul> -->
+<!-- </nav> -->
+<nav class="mt-5">
+  <ul class="pagination justify-content-center">
+	<!--   페이지 왼쪽 버튼 -->
+    <li class="page-item" th:classappend="${1 == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' ">
+      <a class="page-link" href="#" 
+      	th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber-1})}" tabindex="-1">
+      	<i class="feather-arrow-left"></i>Previous</a>
+    </li>
+    
+    <!--   페이지 번호 -->
+    <li class="page-item" id="pageNumberMain">
+<!-- 	    th:classappend="${i == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "  -->
+<!-- 	    th:each="i:${#numbers.sequence(startPage, endPage)}"> -->
+<!-- 	    	<a class="page-link" href="#"  -->
+<!-- 	    		th:text="${i}"  -->
+<!-- 	    		th:href="@{/listClubAll(page=${i-1})}">  -->
+<!-- 	    	</a> -->
+    </li>
+    
+    <!--   페이지 오른쪽 버튼 -->
+    <li class="page-item" 
+    	th:classappend="${clubDTOPage.TotalPages == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' ">
+      		<a class="page-link" href="#" 
+      			th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber+1})}">
+      				<i class="feather-arrow-right">Next</i></a>
+    </li>
+  </ul>
+</nav>
+			
+			</div>
+			</div>
+         </div>
+      </div>
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- slick Slider JS-->
+      <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+      <!-- Custom scripts for all pages-->
+      <script src="js/osahan.js"></script>
+   </body>
+</html>
