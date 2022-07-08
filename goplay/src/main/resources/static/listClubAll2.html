@@ -67,8 +67,9 @@
 					var li2;
 					for(var i = startPage-1; i < endpage; i++){
 						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
-// 							"href": "listClubAll2?page="+i+"&size="+1
- 							"href": "listClubAll2.html"
+							
+							//"href": "listClubAll2?page="+i+"&size="+1
+ 							//"href": "listClubAll2.html"
 						}).html(i)
 						li.append(li2);
 					}
@@ -106,6 +107,7 @@
 					},
       			  success: function(data){
       				console.log("LoadType");
+      				console.log(data);
   					pageNumber= data.pageable.pageNumber;
 					totalPages = data.totalPages;
 					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
@@ -118,7 +120,7 @@
 					for(var i = startPage-1; i < endpage; i++){
 						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
 // 							"href": "listClubAll2?page="+i+"&size="+1
- 							"href": "listClubAll2.html"
+ 							//"href": "listClubAll2.html"
 						}).html(i)
 						li.append(li2);
 					}
@@ -177,32 +179,34 @@
 					},
           		   success: function(item) {
           			console.log("LoadLoc2");
-   					pageNumber= item.pageable.pageNumber;
-					totalPages = item.totalPages;
-					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
-					endpage = Math.min(totalPages, pageNumber + 4); //
-            				$("#clubList").empty();
-              				$("#pageNumberMain").empty();
-        					var li =$("#pageNumberMain").addClass("page-item");
-        					var li2;
-        					for(var i = startPage-1; i < endpage; i++){
-        						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
-//         							"href": "listClubAll2?page="+i+"&size="+1
-         							"href": "listClubAll2.html"
-        						}).html(i)
-        						li.append(li2);
-        					}
-            				$.each(item.content, function(){
-            					listAppend(this);
-            				})
+          			console.log(item);
+//    					pageNumber= item.pageable.pageNumber;
+// 					totalPages = item.totalPages;
+// 					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+// 					endpage = Math.min(totalPages, pageNumber + 4); //
+//             				$("#clubList").empty();
+//               				$("#pageNumberMain").empty();
+//         					var li =$("#pageNumberMain").addClass("page-item");
+//         					var li2;
+//         					for(var i = startPage-1; i < endpage; i++){
+//         						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+// //         							"href": "listClubAll2?page="+i+"&size="+1
+//          							"href": "listClubAll2.html"
+//         						}).html(i)
+//         						li.append(li2);
+//         					}
+//             				$.each(item.content, function(){
+//             					listAppend(this);
+//             				})
           		   }
           	   });
              });
              
              //페이징
              $(document).on("click", ".pageingClass", function (){
+            	
             	   $.ajax({
-            		 url:"/listClubPageing",
+            		 url:"/listClubAll2",
   					 data : {
   						cType : ctype,
   						cloc1 : acName,
@@ -214,19 +218,21 @@
             			    console.log("page");
          					pageNumber= item.pageable.pageNumber;
         					totalPages = item.totalPages;
-        					
         					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
         					endpage = Math.min(totalPages, pageNumber + 4); //
               				$("#clubList").empty();
               				$("#pageNumberMain").empty();
           					var li =$("#pageNumberMain").addClass("page-item");
         					var li2;
+        					
         					for(var i = startPage-1; i < endpage; i++){
+        						
         						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
-//         							"href": "listClubAll2?page="+i+"&size="+1
-         							"href": "listClubAll2.html"
+         							//"href": "listClubAll2?page="+i+"&size="+1
+         							//"href": "listClubAll2.html"
         						}).html(i)
         						li.append(li2);
+        						
         					}
               				$.each(item.content, function(){
               						listAppend(this);

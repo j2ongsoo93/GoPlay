@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.MemberDAO;
@@ -20,7 +21,8 @@ public class MemberService {
 		return dao.findAll();
 	}
 	
-//	public List<Member> findById(String id){
-//		return dao.findById(id);
-//	}
+	
+	public Member findByIdTypeLoc(String id){
+		return dao.findByIdTypeLoc(id);
+	}
 }

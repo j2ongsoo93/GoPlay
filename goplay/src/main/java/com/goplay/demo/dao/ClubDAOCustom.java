@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
+import com.goplay.demo.searchCondition.RecommentClubCondition;
 import com.goplay.demo.vo.Club;
 import com.goplay.demo.vo.QClub;
 import com.querydsl.core.QueryResults;
@@ -23,9 +24,25 @@ import lombok.RequiredArgsConstructor;
 public class ClubDAOCustom {
 	private final JPAQueryFactory queryFactory;
 	QClub qClub = QClub.club;
+	public Page<ClubDTO> listRecommendClub(Pageable pageable, RecommentClubCondition condition){
+		QueryResults<ClubDTO> results = queryFactory
+				.select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+			    .from(qClub)
+			    .where(
+			    		((cLoc1Eq(condition.getC_loc1()))
+					    		.and(cLoc2Eq(condition.getC_loc2())))
+			    		.and(cTypeEq(condition.getSoccer())
+			    		.or(cTypeEq(condition.getFootsal()))
+			    		.or(cTypeEq(condition.getFootvalleyball()))
+			    		.or(cTypeEq(condition.getBascketball())))
+			    		).offset(pageable.getOffset()).limit(pageable.getPageSize())
+			    .fetchResults();
+		List<ClubDTO> content = results.getResults();
+		long total = results.getTotal();
+		return new PageImpl<>(content, pageable, total);
+	}
 	//클럽 검색 기능
 	public Page<ClubDTO> listClubAll(Pageable pageable, ClubSearchCondition condition) {
-
 		QueryResults<ClubDTO> results = queryFactory
 				.select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 			    .from(qClub)
@@ -48,7 +65,7 @@ public class ClubDAOCustom {
 		return new PageImpl<>(content, pageable, total);
 	  }
     private BooleanExpression cTypeEq(String cType){
-        if(cType == null || cType.equals("")){
+        if(cType == "0" || cType.equals("") || cType == null){
             return null;
         }
         return qClub.cType.eq(cType);
@@ -68,5 +85,32 @@ public class ClubDAOCustom {
         return qClub.cLoc2.eq(cLoc2);
     }
     
+//    private BooleanExpression cSoccerEq(String cSoccer){
+//        if(cSoccer == null || cSoccer.equals("")){
+//            return null;
+//        }
+//        return qClub.cType.eq(cSoccer);
+//    }
+//    
+//    private BooleanExpression cFootsalEq(String Footsal){
+//        if(Footsal== null || Footsal.equals("")){
+//            return null;
+//        }
+//        return qClub.cType.eq(Footsal);
+//    }
+//    
+//    private BooleanExpression cFootvalleyballEq(String Footvalleyball){
+//        if(Footvalleyball == null || Footvalleyball.equals("")){
+//            return null;
+//        }
+//        return qClub.cType.eq(Footvalleyball);
+//    }
+//    
+//    private BooleanExpression cBascketballEq(String Bascketball){
+//        if(Bascketball == null || Bascketball.equals("")){
+//            return null;
+//        }
+//        return qClub.cType.eq(Bascketball);
+//    }
 
 }
