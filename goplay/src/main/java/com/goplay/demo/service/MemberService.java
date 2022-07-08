@@ -18,7 +18,7 @@ public class MemberService {
 	private MemberDAO dao;
 	
 	//회원목록
-	public List<Member> findAll(){
+	public List<Member> listMember(){
 		return dao.findAll();
 	}
 	

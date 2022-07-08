@@ -20,7 +20,7 @@ public class MemberController {
 	
 	@GetMapping("/listMember")
 	public void listMember(Model model){
-		model.addAttribute("listMember",ms.findAll());
+		model.addAttribute("listMember",ms.listMember());
 	}
 	
 	@GetMapping("/selectMember/{id}")
