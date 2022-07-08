@@ -66,6 +66,8 @@ public class ClubController {
 
 		return clubDTOPage;
 	}
+
+
 	@GetMapping("/listClubPageing")
 	public String listClubPageing(Model model) {
 
@@ -76,7 +78,9 @@ public class ClubController {
 		return "listClubAll";
 		//return mav;
 
-	}	
+	}
+
+
 	
 	@GetMapping("/listClubRecommend")
 	public void listClubRecommend() {
@@ -87,4 +91,12 @@ public class ClubController {
 //	public void findById(String id) {
 //		ms.findById(id);
 //	}
+
+
+
+
+	//동호회검색 페이지로 이동
+	public String listClub(Model model){
+		return "listCLubAll2";
+	}
 }

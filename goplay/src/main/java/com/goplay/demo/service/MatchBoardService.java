@@ -1,12 +1,13 @@
 package com.goplay.demo.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.goplay.demo.dao.MatchBoardDAOCustom;
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.MatchBoardDAO;
@@ -32,8 +33,13 @@ public class MatchBoardService {
 	}
 
 	//매치검색
-	public List<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition) {
-		return daoCustom.searchMatchBoard(condition);
+	public Page<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition, Pageable pageable) {
+		return daoCustom.searchMatchBoard(condition, pageable);
+	}
+
+	//내 매치 검색
+	public List<MatchBoard> myMatch(String id){
+		return dao.myMatch(id);
 	}
 }
 	

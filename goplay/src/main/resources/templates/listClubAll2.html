@@ -6,7 +6,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="icon" type="image/png" href="img/fav.png">
-      <title>Olink - Job Portal & Social Network HTML</title>
+      <title>동호회 검색</title>
       <!-- Slick Slider -->
       <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css"/>
       <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css"/>
@@ -16,6 +16,226 @@
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+      <script th:inline="javascript">
+      	$(function(){
+      		
+            // 동호회 리스트 동적 노드 생성
+            function listAppend(data){
+      			$("#clubList").append($("<div></div>").addClass("col-lg-4 col-md-4")
+          					.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-3 blog-card border-0")
+          	      					.append($("<a></a>")
+          	      					.append($("<img></img>").addClass("card-img-top").attr("src","img/blog/7.png"))
+          	      					.append($("<div></div>").addClass("card-body")
+          	      					.append($("<span></span>").addClass("badge badge-success").html(data.ctype))
+          	      					.append($("<h6></h6>").addClass("text-dark").html(data.id))
+          	      					.append($("<p></p>").addClass("mb-0").html(data.cintro)))
+          	      					.append($("<div></div>").addClass("card-footer border-0")
+          	      					.append($("<p></p>").addClass("mb-0")
+          	      					.append($("<img></img>").addClass("rounded-circle").attr("src","img/user/3.jpg"))
+          	      					.append($("<strong></strong>").html(data.cloc1))
+          	      					.append($("<strong></strong>").html(" "+ data.cloc2))
+          	      					)
+          	      					)
+          	      					)));
+            }
+            
+      		let acName="인천광역시"; //시 도 지역
+      		let ctype="축구";  //종목
+      		let acName2="계양구"; //도 구 지역
+      		let startPage;   
+      		let endpage;
+      		
+      		//처음에 페이지 로딩 시 동호회 리스트 출력
+          	$.ajax({
+        		url:"/listClubAll2",
+				data : {
+					cType : ctype,
+					cloc1 : acName,
+					cloc2 : acName2, 
+				},
+				success: function(data){
+					console.log("firstLoad");
+					pageNumber= data.pageable.pageNumber;
+					totalPages = data.totalPages;
+					
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+					
+					var li =$("#pageNumberMain").addClass("page-item");
+					var li2;
+					for(var i = startPage-1; i < endpage; i++){
+						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+							"href": "listClubAll2?page="+i+"&size="+1
+ 							// "href": "listClubAll2.html"
+						}).html(i)
+						li.append(li2);
+					}
+	
+	      			$.each(data.content, function(){
+	      				listAppend(this);
+	      			})
+				 }
+        	})
+        	
+      		$.ajax({
+                url:"/listCity",
+                success: function(data){
+                   $.each(data,function(){
+                      let option = $("<option></option>");
+                      option.html(this.acName);
+                      option.attr("value",this.acName);
+                      $("#cloc1").append(option);
+
+                   });
+                }
+             });
+
+			//종목 선택
+			$(document).on("change", "input[name='cType']", function (){
+       		 ctype = $(this).val();
+      		  $.ajax({
+					url:"/listClubAll2",
+					data : {
+						cType : ctype,
+						cloc1 : acName,
+						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+					},
+      			  success: function(data){
+      				console.log("LoadType");
+  					pageNumber= data.pageable.pageNumber;
+					totalPages = data.totalPages;
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+      				$("#clubList").empty();
+      				$("#pageNumberMain").empty();
+					var li =$("#pageNumberMain").addClass("page-item");
+					var li2;
+					
+					for(var i = startPage-1; i < endpage; i++){
+						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+// 							"href": "listClubAll2?page="+i+"&size="+1
+ 							"href": "listClubAll2.html"
+						}).html(i)
+						li.append(li2);
+					}
+      				$.each(data.content, function(){
+      					listAppend(this);
+      				})
+      			  }
+      		  })
+       	  })
+             
+             //지역1 선택 - '시/도' 선택 시 '도/구' 받아옴 
+             
+             $(document).on("change", "#cloc1", function (){
+                 $("#cloc2").empty();
+                 acName = $(this).val()
+                 $.ajax({
+                    url:"/listDistrict/"+acName,
+                    success: function(data) {
+                        let district = data[0].address_district;
+                        $.each(district,function(){
+                           let option = $("<option></option>");
+                           option.html(this.adName);
+                           option.attr("value",this.adName);
+                           $("#cloc2").append(option);
+                        });
+                    	$.ajax({
+                    		url:"/listClubAll2",
+        					data : {
+        						cType : ctype,
+        						cloc1 : acName,
+        						cloc2 : acName2,
+        						size : 1,
+        						page : pageNumber
+        					},
+        					 success: function(data){
+        						 $("#clubList").empty();
+        		      				$.each(data.content, function(){
+        		      					listAppend(this);
+        		      				})
+        					 }
+                    	})
+                    }
+                 });
+              });   
+             
+             //지역2 선택
+             $(document).on("change", "#cloc2", function (){
+          	   $.ajax({
+          		   url:"/listClubAll2",
+					 data : {
+						cType : ctype,
+						cloc1 : acName,
+						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+					},
+          		   success: function(item) {
+          			console.log("LoadLoc2");
+   					pageNumber= item.pageable.pageNumber;
+					totalPages = item.totalPages;
+					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+					endpage = Math.min(totalPages, pageNumber + 4); //
+            				$("#clubList").empty();
+              				$("#pageNumberMain").empty();
+        					var li =$("#pageNumberMain").addClass("page-item");
+        					var li2;
+        					for(var i = startPage-1; i < endpage; i++){
+        						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+//         							"href": "listClubAll2?page="+i+"&size="+1
+         							"href": "listClubAll2.html"
+        						}).html(i)
+        						li.append(li2);
+        					}
+            				$.each(item.content, function(){
+            					listAppend(this);
+            				})
+          		   }
+          	   });
+             });
+             
+             //페이징
+             $(document).on("click", ".pageingClass", function (){
+            	   $.ajax({
+            		 url:"/listClubPageing",
+  					 data : {
+  						cType : ctype,
+  						cloc1 : acName,
+  						cloc2 : acName2,
+						size : 1,
+						page : pageNumber
+  					},
+            		   success: function(item) {
+            			    console.log("page");
+         					pageNumber= item.pageable.pageNumber;
+        					totalPages = item.totalPages;
+        					
+        					startPage = Math.max(1, pageNumber - 4); //현재 페이지 넘버, 최소 값 1으로 설정
+        					endpage = Math.min(totalPages, pageNumber + 4); //
+              				$("#clubList").empty();
+              				$("#pageNumberMain").empty();
+          					var li =$("#pageNumberMain").addClass("page-item");
+        					var li2;
+        					for(var i = startPage-1; i < endpage; i++){
+        						li2 = $("<a></a>").addClass("pageingClass").addClass("page-link").attr({
+//         							"href": "listClubAll2?page="+i+"&size="+1
+         							"href": "listClubAll2.html"
+        						}).html(i)
+        						li.append(li2);
+        					}
+              				$.each(item.content, function(){
+              						listAppend(this);
+              				})
+            		   }
+            	   });
+               });
+      	})
+      </script>
    </head>
    <body>
       <!-- Navigation -->
@@ -218,21 +438,22 @@
 								<fieldset data-role="controlgroup" data-type="horizontal">
 									<legend>종목을 선택하세요 </legend>
 									
-									<input type="radio" name="radio" id="soccer" value="축구" checked="checked" />
+									<input type="radio" name="cType" id="soccer" value="축구" checked="checked" />
 										<label for="soccer">축구</label>
-									<input type="radio" name="radio" id="footVolleyball" value="족구" />
+									<input type="radio" name="cType" id="footVolleyball" value="족구" />
 										<label for="footVolleyball">족구</label>
-									<input type="radio" name="radio" id="futsal" value="풋살" />
+									<input type="radio" name="cType" id="futsal" value="풋살" />
 										<label for="futsal">풋살</label>
-									<input type="radio" name="radio" id="basketball" value="농구" />
+									<input type="radio" name="cType" id="basketball" value="농구" />
 										<label for="basketball">농구</label>
 								</fieldset>
 							</div>
 						<hr>
+						
 							<div>
 								<legend> 지역을 선택하세요  </legend>
 								<label for="validationCustom01">시/도</label>
-								<select style="width:100px;" class="custom-select" id="validationCustom01" name="validationCustom01">
+								<select style="width:100px;" class="custom-select" id="cloc1" name="cloc1">
 								   <option selected=""   th:value="인천시" th:text="인천시" ></option>
 								</select>
 								<div class="invalid-feedback">
@@ -240,7 +461,7 @@
 								</div>
 								
 								<label for="validationCustom02">도 / 구</label>
-								<select style="width:100px;" class="custom-select" id="validationCustom02" name="validationCustom02">
+								<select style="width:100px;" class="custom-select" id="cloc2" name="cloc2">
 								   <option selected="" th:value="연수구" th:text="연수구"  ></option>
 								</select>
 								<div class="invalid-feedback">
@@ -331,26 +552,54 @@
 			 </div>
 			 
 			<!-- 동호회 리스트 화면에 띄우기 -->
-			<div class="row" > 
-               <div class="col-lg-4 col-md-4" th:each="b:${list}">
-                 <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0">
-                        <a href="#"><img class="card-img-top" src="img/blog/7.png" alt="Card image cap">
-                        <div class="card-body">
-                           <span class="badge badge-success" th:text="${b.cType}"></span>
+			<div class="row" id="clubList"> 
+<!--                <div class="col-lg-4 col-md-4"> -->
+<!--                  <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0"> -->
+<!--                         <a href="#"><img class="card-img-top" src="img/blog/7.png" alt="Card image cap"> -->
+<!--                         <div class="card-body" id="cType"> -->
+<!-- <!--                            <span class="badge badge-success"></span> --> 
                            
-                           <h6 class="text-dark"  th:text="${b.cName}"></h6>
-                           <p class="mb-0"  th:text="${b.cIntro}"></p>
-                        </div>
-						<div class="card-footer border-0">
-                              <p class="mb-0"><img class="rounded-circle" src="img/user/4.jpg" alt="Card image cap"> <strong th:text="${b.cLoc1}"></strong> <strong th:text="${b.cLoc2}"></strong></p>
-                           </div>
-						</a>
-                     </div>
-               </div>
+<!-- <!--                            <h6 class="text-dark" id="cName"></h6> --> 
+<!-- <!--                            <p class="mb-0" id="cIntro"></p> --> 
+<!--                         </div> -->
+<!-- 						<div class="card-footer border-0"> -->
+<!--                               <p class="mb-0"><img class="rounded-circle" src="img/user/4.jpg" alt="Card image cap"> <strong th:text="${b.cLoc1}"></strong> <strong th:text="${b.cLoc2}"></strong></p> -->
+<!--                            </div> -->
+<!-- 						</a> -->
+<!--                      </div> -->
+<!--                </div> -->
             </div>
               
 		
 <!-- 페이징 -->
+<!-- <nav class="mt-5"> -->
+<!--   <ul class="pagination justify-content-center"> -->
+<!-- 	<!--   페이지 왼쪽 버튼 --> -->
+<!--     <li class="page-item" th:classappend="${1 == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "> -->
+<!--       <a class="page-link" href="#"  -->
+<!--       	th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber-1})}" tabindex="-1"> -->
+<!--       	<i class="feather-arrow-left"></i>Previous</a> -->
+<!--     </li> -->
+    
+<!--       페이지 번호 -->
+<!--     <li class="page-item"  -->
+<!-- 	    th:classappend="${i == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "  -->
+<!-- 	    th:each="i:${#numbers.sequence(startPage, endPage)}"> -->
+<!-- 	    	<a class="page-link" href="#"  -->
+<!-- 	    		th:text="${i}"  -->
+<!-- 	    		th:href="@{/listClubAll(page=${i-1})}">  -->
+<!-- 	    	</a> -->
+<!--     </li> -->
+    
+<!--       페이지 오른쪽 버튼 -->
+<!--     <li class="page-item"  -->
+<!--     	th:classappend="${clubDTOPage.TotalPages == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "> -->
+<!--       		<a class="page-link" href="#"  -->
+<!--       			th:href="@{/listClubAll(page=${clubDTOPage.pageable.pageNumber+1})}"> -->
+<!--       				<i class="feather-arrow-right">Next</i></a> -->
+<!--     </li> -->
+<!--   </ul> -->
+<!-- </nav> -->
 <nav class="mt-5">
   <ul class="pagination justify-content-center">
 	<!--   페이지 왼쪽 버튼 -->
@@ -360,14 +609,14 @@
       	<i class="feather-arrow-left"></i>Previous</a>
     </li>
     
-    <!--   페이지 이동 -->
-    <li class="page-item" 
-	    th:classappend="${i == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' " 
-	    th:each="i:${#numbers.sequence(startPage, endPage)}">
-	    	<a class="page-link" href="#" 
-	    		th:text="${i}" 
-	    		th:href="@{/listClubAll(page=${i-1})}"> 
-	    	</a>
+    <!--   페이지 번호 -->
+    <li class="page-item" id="pageNumberMain">
+<!-- 	    th:classappend="${i == clubDTOPage.pageable.pageNumber + 1} ? 'disabled' "  -->
+<!-- 	    th:each="i:${#numbers.sequence(startPage, endPage)}"> -->
+<!-- 	    	<a class="page-link" href="#"  -->
+<!-- 	    		th:text="${i}"  -->
+<!-- 	    		th:href="@{/listClubAll(page=${i-1})}">  -->
+<!-- 	    	</a> -->
     </li>
     
     <!--   페이지 오른쪽 버튼 -->

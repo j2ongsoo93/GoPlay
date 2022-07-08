@@ -1,12 +1,20 @@
 package com.goplay.demo.dao;
 
+import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.dto.QMatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
+import com.goplay.demo.vo.MatchBoard;
 import com.goplay.demo.vo.QMatchBoard;
+import com.querydsl.core.QueryResults;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -19,11 +27,11 @@ public class MatchBoardDAOCustom {
     private final JPAQueryFactory queryFactory;
     QMatchBoard matchBoard = QMatchBoard.matchBoard;
 
-    public List<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition) {
-        return queryFactory
+    public Page<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition, Pageable pageable) {
+        List<MatchBoardDTO> content = queryFactory
                 .select(new QMatchBoardDTO(
                         matchBoard.mb_no,
-                        matchBoard.club.cNo,
+                        matchBoard.club.cNo.as("homeClub"),
                         matchBoard.awayClub,
                         matchBoard.mbDate,
                         matchBoard.mbType,
@@ -46,7 +54,19 @@ public class MatchBoardDAOCustom {
                         mbLoc1Eq(condition.getMbLoc1()),
                         mbLoc2Eq(condition.getMbLoc2()),
                         mbStatEq(condition.getMbStat()))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        JPAQuery<MatchBoard> countQuery = queryFactory
+                .select(matchBoard)
+                .from(matchBoard)
+                .where(mbDateEq(condition.getMbDate()),
+                        mbTypeEq(condition.getMbType()),
+                        mbLoc1Eq(condition.getMbLoc1()),
+                        mbLoc2Eq(condition.getMbLoc2()),
+                        mbStatEq(condition.getMbStat()));
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
     }
 
     private BooleanExpression mbDateEq(LocalDateTime mbDate){
@@ -80,7 +100,6 @@ public class MatchBoardDAOCustom {
         }
         return matchBoard.mbStat.containsIgnoreCase(mbStat);
     }
-
 }
 
 

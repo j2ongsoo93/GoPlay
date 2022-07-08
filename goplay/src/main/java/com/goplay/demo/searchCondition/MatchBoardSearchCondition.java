@@ -1,6 +1,7 @@
 package com.goplay.demo.searchCondition;
 
 import lombok.Data;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.Date;
