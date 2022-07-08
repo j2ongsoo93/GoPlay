@@ -13,11 +13,23 @@ import com.goplay.demo.vo.Member;
 @Service
 @Setter
 public class MemberService {
+	
 	@Autowired
 	private MemberDAO dao;
 	
-	public List<Member> findAll(){
+	//회원목록
+	public List<Member> listMember(){
 		return dao.findAll();
+	}
+	
+	//회원정보 등록, 수정
+	public void saveMember(Member m) {
+		dao.save(m);
+	}
+	
+	
+	public Member getOne(String id) {
+		return dao.getOne(id);
 	}
 	
 //	public List<Member> findById(String id){

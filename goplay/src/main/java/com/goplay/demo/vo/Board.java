@@ -38,7 +38,7 @@ public class Board {
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private LocalDateTime bDate	;
 	private	int	bHit	;
-	private	Date	schDate	;
+	private LocalDateTime	schDate	;
 	private	String	schPlace	;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
