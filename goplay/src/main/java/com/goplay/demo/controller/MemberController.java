@@ -1,5 +1,7 @@
 package com.goplay.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +21,19 @@ public class MemberController {
 	private MemberService ms;
 	
 	@GetMapping("/listMember")
-	public void listMember(Model model){
-		model.addAttribute("listMember",ms.listMember());
+	public List<Member> listMember(Model model){
+		//model.addAttribute("listMember",ms.listMember());
+		return ms.listMember();
 	}
 	
-	@GetMapping("/selectMember/{id}")
-	public Member getMember(@PathVariable String id) {
+//	@GetMapping("/selectMember/{id}")
+//	public Member getMember(@PathVariable String id) {
+////		System.out.println(ms.getById(id));
+//		return ms.getById(id);
+//	}
+	
+	@GetMapping("/selectMember")
+	public Member getMember(String id) {
 //		System.out.println(ms.getById(id));
 		return ms.getById(id);
 	}

@@ -16,17 +16,18 @@
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
-     	/*$(function(){
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <!--      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
+     	//$(function(){
      		$.ajax({
-     			url:"/selectMember"+id,
-     			data:data,
-     			success:function(){
-     				
+     			tpye: "get",
+     			url:"/selectMember"+horse123,
+     			success:function(data){
+     				console.log(data);
      			}
      		});
-     	});*/
-      </script>
+     	//});
+      </script> -->
    </head>
    <body>
       <!-- Navigation -->
@@ -316,7 +317,7 @@
                                     <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="name" value="Gurdeep Osahan" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input type="text" id="memberName" class="form-control" name="name" value="" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
                                        <small class="form-text text-muted">Displayed on your public profile, notifications and other places.</small>
                                     </div>
                                  </div>
@@ -709,4 +710,17 @@
       <!-- Custom scripts for all pages-->
       <script src="js/osahan.js"></script>
    </body>
+   <script type="text/javascript">
+     	//$(function(){
+     		var id = "horse123";
+     		$.ajax({
+     			type: "GET",
+     			url:"/selectMember?id="+id,
+     			success:function(data){
+     				$("#memberName").val(data.mname);
+     				console.log(data);
+     			}
+     		});
+     	//});
+   </script>      
 </html>
