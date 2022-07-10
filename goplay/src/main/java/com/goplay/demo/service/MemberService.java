@@ -28,8 +28,8 @@ public class MemberService {
 	}
 	
 	
-	public Member getOne(String id) {
-		return dao.getOne(id);
+	public Member getById(String id) {
+		return dao.getById(id);
 	}
 	
 //	public List<Member> findById(String id){

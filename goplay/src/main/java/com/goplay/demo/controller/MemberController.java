@@ -24,8 +24,9 @@ public class MemberController {
 	}
 	
 	@GetMapping("/selectMember/{id}")
-	public void getOne(@PathVariable String id, Model model) {
-		model.addAttribute("m",ms.getOne(id));
+	public Member getMember(@PathVariable String id) {
+//		System.out.println(ms.getById(id));
+		return ms.getById(id);
 	}
 	
 	@PostMapping("/saveMember")
@@ -36,7 +37,7 @@ public class MemberController {
 	
 	@GetMapping("/updateMember/{id}")
 	public String update(@PathVariable String id, Model model) {
-		model.addAttribute("m", ms.getOne(id));
+		model.addAttribute("m", ms.getById(id));
 		return "updateMember";
 	}
 }

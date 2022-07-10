@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberDAO extends JpaRepository<Member, String>{
-
+	Member getById(String id);
 }
