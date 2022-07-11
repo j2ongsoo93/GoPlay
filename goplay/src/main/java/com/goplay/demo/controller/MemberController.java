@@ -35,6 +35,7 @@ public class MemberController {
 	@GetMapping("/selectMember")
 	public Member getMember(String id) {
 //		System.out.println(ms.getById(id));
+//		model.addAttribute("m", ms.getById(id));
 		return ms.getById(id);
 	}
 	

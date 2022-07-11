@@ -17,17 +17,6 @@
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <!--      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
-     	//$(function(){
-     		$.ajax({
-     			tpye: "get",
-     			url:"/selectMember"+horse123,
-     			success:function(data){
-     				console.log(data);
-     			}
-     		});
-     	//});
-      </script> -->
    </head>
    <body>
       <!-- Navigation -->
@@ -302,8 +291,8 @@
                <main class="col-md-8">
                   <div class="border rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Edit Basic Info</h6>
-                        <p class="mb-0 mt-0 small">Lorem ipsum dolor sit amet, consecteturs.
+                        <h6 class="m-0">My Profile</h6>
+                        <p class="mb-0 mt-0 small">수정 후 수정버튼을 꼭 클릭해주십쇼.
                         </p>
                      </div>
                      <div class="box-body p-3">
@@ -313,12 +302,12 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="nameLabel" class="form-label">
-                                    Name
-                                    <span class="text-danger">*</span>
+                                    이름
+                                    <span class="text-danger"></span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" id="memberName" class="form-control" name="name" value="" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success">
-                                       <small class="form-text text-muted">Displayed on your public profile, notifications and other places.</small>
+                                       <input type="text" id="memberName" class="form-control" name="name" value="" placeholder="Enter your name" aria-label="Enter your name" required="" aria-describedby="nameLabel" data-msg="Please enter your name." data-error-class="u-has-error" data-success-class="u-has-success" readonly>
+                                       <small class="form-text text-muted">닉네임, 이메일만 수정이 가능합니다.</small>
                                     </div>
                                  </div>
                               </div>
@@ -327,27 +316,27 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="usernameLabel" class="form-label">
-                                    NickName
-                                    <span class="text-danger">*</span>
+                                    닉네임
+                                    <span class="text-danger"></span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="username" value="iamosahan" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input type="text" id="memberNickName" class="form-control" name="username" value="" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success">
                                     </div>
                                  </div>
                               </div>
                               <!-- End Input -->
                            </div>
                            <label class="form-label">
-                           Birth date
-                           <span class="text-danger">*</span>
+                           출생년도-월-일
+                           <span class="text-danger">	</span>
                            </label>
                            <div class="row">
                               <!-- Input -->
                               <div class="col-md-6 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select" required="" data-msg="Please select month." data-error-class="u-has-error" data-success-class="u-has-success">
-                                          <option value="">Select month</option>
+                                       <input type="text" id="memberBirthDate" class="form-control" readonly>
+                                         <!--  <option value="">Select month</option>
                                           <option value="birthMonthSelect1">1월</option>
                                           <option value="birthMonthSelect2">February</option>
                                           <option value="birthMonthSelect3">March</option>
@@ -359,8 +348,8 @@
                                           <option value="birthMonthSelect9">September</option>
                                           <option value="birthMonthSelect10">October</option>
                                           <option value="birthMonthSelect11">November</option>
-                                          <option value="birthMonthSelect12">December</option>
-                                       </select>
+                                          <option value="birthMonthSelect12">December</option> -->
+                                       </input>
                                     </div>
                                  </div>
                               </div>
@@ -369,7 +358,7 @@
                               <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <!-- <select class="form-control custom-select" required="" data-msg="Please select date." data-error-class="u-has-error" data-success-class="u-has-success">
                                           <option value="">Select date</option>
                                           <option value="birthDateSelect1">1</option>
                                           <option value="birthDateSelect2">2</option>
@@ -402,7 +391,7 @@
                                           <option value="birthDateSelect29">29</option>
                                           <option value="birthDateSelect30">30</option>
                                           <option value="birthDateSelect31">31</option>
-                                       </select>
+                                       </select> -->
                                     </div>
                                  </div>
                               </div>
@@ -411,7 +400,7 @@
                               <div class="col-sm-4 col-md-2 mb-3 mb-sm-6">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <!-- <select id="memberBirthYear" class="form-control custom-select" required="" data-msg="Please select year." data-error-class="u-has-error" data-success-class="u-has-success">
                                           <option value="">Select year</option>
                                           <option value="birthYearSelect1900">1900</option>
                                           <option value="birthYearSelect1901">1901</option>
@@ -531,19 +520,23 @@
                                           <option value="birthYearSelect2015">2015</option>
                                           <option value="birthYearSelect2016">2016</option>
                                           <option value="birthYearSelect2017">2017</option>
-                                       </select>
+                                       </select> -->
                                     </div>
                                  </div>
                               </div>
                               <!-- End Input -->
                               <!-- Input -->
-                              <div class="col-sm-4 col-md-2 mb-2">
+                              <div class="col-sm-4 col-md-4 mb-2">
                                  <div class="js-form-message">
                                     <div class="form-group">
-                                       <select class="form-control custom-select" required="" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success">
-                                          <option value="genderSelect1" selected="">남성</option>
-                                          <option value="genderSelect2">여성</option>
-                                       </select>
+                                    	<label id="genderLabel">
+                                    	성별
+                                    	<span class="text-danger"></span>
+                                    	</label>
+                                       <input id="memberGender" class="form-control" readonly>
+                                        <!--   <option value="genderSelect1" selected="">남성</option>
+                                          <option value="genderSelect2">여성</option> -->
+                                       </input>
                                     </div>
                                  </div>
                               </div>
@@ -554,18 +547,18 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="emailLabel" class="form-label">
-                                    Email address
-                                    <span class="text-danger">*</span>
+                                    이메일
+                                    <span class="text-danger"></span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="email" class="form-control" name="email" value="iamosahan@gmail.com" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input type="email" id="memberEmail" class="form-control" name="email" value="" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
                                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                  </div>
                               </div>
                               <!-- End Input -->
                               <!-- Input -->
-                              <div class="col-sm-6 mb-2">
+                             <!--  <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="locationLabel" class="form-label">
                                     Location
@@ -575,6 +568,23 @@
                                        <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success">
                                     </div>
                                  </div>
+                              </div> -->
+                              <!-- End Input -->
+                              <!-- Input -->
+                              <div class="col-sm-6 mb-2">
+                                 <div class="js-form-message">
+                                    <label id="phoneNumberLabel" class="form-label">
+                                    휴대폰 번호
+                                    <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="form-group">
+                                       <input id="memberPhoneNumber" class="form-control" type="tel" name="phoneNumber" value="" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                    </div>
+                                 </div>
+                                 <a class="d-inline-block u-text-muted" href="#">
+                                 <span class="mr-1">+</span>
+                                 Add phone number
+                                 </a>
                               </div>
                               <!-- End Input -->
                            </div>
@@ -583,11 +593,13 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="organizationLabel" class="form-label">
-                                    Organization
+                                    선호지역 1
                                     <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" class="form-control" name="organization" value="Wrapbootstrap Ltd." placeholder="Enter your organization name" aria-label="Enter your organization name" required="" aria-describedby="organizationLabel" data-msg="Please enter your organization name" data-error-class="u-has-error" data-success-class="u-has-success">
+                                      <select class="custom-select" id="mbLoc1">
+
+                                       </select>
                                     </div>
                                  </div>
                               </div>
@@ -596,12 +608,14 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="websiteLabel" class="form-label">
-                                    Website
+                                    선호지역 2
                                     <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input class="form-control" type="url" name="website" value="https://wrapbootstrap.com/" placeholder="Enter your website" aria-label="Enter your website" required="" aria-describedby="websiteLabel" data-msg="Password enter a valid website" data-error-class="u-has-error" data-success-class="u-has-success">
-                                       <small class="form-text text-muted">Your home page, blog or company site, e.g. http://example.com</small>
+                                     <select class="custom-select" id="mbLoc2">
+
+                                       </select>
+                                       <small class="form-text text-muted">선호지역 1을 먼저 선택해주십쇼</small>
                                     </div>
                                  </div>
                               </div>
@@ -611,12 +625,12 @@
                               <!-- Input -->
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
-                                    <label id="phoneNumberLabel" class="form-label">
-                                    Phone number
+                                    <label id="" class="form-label">
+                                   	선호 종목 
                                     <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input class="form-control" type="tel" name="phoneNumber" value="+91 85680 79956" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
+                                       <input id="memberPhoneNumber" class="form-control" type="tel" name="phoneNumber" value="" placeholder="Enter your phone number" aria-label="Enter your phone number" required="" aria-describedby="phoneNumberLabel" data-msg="Please enter a valid phone number" data-error-class="u-has-error" data-success-class="u-has-success">
                                     </div>
                                  </div>
                                  <a class="d-inline-block u-text-muted" href="#">
@@ -710,17 +724,82 @@
       <!-- Custom scripts for all pages-->
       <script src="js/osahan.js"></script>
    </body>
-   <script type="text/javascript">
-     	//$(function(){
-     		var id = "horse123";
+	  <script type="text/javascript" >
+     		var id = "lion123";
+     		
+     		var acName;
+     		var adName;
      		$.ajax({
      			type: "GET",
      			url:"/selectMember?id="+id,
+     			async: false,
      			success:function(data){
      				$("#memberName").val(data.mname);
+     				$("#memberNickName").val(data.nickname);
+     				$("#memberEmail").val(data.email);
+     				$("#memberBirthDate").val(data.birth_date);
+     				$("#memberGender").val(data.gender);
+     				$("#memberPhoneNumber").val(data.phone);
      				console.log(data);
+     				acName = data.mloc1;
+     				adName = data.mloc2;
+     				$("#mbLoc1").val(acName);
      			}
      		});
-     	//});
-   </script>      
+     		
+     		console.log(acName)
+     		console.log(adName)
+     		
+     		//시도 지역선택 드롭다운 리스트
+     		$.ajax({
+                url:"/listCity",
+                success: function(data){
+                   $.each(data,function(){
+                      let option = $("<option></option>");
+                      option.html(this.acName);
+                      option.attr("id",this.acName);
+                      option.attr("value",this.acName);
+                      $("#mbLoc1").append(option);
+                     
+                   });
+                }
+             });
+     		
+     		  //시도 지역분류 선택 시 세부지역 출력
+            $(document).on("change", "#loc1", function (){
+               $("#mbLoc2").empty();
+               let acName = $(this).val()
+               $.ajax({
+                  url:"/listDistrict/"+acName,
+                  success: function(data) {
+                     let district = data[0].address_district;
+                     $.each(district,function(){
+                        let option = $("<option></option>");
+                        option.html(this.adName);
+                        option.attr("value",this.adName);
+                        $("#mbLoc2").append(option);
+                     });
+                  }
+               });
+            });
+
+     		//시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
+            $.ajax({
+               url:"/listDistrict/"+"서울특별시",
+               success: function(data) {
+                  let district = data[0].address_district;
+                  $.each(district,function(){
+                     let option = $("<option></option>");
+                     option.html(this.adName);
+                     option.attr("id",this.adName);
+                     option.attr("value",this.adName);
+                     $("#mbLoc2").append(option);
+                  });
+               }
+            });
+     		
+     		$("#서울시").attr("selected", "true");
+     		$("#강서구").attr("selected", "true");
+     		
+   </script>   
 </html>
