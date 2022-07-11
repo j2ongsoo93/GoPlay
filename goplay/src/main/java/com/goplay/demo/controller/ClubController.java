@@ -15,10 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goplay.demo.dao.MemberDAO;
@@ -80,23 +77,14 @@ public class ClubController {
 
 	}
 
-
-	
 	@GetMapping("/listClubRecommend")
 	public void listClubRecommend() {
 		
 	}
-	
-//	@GetMapping("/findById")
-//	public void findById(String id) {
-//		ms.findById(id);
-//	}
 
-
-
-
-	//동호회검색 페이지로 이동
-	public String listClub(Model model){
-		return "listCLubAll2";
+	@GetMapping ("/findClub/{cNo}")
+	@ResponseBody
+	public List<ClubDTO> findByCno(@PathVariable int cNo){
+		return cs.findByCno(cNo);
 	}
 }
