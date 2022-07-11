@@ -16,6 +16,16 @@
       <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
+     	$(function(){
+     		$.ajax({
+     			url:"/selectMember"+id,
+     			success:function(data){
+     				
+     			}
+     		});
+     	});
+      </script>
    </head>
    <body>
       <!-- Navigation -->
@@ -315,7 +325,7 @@
                               <div class="col-sm-6 mb-2">
                                  <div class="js-form-message">
                                     <label id="usernameLabel" class="form-label">
-                                    Username
+                                    NickName
                                     <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
@@ -336,7 +346,7 @@
                                     <div class="form-group">
                                        <select class="form-control custom-select" required="" data-msg="Please select month." data-error-class="u-has-error" data-success-class="u-has-success">
                                           <option value="">Select month</option>
-                                          <option value="birthMonthSelect1">January</option>
+                                          <option value="birthMonthSelect1">1월</option>
                                           <option value="birthMonthSelect2">February</option>
                                           <option value="birthMonthSelect3">March</option>
                                           <option value="birthMonthSelect4" selected="selected">April</option>
@@ -529,9 +539,8 @@
                                  <div class="js-form-message">
                                     <div class="form-group">
                                        <select class="form-control custom-select" required="" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success">
-                                          <option value="genderSelect1" selected="">Male</option>
-                                          <option value="genderSelect2">Female</option>
-                                          <option value="genderSelect3">Other</option>
+                                          <option value="genderSelect1" selected="">남성</option>
+                                          <option value="genderSelect2">여성</option>
                                        </select>
                                     </div>
                                  </div>
@@ -684,8 +693,8 @@
                      </div>
                   </div>
                   <div class="mb-3 text-right">
-                     <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
-                     <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;  Sava Chenges &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                     <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                     <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </a>
                   </div>
                </main>
             </div>

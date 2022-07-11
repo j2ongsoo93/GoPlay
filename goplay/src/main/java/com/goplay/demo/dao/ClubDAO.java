@@ -11,9 +11,17 @@ import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.dto.ClubDTOInterface;
 import com.goplay.demo.vo.AddressDistrict;
 import com.goplay.demo.vo.Club;
+<<<<<<< HEAD
 import com.querydsl.core.Tuple;
+=======
+import org.springframework.stereotype.Repository;
+>>>>>>> branch 'master' of https://github.com/j2ongsoo93/GoPlay.git
 
+import java.util.List;
+
+@Repository
 public interface ClubDAO extends JpaRepository<Club, Integer> {
+    Club findBycNo(int cNo);
 
 //	@Query("select soccer,footsal,footvalleyball,bascketball,mLoc1,mLoc2 from Member where id=:id")
 //	String findByIdTypeLoc(String id);

@@ -35,6 +35,5 @@ public class ClubMemberlist {
 	private	Member member	;
 	
 	@OneToMany(mappedBy = "club_memberlist")
-	@JsonManagedReference
 	private List<MatchMember> match_member;
 }

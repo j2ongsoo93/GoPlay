@@ -16,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goplay.demo.dao.MemberDAO;
@@ -91,6 +88,22 @@ public class ClubController {
 		if(memberInfo.getBascketball() == 1) {
 			resultType[3] = "농구";
 		}
+
+
+	@GetMapping("/listClubPageing")
+	public String listClubPageing(Model model) {
+
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endpage);
+		model.addAttribute("clubDTOPage", clubDTOPage);
+		
+		return "listClubAll";
+		//return mav;
+
+	}
+
+	@GetMapping("/listClubRecommend")
+	public void listClubRecommend() {
 		
 		resultType[4] = memberInfo.getMLoc1().toString();
 		resultType[5] = memberInfo.getMLoc2().toString();
@@ -137,5 +150,11 @@ public class ClubController {
 	public List<ClubInfoDTO> getClubProfileResult() {
 		int cNo=1;//tiger123  의 Cno
 		return cs.getClubProfileResult(cNo);
+	}
+		
+	@GetMapping ("/findClub/{cNo}")
+	@ResponseBody
+	public List<ClubDTO> findByCno(@PathVariable int cNo){
+		return cs.findByCno(cNo);
 	}
 }

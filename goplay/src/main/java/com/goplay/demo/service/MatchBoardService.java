@@ -1,6 +1,5 @@
 package com.goplay.demo.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.goplay.demo.dao.MatchBoardDAOCustom;
@@ -34,8 +33,13 @@ public class MatchBoardService {
 	}
 
 	//매치검색
-	public List<MatchBoard> searchMatchBoard(MatchBoardSearchCondition condition) {
-		return daoCustom.searchMatchBoard(condition);
+	public Page<MatchBoardDTO> searchMatchBoard(MatchBoardSearchCondition condition, Pageable pageable) {
+		return daoCustom.searchMatchBoard(condition, pageable);
+	}
+
+	//내 매치 검색
+	public List<MatchBoard> myMatch(String id){
+		return dao.myMatch(id);
 	}
 	
     public Page<MatchBoardDTO> listMatchCno(Pageable pageable,Integer cNo) {

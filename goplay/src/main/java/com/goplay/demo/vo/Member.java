@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class Member {
 	private	String	email	;
 	private	String	mName	;
 	private	String	nickname	;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private	LocalDateTime	birth_date	;
 	private	String	gender	;
 	private	Integer	soccer	;
@@ -44,31 +46,24 @@ public class Member {
 	private	String	role	;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<Club> club;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<ClubMemberlist> club_memberlist;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<Notice> notice;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<Board> board;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<ChatRoomJoin> chatroomjoin;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<ChatMessage> chatmessage;
 	
 	@OneToMany(mappedBy = "member")
-	@JsonManagedReference
 	private List<Reply> reply;
 	
 	
