@@ -2,12 +2,13 @@ package com.goplay.demo.controller;
 
 
 import com.goplay.demo.dto.MatchBoardDTO;
+import com.goplay.demo.dto.MatchRecordDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
+import com.goplay.demo.service.MatchRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ import java.util.List;
 public class MatchBoardController {
 	@Autowired
 	private MatchBoardService ms;
+	@Autowired
+	private MatchRecordService mrs;
 
 	//매치검색페이지로 이동
 	@GetMapping("/matchBoard")
@@ -37,8 +40,9 @@ public class MatchBoardController {
 	//매치검색
 	@GetMapping("/findMatch")
 	@ResponseBody
-	public Page<MatchBoardDTO> findMatchBoard(MatchBoardSearchCondition condition, Pageable pageable){
-		return ms.searchMatchBoard(condition, pageable);
+	public Page<MatchBoardDTO> findMatchBoard(MatchBoardSearchCondition condition){
+		PageRequest pageRequest1 = PageRequest.of(1, 3);
+		return ms.searchMatchBoard(condition, pageRequest1);
 	}
 
 	//매치등록, 수정
@@ -64,5 +68,12 @@ public class MatchBoardController {
 	@ResponseBody
 	public List<MatchBoard> myMatch(@PathVariable String id){
 		return ms.myMatch(id);
+	}
+
+	//전적 검색
+	@GetMapping("/matchRecord/{cNo}")
+	@ResponseBody
+	public List<MatchRecordDTO> matchRecord(@PathVariable int cNo){
+		return mrs.matchRecord(cNo);
 	}
 }
