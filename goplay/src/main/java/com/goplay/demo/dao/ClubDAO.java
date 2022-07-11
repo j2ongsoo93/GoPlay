@@ -3,10 +3,13 @@ package com.goplay.demo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.goplay.demo.dto.ClubDTO;
+import com.goplay.demo.dto.ClubDTOInterface;
+import com.goplay.demo.vo.AddressDistrict;
 import com.goplay.demo.vo.Club;
 import com.querydsl.core.Tuple;
 
@@ -25,5 +28,7 @@ public interface ClubDAO extends JpaRepository<Club, Integer> {
 //			@Param("footvalleyball") String footvalleyball,  @Param("bascketball") String bascketball,
 //			@Param("cLoc1") String cLoc1, @Param("cLoc2") String cLoc2);
 	
+//	@Query("select cName from Club")
+//	List<ClubDTOInterface> findAllClub();
 	
 }

@@ -8,13 +8,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.goplay.demo.dto.ClubDTO;
+import com.goplay.demo.dto.ClubInfoDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
 import com.goplay.demo.vo.Club;
 import com.goplay.demo.vo.QClub;
+import com.goplay.demo.vo.QClubMemberlist;
+import com.goplay.demo.vo.QMatchBoard;
+import com.goplay.demo.vo.QMatchRecord;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
@@ -24,17 +32,59 @@ import lombok.RequiredArgsConstructor;
 public class ClubDAOCustom {
 	private final JPAQueryFactory queryFactory;
 	QClub qClub = QClub.club;
+	QClubMemberlist qClubMemberlist = QClubMemberlist.clubMemberlist;
+	QMatchRecord qMatchRecord = QMatchRecord.matchRecord;
+	//모든 클럽 반환
+	public List<ClubDTO> listAllClub(){
+		return queryFactory
+                .select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+                .from(qClub)
+                .fetch();
+	}
+	
+	//클럽 커뮤니티에 해당 클럽 정보
+	public List<ClubInfoDTO> getClubProfileResult(int cNo) {
+		return queryFactory
+                .select(Projections.constructor(ClubInfoDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat
+                		,ExpressionUtils.as(
+                				JPAExpressions.select(qClubMemberlist.count().longValue()).from(qClubMemberlist)
+                				.where(qClubMemberlist.club.cNo.eq(cNo)),"memberCount"
+                				)
+                		,ExpressionUtils.as(
+                				JPAExpressions.select(qMatchRecord.win.sum().longValue()).from(qMatchRecord)
+                				.where(qMatchRecord.club.cNo.eq(cNo)),"win"
+                				)
+                		,ExpressionUtils.as(
+                				JPAExpressions.select(qMatchRecord.draw.sum().longValue()).from(qMatchRecord)
+                				.where(qMatchRecord.club.cNo.eq(cNo)),"draw"
+                				)
+                		,ExpressionUtils.as(
+                				JPAExpressions.select(qMatchRecord.lose.sum().longValue()).from(qMatchRecord)
+                				.where(qMatchRecord.club.cNo.eq(cNo)),"lose"
+                				)
+                		,ExpressionUtils.as(
+                				JPAExpressions.select(qMatchRecord.count().longValue()).from(qMatchRecord)
+                				.where(qMatchRecord.club.cNo.eq(cNo)),"recordCount"
+                				)
+                		))
+                .from(qClub)
+                .where(qClub.cNo.eq(cNo))
+                .fetch();
+	}
+	//추천 동호회
 	public Page<ClubDTO> listRecommendClub(Pageable pageable, RecommentClubCondition condition){
 		QueryResults<ClubDTO> results = queryFactory
-				.select(Projections.constructor(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+				.select(Projections.fields(ClubDTO.class, qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 			    .from(qClub)
 			    .where(
 			    		((cLoc1Eq(condition.getC_loc1()))
-					    		.and(cLoc2Eq(condition.getC_loc2())))
+					    .and(cLoc2Eq(condition.getC_loc2())))
 			    		.and(cTypeEq(condition.getSoccer())
 			    		.or(cTypeEq(condition.getFootsal()))
 			    		.or(cTypeEq(condition.getFootvalleyball()))
-			    		.or(cTypeEq(condition.getBascketball())))
+			    		.or(cTypeEq(condition.getBascketball()))
+			    		
+			    		)
 			    		).offset(pageable.getOffset()).limit(pageable.getPageSize())
 			    .fetchResults();
 		List<ClubDTO> content = results.getResults();
@@ -84,33 +134,4 @@ public class ClubDAOCustom {
         }
         return qClub.cLoc2.eq(cLoc2);
     }
-    
-//    private BooleanExpression cSoccerEq(String cSoccer){
-//        if(cSoccer == null || cSoccer.equals("")){
-//            return null;
-//        }
-//        return qClub.cType.eq(cSoccer);
-//    }
-//    
-//    private BooleanExpression cFootsalEq(String Footsal){
-//        if(Footsal== null || Footsal.equals("")){
-//            return null;
-//        }
-//        return qClub.cType.eq(Footsal);
-//    }
-//    
-//    private BooleanExpression cFootvalleyballEq(String Footvalleyball){
-//        if(Footvalleyball == null || Footvalleyball.equals("")){
-//            return null;
-//        }
-//        return qClub.cType.eq(Footvalleyball);
-//    }
-//    
-//    private BooleanExpression cBascketballEq(String Bascketball){
-//        if(Bascketball == null || Bascketball.equals("")){
-//            return null;
-//        }
-//        return qClub.cType.eq(Bascketball);
-//    }
-
 }

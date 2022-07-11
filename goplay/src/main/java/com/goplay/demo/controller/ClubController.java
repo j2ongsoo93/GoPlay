@@ -1,6 +1,7 @@
 package com.goplay.demo.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.ClubDTO;
+import com.goplay.demo.dto.ClubDTOInterface;
+import com.goplay.demo.dto.ClubInfoDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
 import com.goplay.demo.service.ClubService;
@@ -68,12 +71,11 @@ public class ClubController {
 	
 	@GetMapping("/listRecommendClub")
 	@ResponseBody
-	public Page<ClubDTO>  listRecommendClub(Pageable pageable) {
+	public Page<ClubDTO> listRecommendClub(Pageable pageable) {
 //		public <S extends ClubDTO> Iterable<S> listRecommendClub() {
-		String id="zxc123"; //로그인 한 id 값
+		String id="tiger123"; //로그인 한 id 값
 //		String[] result = (ms.findByIdTypeLoc(id)).split(",");
 		Member memberInfo = ms.findByIdTypeLoc(id);
-		System.out.println("resultReco " + memberInfo);
 		String[] resultType = {"","","","","",""}; // type 숫자 -> 스트링 변환 후 저장 (1 -> 축구)
 
 		//축구, 풋살, 족구, 농구, 지역1, 지역2
@@ -101,13 +103,39 @@ public class ClubController {
 		condition.setC_loc1(resultType[4]);
 		condition.setC_loc2(resultType[5]);
 		
-		System.out.println("resultType[0] "+ resultType[0]);
-		System.out.println("resultType[1] "+ resultType[1]);
-		System.out.println("resultType[2] "+ resultType[2]);
-		System.out.println("resultType[3] "+ resultType[3]);
-		System.out.println("resultType[4] "+ resultType[4]);
-		System.out.println("resultType[5] "+ resultType[5]);
-	
+//		System.out.println("resultType[0] "+ resultType[0]);
+//		System.out.println("resultType[1] "+ resultType[1]);
+//		System.out.println("resultType[2] "+ resultType[2]);
+//		System.out.println("resultType[3] "+ resultType[3]);
+//		System.out.println("resultType[4] "+ resultType[4]);
+//		System.out.println("resultType[5] "+ resultType[5]);
+		
+//		if(cs.listRecommendClub(pageable ,condition).getContent().size()==0) {
+//			
+//		}
 		return cs.listRecommendClub(pageable ,condition);
+	}
+	
+	//추천 동호회 출력(랜덤하게 2개출력)
+	@GetMapping("/listAllClub")
+	@ResponseBody
+	public List<ClubDTO> listAllClub(){
+		List<ClubDTO> cdto =cs.listAllClub();
+		List<ClubDTO> cdto2 = cs.listAllClub();
+		cdto2.clear();
+		for (int i=0; i<cdto.size(); i++) {
+			int intValue = (int)(Math.random()*cdto.size());
+			cdto2.add(cdto.get(intValue));
+			System.out.println("qqq" + intValue);
+		}
+		return cdto2;
+	}
+	
+	//동호회 커뮤니티 내 클럽 정보
+	@GetMapping("/getClubProfileResult")
+	@ResponseBody
+	public List<ClubInfoDTO> getClubProfileResult() {
+		int cNo=1;//tiger123  의 Cno
+		return cs.getClubProfileResult(cNo);
 	}
 }

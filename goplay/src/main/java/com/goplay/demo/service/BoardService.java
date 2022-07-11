@@ -7,10 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.goplay.demo.dao.BoardDAOCustom;
 import com.goplay.demo.dao.ClubDAO;
 import com.goplay.demo.dao.ClubDAOCustom;
+import com.goplay.demo.dto.BoardDTO;
 import com.goplay.demo.dto.ClubDTO;
-import com.goplay.demo.dto.ClubDTOInterface;
 import com.goplay.demo.dto.ClubInfoDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
@@ -21,30 +22,19 @@ import lombok.Setter;
 
 @Service
 @Setter
-public class ClubService {
+public class BoardService {
 
 	@Autowired
-	private ClubDAOCustom daoCustom;
-	
-	@Autowired
-	private ClubDAO dao;
+	private BoardDAOCustom daoCustom;
 	
 	//클럽 검색 기능
-	public Page<ClubDTO> listClubAll(Pageable pageable,ClubSearchCondition condition) {
-		return daoCustom.listClubAll(pageable, condition);
-	}
-
-	//추천 동호회(지역, 종목)
-	public Page<ClubDTO> listRecommendClub(Pageable pageable, RecommentClubCondition condition) {
-		return daoCustom.listRecommendClub(pageable, condition);
+	public Page<BoardDTO> listBoardSch(Pageable pageable, Integer cNo) {
+		return daoCustom.listBoardSch(pageable, cNo);
 	}
 	
-	public List<ClubInfoDTO> getClubProfileResult(int cNo) {
-		return daoCustom.getClubProfileResult(cNo);
+	//전체 게시물 띄우기
+	public Page<BoardDTO> listBoardAllCno(Pageable pageable, Integer cNo) {
+		return daoCustom.listBoardSch(pageable, cNo);
 	}
 	
-	
-	public List<ClubDTO> listAllClub(){
-		return daoCustom.listAllClub();
-	}
 }

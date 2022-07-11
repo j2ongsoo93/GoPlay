@@ -30,30 +30,31 @@ public class MatchBoardDTO {
     private	Integer	hScore	;
     private	Integer	aScore	;
     private	String	mbStat	;
-
-    @QueryProjection
-    public MatchBoardDTO(int mb_no, Club club, Integer awayClub, Date mbDate, String mbType, String mbLoc1, String mbLoc2, String mbStadium, int mbFee, String homeUcolor, String awayUcolor, String homeLevel, String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
-        this.mb_no = mb_no;
-        this.club = club;
-        this.awayClub = awayClub;
-        this.mbDate = mbDate;
-        this.mbType = mbType;
-        this.mbLoc1 = mbLoc1;
-        this.mbLoc2 = mbLoc2;
-        this.mbStadium = mbStadium;
-        this.mbFee = mbFee;
-        this.homeUcolor = homeUcolor;
-        this.awayUcolor = awayUcolor;
-        this.homeLevel = homeLevel;
-        this.awayLevel = awayLevel;
-        this.homeSay = homeSay;
-        this.awaySay = awaySay;
-        this.hScore = hScore;
-        this.aScore = aScore;
-        this.mbStat = mbStat;
-    }
-    @QueryProjection
-    public MatchBoardDTO() {
-
-    }
+    
+//    @QueryProjection
+//	public MatchBoardDTO(int mb_no, Club club, Integer awayClub, Date mbDate, String mbType, String mbLoc1,
+//			String mbLoc2, String mbStadium, int mbFee, String homeUcolor, String awayUcolor, String homeLevel,
+//			String awayLevel, String homeSay, String awaySay, Integer hScore, Integer aScore, String mbStat) {
+//		super();
+//		this.mb_no = mb_no;
+//		this.club = club;
+//		this.awayClub = awayClub;
+//		this.mbDate = mbDate;
+//		this.mbType = mbType;
+//		this.mbLoc1 = mbLoc1;
+//		this.mbLoc2 = mbLoc2;
+//		this.mbStadium = mbStadium;
+//		this.mbFee = mbFee;
+//		this.homeUcolor = homeUcolor;
+//		this.awayUcolor = awayUcolor;
+//		this.homeLevel = homeLevel;
+//		this.awayLevel = awayLevel;
+//		this.homeSay = homeSay;
+//		this.awaySay = awaySay;
+//		this.hScore = hScore;
+//		this.aScore = aScore;
+//		this.mbStat = mbStat;
+//	}
+    
+    
 }

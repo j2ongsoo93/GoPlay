@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTO;
+import com.goplay.demo.vo.Club;
 import com.goplay.demo.vo.Member;
 
 @Service
@@ -25,4 +26,5 @@ public class MemberService {
 	public Member findByIdTypeLoc(String id){
 		return dao.findByIdTypeLoc(id);
 	}
+
 }

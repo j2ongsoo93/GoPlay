@@ -5,6 +5,8 @@ import java.util.List;
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +57,13 @@ public class MatchBoardController {
 	@GetMapping("/updateMatchBoard")
 	public void updateBoard(){
 	}
+	
+	@GetMapping("/listMatchCno")
+	@ResponseBody
+    public Page<MatchBoardDTO> listMatchCno(Pageable pageable) {
+		int cNo = 1; //현재 로그인 한 id의 동호회 cno 받아와아햠
+		return ms.listMatchCno(pageable, cNo);
+    }
 
 
 

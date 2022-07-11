@@ -7,6 +7,8 @@ import com.goplay.demo.dao.MatchBoardDAOCustom;
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.MatchBoardDAO;
@@ -35,5 +37,9 @@ public class MatchBoardService {
 	public List<MatchBoard> searchMatchBoard(MatchBoardSearchCondition condition) {
 		return daoCustom.searchMatchBoard(condition);
 	}
+	
+    public Page<MatchBoardDTO> listMatchCno(Pageable pageable,Integer cNo) {
+    	return daoCustom.listMatchCno(pageable, cNo);
+    }
 }
 	

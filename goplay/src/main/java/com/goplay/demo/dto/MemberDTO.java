@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.querydsl.core.annotations.QueryProjection;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class MemberDTO {
 	private	String	id	;
 	private	String	pwd	;
@@ -39,4 +39,31 @@ public class MemberDTO {
 	private	String	mLoc2	;
 	private	String	mStat	;
 	private	String	role	;
+	
+	@QueryProjection
+	public MemberDTO(String id, String pwd, String phone, String email, String mName, String nickname,
+			LocalDateTime birth_date, String gender, Integer soccer, Integer footsal, Integer bascketball,
+			Integer footvalleyball, String mImg, String mLoc1, String mLoc2, String mStat, String role) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.phone = phone;
+		this.email = email;
+		this.mName = mName;
+		this.nickname = nickname;
+		this.birth_date = birth_date;
+		this.gender = gender;
+		this.soccer = soccer;
+		this.footsal = footsal;
+		this.bascketball = bascketball;
+		this.footvalleyball = footvalleyball;
+		this.mImg = mImg;
+		this.mLoc1 = mLoc1;
+		this.mLoc2 = mLoc2;
+		this.mStat = mStat;
+		this.role = role;
+	}
+	
+	
+	
 }

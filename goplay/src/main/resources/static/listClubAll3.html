@@ -24,7 +24,7 @@
       		var totalRecords=1;		//전체레코드 수
       		var totalPage=1;		//전체페이지 수	
       		var pageSize=1;			//한화면에 보여줄 레코드 수 
-      		var pageGroup = 2;		//한화면에 보여줄 페이지 수
+      		var pageGroup = 3;		//한화면에 보여줄 페이지 수
       		
      		let acName="인천광역시"; 	//시 도 지역 초기 값
       		let ctype="축구";  		//종목 초기 값
@@ -43,26 +43,47 @@
           	      		.append($("<div></div>").attr({'id':"mainData", "style":"display:inline-block"})
 	          	      		.append($("<h3></h3>").attr('id',"recommendClubCname").html(data.cname))
 	          	      		.append($("<ul></ul>").attr('id', "recommendClubLoc1").html(data.cloc1))
-	          	      		.append($("<p></p>").attr('id','recommendClubIntro').html(data.cintro))))
+	          	      		.append($("<p></p>").attr('id','recommendClubIntro').html(data.cintro)))
+	          	      		
+          				)
       		}
       		$.ajax({
       			url:"/listRecommendClub",
       			success:function(data){
-      				console.log("listRecommendClub")
-      				console.log(data);
-      				$.each(data['content'],function(){
-      					console.log(this.id);
-      					console.log(this.cname);
-      					console.log(this.cloc1);
-      					console.log(this.cloc2);
-      					console.log(this.ctype);
-      					console.log(this.cimg);
-      					console.log(this.cintro);
-      					recommendClubFunc(this)
-      					
-      				})
+      				count = 1;
+      				if (data['content'].length==0){
+      					$.ajax({
+      						url:"/listAllClub",
+      						success:function(data){
+      							$.each(data,function(){
+      								console.log(data)
+	      							if(count===3){
+	              						return false
+	              					}
+	      							recommendClubFunc(this)
+	              					count++;
+      							})
+      						}
+      					})
+      				}else{
+      					$.each(data['content'],function(){
+          					if(count===3){
+          						return false
+          					}
+          					
+          					console.log(this.id);
+          					console.log(this.cname);
+          					console.log(this.cloc1);
+          					console.log(this.cloc2);
+          					console.log(this.ctype);
+          					console.log(this.cimg);
+          					console.log(this.cintro);
+          					recommendClubFunc(this)
+          					count++;
+          					
+          				})
+      				}
       			}
-      			
       		})
       		
       		function initPrint(){
@@ -125,18 +146,19 @@
 //         			$(span).attr("page", 1);
 //         			$("#pageNumberMain").append(span);
 //         		}
-        		
-        		//if(startPage > 1){
+        		console.log("startPage " , startPage)
+        		if(startPage > 1){
+        			
         			span = $("<a></a>").addClass("pageing").addClass("page-link").html("Previous");
 //         			if(startPage > 1){
-//         				$(span).bind('click', false);
+//         				$(span).attr("disabled", true)
 //         			}
         			$(span).attr({
         				"page":startPage - 1,
         				"style":"display:inline-block",
         			})
         			$("#pageNumberMain").append(span);
-        		//}
+        		}
         		
         		for(i = startPage; i<=endPage ; i++){
         			span = $("<a></a>").addClass("pageing").addClass("page-link").html(i);
@@ -150,14 +172,14 @@
         		}
         		
         		//전체 totalpage 인 223 보다 현재 endPage가 작으면 다음 페이지가 있어야함
-        		//if(endPage < totalPage){
+        		if(endPage < totalPage){
         			span = $("<a></a>").addClass("pageing").addClass("page-link").html("Next");
         			$(span).attr({
         				"page":endPage+1,
         				"style":"display:inline-block"
         			});
         			$("#pageNumberMain").append(span);
-        		//}
+        		}
         		
         		//맨 끝으로
         		//맨 마지막 페이지 그룹에 출력할 시작 페이지와 마지막 페이지를 구해야함.
@@ -204,7 +226,7 @@
             //페이지 버튼 클릭
             $(document).on("click", ".pageing", function(){
         		var page = $(this).attr("page");
-        		console.log(page);
+        		console.log("page ", page);
         		printPage(page);
         		printPageNumber(page);
         	});
