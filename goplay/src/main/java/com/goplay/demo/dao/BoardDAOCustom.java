@@ -44,7 +44,6 @@ public class BoardDAOCustom {
 		return new PageImpl<>(content, pageable, total);
     }
     
-    
     //SELECT * FROM board WHERE c_no=1 AND SCH_DATE IS NOT NULL;
     //행사 일정 띄우기
     public Page<BoardDTO> listBoardSch(Pageable pageable, Integer cNo) {
