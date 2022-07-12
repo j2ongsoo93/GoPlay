@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Table(name="match_record")
 @SequenceGenerator(
 		name = "seq_match_record",
@@ -33,12 +31,12 @@ public class MatchRecord {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mb_no")
-//	@JsonIgnore
+	@JsonIgnore
 	private	MatchBoard match_board;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "c_no")
-//	@JsonIgnore
+	@JsonIgnore
 	private	Club club;
 	
 	private	int	win	;

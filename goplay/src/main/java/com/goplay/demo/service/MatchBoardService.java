@@ -41,9 +41,5 @@ public class MatchBoardService {
 	public List<MatchBoard> myMatch(String id){
 		return dao.myMatch(id);
 	}
-	
-    public Page<MatchBoardDTO> listMatchCno(Pageable pageable,Integer cNo) {
-    	return daoCustom.listMatchCno(pageable, cNo);
-    }
 }
 	
