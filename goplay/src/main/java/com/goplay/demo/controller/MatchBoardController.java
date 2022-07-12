@@ -1,25 +1,24 @@
 package com.goplay.demo.controller;
 
-
 import com.goplay.demo.dto.MatchBoardDTO;
+import com.goplay.demo.dto.MatchRecordDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
+import com.goplay.demo.service.MatchRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 import com.goplay.demo.service.MatchBoardService;
 import com.goplay.demo.vo.MatchBoard;
-
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -27,6 +26,8 @@ import java.util.List;
 public class MatchBoardController {
 	@Autowired
 	private MatchBoardService ms;
+	@Autowired
+	private MatchRecordService mrs;
 
 	//매치검색페이지로 이동
 	@GetMapping("/matchBoard")
@@ -35,10 +36,27 @@ public class MatchBoardController {
 	}
 
 	//매치검색
-	@GetMapping("/findMatch")
+	@PostMapping("/findMatch")
 	@ResponseBody
-	public Page<MatchBoardDTO> findMatchBoard(MatchBoardSearchCondition condition, Pageable pageable){
-		return ms.searchMatchBoard(condition, pageable);
+	public Page<MatchBoardDTO> findMatchBoard(@RequestBody HashMap<String, String> map)	{
+		List<String> mbStat = new ArrayList<>();
+		mbStat.add(map.get("mbStat_wait"));
+		mbStat.add(map.get("mbStat_matched"));
+		mbStat.add(map.get("mbStat_end"));
+		mbStat.removeAll(Arrays.asList("",null));
+		if(map.get("mbStat_wait")==null && map.get("mbStat_matched")==null && map.get("mbStat_end")==null){
+			mbStat = null;
+		}
+		LocalDateTime mbDate;
+		if(map.get("mbDate") == null){
+			mbDate = null;
+		}else{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+			mbDate = LocalDateTime.parse(map.get("mbDate"), formatter);
+		}
+		MatchBoardSearchCondition condition = new MatchBoardSearchCondition(mbDate, map.get("mbType"), map.get("mbLoc1"), map.get("mbLoc2"), mbStat);
+		PageRequest pageRequest = PageRequest.of(Integer.parseInt(map.get("page")), Integer.parseInt(map.get("size")));
+		return ms.searchMatchBoard(condition, pageRequest);
 	}
 
 	//매치등록, 수정
@@ -64,5 +82,12 @@ public class MatchBoardController {
 	@ResponseBody
 	public List<MatchBoard> myMatch(@PathVariable String id){
 		return ms.myMatch(id);
+	}
+
+	//전적 검색
+	@GetMapping("/matchRecord/{cNo}")
+	@ResponseBody
+	public List<MatchRecordDTO> matchRecord(@PathVariable int cNo){
+		return mrs.matchRecord(cNo);
 	}
 }

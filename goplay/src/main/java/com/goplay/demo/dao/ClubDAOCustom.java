@@ -2,6 +2,8 @@ package com.goplay.demo.dao;
 
 import java.util.List;
 
+import com.goplay.demo.dto.QClubDTO;
+import com.goplay.demo.dto.QMatchBoardDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -48,7 +50,17 @@ public class ClubDAOCustom {
 		List<ClubDTO> content = results.getResults();
 		long total = results.getTotal();
 		return new PageImpl<>(content, pageable, total);
-	  }
+	}
+
+	public List<ClubDTO> findClub(int cNo){
+		return queryFactory
+				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+				.from(qClub)
+				.where(cNoEq(cNo))
+				.fetch();
+	}
+
+
     private BooleanExpression cTypeEq(String cType){
         if(cType == null || cType.equals("")){
             return null;
@@ -69,6 +81,10 @@ public class ClubDAOCustom {
         }
         return qClub.cLoc2.eq(cLoc2);
     }
+
+	private BooleanExpression cNoEq(int cNo){
+		return qClub.cNo.eq(cNo);
+	}
     
 
 }

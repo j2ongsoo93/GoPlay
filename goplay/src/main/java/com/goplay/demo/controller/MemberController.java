@@ -23,7 +23,7 @@ public class MemberController {
 	@GetMapping("/listMember")
 	public List<Member> listMember(Model model){
 		//model.addAttribute("listMember",ms.listMember());
-		return ms.listMember();
+		return ms.findAll();
 	}
 	
 //	@GetMapping("/selectMember/{id}")

@@ -13,6 +13,8 @@ import com.goplay.demo.dto.ClubDTO;
 
 import lombok.Setter;
 
+import java.util.List;
+
 @Service
 @Setter
 public class ClubService {
@@ -27,7 +29,7 @@ public class ClubService {
 	}
 
 	//클럽찾기
-	public Club findClub(int cNo){
-		return dao.findBycNo(cNo);
+	public List<ClubDTO> findByCno(int cNo){
+		return daoCustom.findClub(cNo);
 	}
 }
