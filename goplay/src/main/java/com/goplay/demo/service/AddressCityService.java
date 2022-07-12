@@ -1,6 +1,7 @@
 package com.goplay.demo.service;
 
 import com.goplay.demo.dao.AddressCityDAO;
+import com.goplay.demo.dto.AddressCityDTO;
 import com.goplay.demo.vo.AddressCity;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class AddressCityService {
     @Autowired
     private AddressCityDAO dao;
 
-    public List<AddressCity> listAddress(){
+    public List<AddressCityDTO> listAddress(){
         return dao.findAllByOrderByAcNo();
     }
     public List<AddressCity> findByAcName(String acName){return dao.findAllByAcName(acName);}

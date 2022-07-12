@@ -39,3 +39,4 @@ $('.osahan-slider').slick({
 });
 
 })(jQuery); // End of use strict
+

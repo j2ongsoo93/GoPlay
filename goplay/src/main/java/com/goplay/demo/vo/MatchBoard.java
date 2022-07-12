@@ -1,15 +1,11 @@
 package com.goplay.demo.vo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,14 +29,20 @@ public class MatchBoard {
 	@JoinColumn(name = "home_club")
 	@JsonBackReference
 	private	Club 	club;
-	
+
 	private	Integer	awayClub;
-	private	Date	mbDate	;
+
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+	private LocalDateTime mbDate	;
+
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+	private LocalDateTime mbTime;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="HH:mm", timezone="Asia/Seoul")
 	private	String	mbType	;
 	private	String	mbLoc1	;
 	private	String	mbLoc2	;
 	private	String	mbStadium	;
-	private	int		mbFee	;
+	private	String	mbFee	;
 	private	String	homeUcolor	;
 	private	String	awayUcolor	;
 	private	String	homeLevel	;

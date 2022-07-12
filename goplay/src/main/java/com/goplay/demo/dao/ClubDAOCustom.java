@@ -104,7 +104,9 @@ public class ClubDAOCustom {
 			    		.or(qClub.cLoc2.contains(condition.getC_keyword()))
 			    		.or(qClub.cName.contains(condition.getC_keyword()))
 			    		.or(qClub.cType.contains(condition.getC_keyword())))
-			    		).offset(pageable.getOffset()).limit(pageable.getPageSize())
+			    		)
+				.offset(pageable.getOffset())
+				.limit(pageable.getPageSize())
 			    .fetchResults();
 		
 //		System.out.println("cTypeEq " + cTypeEq(condition.getC_type()));

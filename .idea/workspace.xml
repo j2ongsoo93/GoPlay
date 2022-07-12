@@ -4,19 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java">
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchRecordDAOCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchRecordDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchRecordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchBoard.js" afterDir="false" />
+    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 추가: AddressCityStd, AddressDistrictStd 엔티티, 지역명 호출 서비스, 매치등록 뷰페이지">
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/AddressCityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/AddressDistrictController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/AddressCityDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/AddressDistrictDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom_DTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchBoardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/AddressCityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/AddressDistrictService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressCityStd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressDistrictStd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/FaqController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ClubDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ClubDAOCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ClubService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/FaqDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/FaqService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressCity.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressCity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressDistrict.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/AddressDistrict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatRoomJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ChatRoomJoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Club.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ClubMemberlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/ClubMemberlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Faq.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Faq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchOffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Notice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Reply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Stadium.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Stadium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,16 +57,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="PJS_DTOtest" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,8 +81,8 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
@@ -94,73 +122,35 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/박정수/Documents/GitHub/GoPlay/goplay/src/main/resources/templates&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/j2ong/Documents/GitHub/GoPlay/goplay/src/main/resources/templates&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;5bf396b10038348453209c8033c86e34&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ed2f642897ffccf8febe2b67a2a7a190&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\templates" />
-      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
       <recent name="C:\Users\j2ong\Documents\GitHub\GoPlay\goplay\src\main\resources\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
-      <recent name="C:\Users\j2ong\Documents\GitHub\GoPlay\goplay\src\main\resources\templates" />
       <recent name="C:\Users\j2ong\Documents\GitHub\GoPlay\goplay\src\main\resources" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.goplay.demo.dto" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.goplay.demo.vo" />
       <recent name="com.goplay.demo.dao" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.GoplayApplication">
-    <configuration name="goplays" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\Java\jdk-17.0.3.1" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.goplay.demo.GoplayApplication" />
-      <module name="goplay_jar" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="GoplayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ACTIVE_PROFILES" />
-      <module name="goplay" />
+      <module name="goplay_jar" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.goplay.demo.GoplayApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ACTIVE_PROFILES" />
-      <option name="SPRING_BOOT_MAIN_CLASS" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Spring Boot.GoplayApplication" />
-      <item itemvalue="애플리케이션.goplays" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -182,28 +172,6 @@
       <workItem from="1656644549889" duration="16205000" />
       <workItem from="1656812127321" duration="26504000" />
       <workItem from="1656893128726" duration="1311000" />
-      <workItem from="1656899954159" duration="602000" />
-      <workItem from="1656900854708" duration="14147000" />
-      <workItem from="1656923577146" duration="1185000" />
-      <workItem from="1656979540581" duration="189000" />
-      <workItem from="1656981772007" duration="17574000" />
-      <workItem from="1657017242301" duration="497000" />
-      <workItem from="1657017751175" duration="1106000" />
-      <workItem from="1657019827900" duration="30000" />
-      <workItem from="1657019870567" duration="32000" />
-      <workItem from="1657062484712" duration="1488000" />
-      <workItem from="1657064007683" duration="2729000" />
-      <workItem from="1657082992962" duration="726000" />
-      <workItem from="1657084736504" duration="10036000" />
-      <workItem from="1657109871459" duration="3646000" />
-      <workItem from="1657117962558" duration="3331000" />
-      <workItem from="1657151810065" duration="3756000" />
-      <workItem from="1657169597454" duration="14003000" />
-      <workItem from="1657192202999" duration="4467000" />
-      <workItem from="1657238548259" duration="2605000" />
-      <workItem from="1657242934832" duration="321000" />
-      <workItem from="1657243279846" duration="73000" />
-      <workItem from="1657256054557" duration="3835000" />
     </task>
     <task id="LOCAL-00001" summary="[박정수] 추가: Querydsl dependency">
       <created>1656569367336</created>
@@ -212,22 +180,11 @@
       <option name="project" value="LOCAL" />
       <updated>1656569367337</updated>
     </task>
-    <task id="LOCAL-00002" summary="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경">
-      <created>1656979687434</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1656979687434</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="UnknownFeatures">
-    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
-    <option featureType="dependencySupport" implementationName="java:org.hibernate:hibernate-core" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -240,7 +197,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="PJS_2" />
+                        <option value="PJS_DTOtest" />
                       </list>
                     </value>
                   </entry>
@@ -256,22 +213,15 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="[박정수] 추가: Querydsl dependency" />
     <MESSAGE value="[박정수] 추가: AddressCityStd, AddressDistrictStd 엔티티, 지역명 호출 서비스, 매치등록 뷰페이지" />
-    <MESSAGE value="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경" />
-    <MESSAGE value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="[박정수] 추가: AddressCityStd, AddressDistrictStd 엔티티, 지역명 호출 서비스, 매치등록 뷰페이지" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/AddressCityDAO.java</url>
-          <line>14</line>
+          <line>12</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
