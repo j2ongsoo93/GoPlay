@@ -20,7 +20,7 @@ public class MemberController {
 
 	@GetMapping("/listMember")
 	public List<Member> listMember(Model model){
-		return ms.listMember();
+		return ms.findAll();
 	}
 	
 	@GetMapping("/selectMember")

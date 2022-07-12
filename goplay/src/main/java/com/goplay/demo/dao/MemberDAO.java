@@ -8,10 +8,15 @@ import com.goplay.demo.vo.Member;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberDAO extends JpaRepository<Member, String>{
+public interface MemberDAO extends JpaRepository<Member, Long>{
 	Member getById(String id);
 	List<Member> findAll();
-	
+	Member findById(String id);
+	Member findByEmail(String email);
+	Member findByNickname(String nickname);
+	Member findByPhone(String phone);
+
+
 	@Query("select m from Member m where m.id=:id")
 	Member findByIdTypeLoc(@Param("id") String id);
 

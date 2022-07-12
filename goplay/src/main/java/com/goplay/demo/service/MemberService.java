@@ -43,7 +43,7 @@ public class MemberService implements UserDetailsService{
 //	}
 
 	private void validateDuplicateMember(Member member) {
-//		Member findid = dao.findById(member.getId());
+		Member findid = dao.findById(member.getId());
 		Member findphone = dao.findByPhone(member.getPhone());
 		Member findemail = dao.findByEmail(member.getEmail());
 		Member findnickname = dao.findByNickname(member.getNickname());
@@ -67,7 +67,7 @@ public class MemberService implements UserDetailsService{
 	}
 
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException{
-//		Member member = dao.findById(id);
+		Member member = dao.findById(id);
 
 		if(member == null) {
 			throw new UsernameNotFoundException(id);
