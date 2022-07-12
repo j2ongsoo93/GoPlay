@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.BatchSize;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,7 +22,6 @@ import lombok.Setter;
 @Table(name="club")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @SequenceGenerator(
 		name = "seq_club",
 		sequenceName = "seq_club",
@@ -32,10 +30,9 @@ import lombok.Setter;
 )
 public class Club {
 	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private	Integer	cNo	;
+	private	int	cNo	;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
 	@JoinColumn(name = "id", insertable = true, updatable = true)
 	@JsonBackReference
 	private	Member	member;

@@ -4,21 +4,240 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 추가: AddressCityStd, AddressDistrictStd 엔티티, 지역명 호출 서비스, 매치등록 뷰페이지">
+<<<<<<<<< Temporary merge branch 1
+    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 220706">
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/caledar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap/_media.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap/mixins/_border-radius.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap/mixins/_screen-reader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap/mixins/_visibility.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/bootstrap/utilities/_stretched-link.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/js/popper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_breadcrumb.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_button-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_carousel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_close.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_code.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_custom-forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_images.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_jumbotron.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_media.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_nav.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_popover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_print.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_root.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_spinners.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_toasts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_tooltip.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_transitions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/bootstrap-grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/bootstrap-reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/bootstrap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_background-variant.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_border-radius.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_box-shadow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_breakpoints.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_caret.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_deprecate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_gradients.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_grid-framework.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_hover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_image.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_lists.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_nav-divider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_reset-text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_resize.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_screen-reader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_size.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_table-row.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_text-emphasis.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_text-hide.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_text-truncate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_transition.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/mixins/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_align.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_background.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_borders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_display.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_embed.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_flex.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_overflow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_position.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_screenreaders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_shadows.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_sizing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_spacing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_stretched-link.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/utilities/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/bootstrap/vendor/_rfs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar/scss/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap/_media.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap/mixins/_border-radius.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap/mixins/_screen-reader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap/mixins/_visibility.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/bootstrap/utilities/_stretched-link.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/matchBoardTest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_breadcrumb.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_button-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_carousel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_close.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_code.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_custom-forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_images.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_jumbotron.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_media.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_nav.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_popover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_print.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_root.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_spinners.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_toasts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_tooltip.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_transitions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/bootstrap-grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/bootstrap-reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/bootstrap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_background-variant.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_border-radius.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_box-shadow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_breakpoints.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_caret.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_deprecate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_gradients.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_grid-framework.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_hover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_image.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_lists.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_nav-divider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_reset-text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_resize.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_screen-reader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_size.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_table-row.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_text-emphasis.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_text-hide.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_text-truncate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_transition.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/mixins/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_align.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_background.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_borders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_display.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_embed.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_flex.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_overflow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_position.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_screenreaders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_shadows.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_sizing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_spacing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_stretched-link.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/utilities/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/bootstrap/vendor/_rfs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/scss/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/caledar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/listClubAll2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard_copy.html" afterDir="false" />
+=========
+    <list default="true" id="7129d58c-4b9a-47dd-a4c5-aa89d12109c9" name="Changes" comment="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java">
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchRecordDAOCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchRecordDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchRecordService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchBoard.js" afterDir="false" />
+>>>>>>>>> Temporary merge branch 2
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/BoardDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/BoardDAOCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAOCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/BoardDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/BoardDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ReplyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ReplyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ReplyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/ㅇㅂㅈㅇ.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ClubDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ClubDAOCustom.java" afterDir="false" />
+<<<<<<<<< Temporary merge branch 1
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/MatchBoardSearchCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/MatchBoardSearchCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/listClubAll2.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/listClubAll2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/sass/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/sass/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/searchMatchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" afterDir="false" />
+=========
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" afterDir="false" />
+>>>>>>>>> Temporary merge branch 2
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,8 +478,12 @@
     <MESSAGE value="[박정수] 추가: Querydsl dependency" />
     <MESSAGE value="[박정수] 추가: AddressCityStd, AddressDistrictStd 엔티티, 지역명 호출 서비스, 매치등록 뷰페이지" />
     <MESSAGE value="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경" />
+<<<<<<<<< Temporary merge branch 1
+    <option name="LAST_COMMIT_MESSAGE" value="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경" />
+=========
     <MESSAGE value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
     <option name="LAST_COMMIT_MESSAGE" value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
+>>>>>>>>> Temporary merge branch 2
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -269,6 +492,11 @@
           <url>file://$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/AddressCityDAO.java</url>
           <line>14</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

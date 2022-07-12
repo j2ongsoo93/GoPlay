@@ -2,7 +2,6 @@
 
 	"use strict";
 
-
 	$(document).ready(function () {
     function c(passed_month, passed_year, calNum) {
         var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
@@ -36,7 +35,7 @@
             }
         }
 
-        var color = "#444444"; <!-- 요일 라인 색상 -->
+        var color = "#444444";
         calendar.calHeader.find("h2").text(i[passed_month] + " " + passed_year);
         calendar.weekline.find("div").css("color", color);
         calendar.datesBody.find(".today").css("color", "#00bdaa");
@@ -127,6 +126,30 @@
 
     }
 
+    function selectDates(selected) {
+        if (!$.isEmptyObject(selected)) {
+            var dateElements1 = datesBody1.find('div');
+            var dateElements2 = datesBody2.find('div');
+
+            function highlightDates(passed_year, passed_month, dateElements) {
+                if (passed_year in selected && passed_month in selected[passed_year]) {
+                    var daysToCompare = selected[passed_year][passed_month];
+                    for (var d in daysToCompare) {
+                        dateElements.each(function (index) {
+                            if (parseInt($(this).text()) == daysToCompare[d]) {
+                                $(this).addClass('selected');
+                            }
+                        });
+                    }
+
+                }
+            }
+
+            highlightDates(year, month, dateElements1);
+            highlightDates(nextYear, nextMonth, dateElements2);
+        }
+    }
+
     function makeMonthArray(passed_month, passed_year) { // creates Array specifying dates and weekdays
         var e = [];
         for (var r = 1; r < getDaysInMonth(passed_year, passed_month) + 1; r++) {
@@ -161,7 +184,6 @@
 
     }
 
-    <!-- 달력 넘기기 -->
     function getAdjacentMonth(curr_month, curr_year, direction) {
         var theNextMonth;
         var theNextYear;
@@ -175,7 +197,6 @@
         return [theNextMonth, theNextYear];
     }
 
-    <!-- 달력 출력 -->
     function b() {
         today = new Date;
         year = today.getFullYear();
@@ -184,6 +205,8 @@
         nextMonth = nextDates[0];
         nextYear = nextDates[1];
     }
+
+    var e = 480;
 
     var today;
     var year,
@@ -275,6 +298,103 @@
         }
         clickedElement = bothCals.find(".calendar_content").find("div");
     });
+
+
+    //  Click picking stuff
+    function getClickedInfo(element, calendar) {
+        var clickedInfo = {};
+        var clickedCalendar,
+        clickedMonth,
+        clickedYear;
+        clickedCalendar = calendar.name;
+        clickedMonth = clickedCalendar == "first" ? month : nextMonth;
+        clickedYear = clickedCalendar == "first" ? year : nextYear;
+        clickedInfo = {
+            "calNum": clickedCalendar,
+                "date": parseInt(element.text()),
+                "month": clickedMonth,
+                "year": clickedYear
+        }
+        return clickedInfo;
+    }
+
+
+    // Finding between dates MADNESS. Needs refactoring and smartening up :)
+    function addChosenDates(firstClicked, secondClicked, selected) {
+        if (secondClicked.date > firstClicked.date || secondClicked.month > firstClicked.month || secondClicked.year > firstClicked.year) {
+
+            var added_year = secondClicked.year;
+            var added_month = secondClicked.month;
+            var added_date = secondClicked.date;
+
+            if (added_year > firstClicked.year) {
+                // first add all dates from all months of Second-Clicked-Year
+                selected[added_year] = {};
+                selected[added_year][added_month] = [];
+                for (var i = 1;
+                i <= secondClicked.date;
+                i++) {
+                    selected[added_year][added_month].push(i);
+                }
+
+                added_month = added_month - 1;
+                while (added_month >= 0) {
+                    selected[added_year][added_month] = [];
+                    for (var i = 1;
+                    i <= getDaysInMonth(added_year, added_month);
+                    i++) {
+                        selected[added_year][added_month].push(i);
+                    }
+                    added_month = added_month - 1;
+                }
+
+                added_year = added_year - 1;
+                added_month = 11; // reset month to Dec because we decreased year
+                added_date = getDaysInMonth(added_year, added_month); // reset date as well
+
+                // Now add all dates from all months of inbetween years
+                while (added_year > firstClicked.year) {
+                    selected[added_year] = {};
+                    for (var i = 0; i < 12; i++) {
+                        selected[added_year][i] = [];
+                        for (var d = 1; d <= getDaysInMonth(added_year, i); d++) {
+                            selected[added_year][i].push(d);
+                        }
+                    }
+                    added_year = added_year - 1;
+                }
+            }
+
+            if (added_month > firstClicked.month) {
+                if (firstClicked.year == secondClicked.year) {
+                    selected[added_year][added_month] = [];
+                    for (var i = 1;
+                    i <= secondClicked.date;
+                    i++) {
+                        selected[added_year][added_month].push(i);
+                    }
+                    added_month = added_month - 1;
+                }
+                while (added_month > firstClicked.month) {
+                    selected[added_year][added_month] = [];
+                    for (var i = 1;
+                    i <= getDaysInMonth(added_year, added_month);
+                    i++) {
+                        selected[added_year][added_month].push(i);
+                    }
+                    added_month = added_month - 1;
+                }
+                added_date = getDaysInMonth(added_year, added_month);
+            }
+
+            for (var i = firstClicked.date + 1;
+            i <= added_date;
+            i++) {
+                selected[added_year][added_month].push(i);
+            }
+        }
+        return selected;
+    }
 });
 
 
