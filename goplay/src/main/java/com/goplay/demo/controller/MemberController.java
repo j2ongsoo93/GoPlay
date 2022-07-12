@@ -8,39 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.goplay.demo.dto.MemberDTO;
 import com.goplay.demo.service.MemberService;
 import com.goplay.demo.vo.Member;
-
 import lombok.Setter;
 
-<<<<<<<<< Temporary merge branch 1
-@RestController 
-=========
->>>>>>>>> Temporary merge branch 2
 @Setter
 @RestController
 public class MemberController {
 	@Autowired
 	private MemberService ms;
-	
+
 	@GetMapping("/listMember")
 	public List<Member> listMember(Model model){
-		//model.addAttribute("listMember",ms.listMember());
 		return ms.listMember();
 	}
 	
-//	@GetMapping("/selectMember/{id}")
-//	public Member getMember(@PathVariable String id) {
-////		System.out.println(ms.getById(id));
-//		return ms.getById(id);
-//	}
-	
 	@GetMapping("/selectMember")
 	public Member getMember(String id) {
-//		System.out.println(ms.getById(id));
-//		model.addAttribute("m", ms.getById(id));
 		return ms.getById(id);
 	}
 	
