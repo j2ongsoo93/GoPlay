@@ -22,4 +22,5 @@ public class BoardDTO {
 	private	int	bHit	;
 	private	Date	schDate	;
 	private	String	schPlace	;
+	private String id;
 }

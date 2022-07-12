@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.goplay.demo.dao.BoardDAOCustom;
 import com.goplay.demo.dao.ClubDAO;
 import com.goplay.demo.dao.ClubDAOCustom;
+import com.goplay.demo.dao.ReplyDAOCustom;
 import com.goplay.demo.dto.BoardDTO;
 import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.dto.ClubInfoDTO;
+import com.goplay.demo.dto.ReplyDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
 import com.goplay.demo.vo.Club;
@@ -22,19 +24,16 @@ import lombok.Setter;
 
 @Service
 @Setter
-public class BoardService {
+public class ReplyService {
 
 	@Autowired
-	private BoardDAOCustom daoCustom;
+	private ReplyDAOCustom daoCustom;
 	
 	//클럽 검색 기능
-	public Page<BoardDTO> listBoardSch(Pageable pageable, Integer cNo) {
-		return daoCustom.listBoardSch(pageable, cNo);
+	public List<ReplyDTO> listReply(Integer bNo) {
+		return daoCustom.listReply(bNo);
 	}
 	
-	//전체 게시물 띄우기
-	public Page<BoardDTO> listBoardAllCno(Pageable pageable, Integer cNo) {
-		return daoCustom.listBoardAllCno(pageable, cNo);
-	}
+	
 	
 }

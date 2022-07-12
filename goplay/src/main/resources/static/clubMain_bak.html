@@ -45,21 +45,21 @@
 	 //게시글 동적 생성
 	 let boardContent;
 		 function boardContentAdd(data){
-		   boardContent = $("#profile").append($("<div></div").addClass("box shadow-sm border rounded bg-white mb-3 osahan-post")
+		   boardContent = $("#boardContent")
 			.append($("<div></div>").addClass("p-3 d-flex align-items-center border-bottom osahan-post-header")
 				.append($("<div></div>").addClass("dropdown-list-image mr-3")
 					.append($("<img></img>").addClass("rounded-circle").attr("src", "img/p5.png"))
 					.append($("<div></div>").addClass("status-indicator bg-success"))
 					)
 				.append($("<div></div>").addClass("font-weight-bold")
-					.append($("<div></div>").addClass("text-truncate").html(data.id))
-					.append($("<div></div>").addClass("small text-gray-500").html(data.btitle)))
+					.append($("<div></div>").addClass("text-truncate").html(data.btitle))
+					.append($("<div></div>").addClass("small text-gray-500").html(data.id)))
 				.append($("<span></span>").addClass("ml-auto small").html(data.bdate)))
 			
 			.append($("<div></div>").addClass("p-3 border-bottom osahan-post-body")
 				.append($("<p></p>").addClass("mb-0").html(data.bcontent)))
 			
-			.append($("<div></div>").addClass("p-3 border-bottom osahan-post-footer box shadow-sm border rounded bg-white mb-3 osahan-post")
+			.append($("<div></div>").addClass("p-3 border-bottom osahan-post-footer")
 				.append($("<a></a>").addClass("mr-3 text-secondary")
 					.append("<i></i>").addClass("feather-heart text-danger").html("16"))
 				.append($("<a></a>").addClass("mr-3 text-secondary")
@@ -67,7 +67,7 @@
 				.append($("<a></a>").addClass("mr-3 text-secondary")
 					.append("<i></i>").addClass("feather-share-2").html("2"))
  			 
-			.append($("<div></div>").attr("idx",data.bno))))//빈 값(댓글이 나중에 여기 들어가야함.)
+			.append($("<div>hello</div>").attr("idx",data.bno)))//빈 값(댓글이 나중에 여기 들어가야함.)
 		   
 // 				.append($("<button></button>").addClass("btn btn-outline-primary btn-sm mr-1").html("Awesome!!")
 // 					)
@@ -81,34 +81,28 @@
 	   }
 // 	 console.log($("div").attr("idx"))
 	 //댓글 생성
-	 var allReply;
-	 function boardReplyAdd(data,bNo){
-		console.log(data)
-		allReply=$(replyContainer).css("padding-top", 20).append($("<div></div>").addClass("box mb-0 shadow-sm border rounded bg-white osahan-post")
+	 function boardReplyAdd(me, data){
+		 
+// 		 console.log("이벤트가 발생")
+// 		 console.log(me.next())
+		 $(boardContent).append($("<div></div>").addClass("box mb-0 shadow-sm border rounded bg-white osahan-post")
 				 	.append($("<div></div>").addClass("p-3 d-flex align-items-top border-bottom osahan-post-comment")
 				 		.append($("<div></div>").addClass("dropdown-list-image mr-3")
 				 				.append($("<img></img>").addClass("rounded-circle").attr("src","img/p7.png"))
 				 				.append($("<div></div>").addClass("status-indicator bg-success"))
 				 		)
-				 		.append($("<div></div>").addClass("font-weight-bold")
-				 				.append($("<div></div>").addClass("text-truncate").html(data.id+" ")
-				 						.append($("<span></span>").addClass("float-right small").html(data.rdate)))
-				 				.append($("<div></div>").addClass("small text-gray-500").html(data.rcontent))
+				 		.append($("<div></div>").addClass("ont-weight-bold")
+				 				.append($("<div></div>").addClass("text-truncate").html("댓글")
+				 						.append($("<span></span>").addClass("float-right small").html("2")))
+				 				.append($("<div></div>").addClass("small text-gray-500").html("Ratione voluptatem sequi en lod nesciunt. Neque porro quisquam est, quinder dolorem ipsum quia dolor sit amet, consectetur"))
 				 		))
-// 				 	.append($("<div></div>").addClass("p-3")
-// 				 			.append($("<textarea></textarea>")
-// 				 				.addClass("form-control border-0 p-0 shadow-none")
-// 				 				.attr({"placeholder": "Add Comment...","rows":1})))
+				 	.append($("<div></div>").addClass("p-3")
+				 			.append($("<textarea></textarea>")
+				 				.addClass("form-control border-0 p-0 shadow-none")
+				 				.attr({"placeholder": "Add Comment...","rows":1})))
 				 	)
 	 }
-	//댓글 입력하는 comment창
-	function replyComment(){
-		   $(allReply).append($("<div></div>").addClass("p-3 bg-white box mb-0 shadow-sm border rounded bg-white osahan-post")
-					 			.append($("<textarea></textarea>")
-						 				.addClass("form-control border-0 p-0 shadow-none ")
-						 				.attr({"placeholder": "Add Comment...","rows":1})))
-	 }
-	
+	 
 	   //최초로 경기일정 띄우기
 	   schMatch();
 	   
@@ -134,6 +128,9 @@
 		   async: false,
 		   success:function(data){
 			   $.each(data['content'],function(){
+				   console.log("------")
+				   console.log(this)
+				   console.log("------")
 				   boardContentAdd(this);
 				   //listReply(this.bno)
  			   })
@@ -166,10 +163,8 @@
 	   
 	   //댓글 보기 버튼 클릭
 	   $(document).on("click", ".replyBtn", function(){
-		   $(allReply).empty();
-		   
-		   $(replyContainer).empty();
- 		   replyContainer = $(this).next().next();//댓글이 들어갈 위치
+// 		   console.log($(this).next().next().html())
+ 		   replyContainer = $(this).next().next();
 		   bNo=$(this).attr("bno")
 		   //function listReply(bNo){
 			   $.ajax({
@@ -177,13 +172,13 @@
 				   async: false,
 				   success:function(data1){
 					   $.each(data1,function(){
-						  	boardReplyAdd(this, bNo);
-						  	
+// 						   	console.log("******")
+// 						   	console.log(this)
+// 						  	console.log("******")
+						  	boardReplyAdd(this,bNo);
 					   })
 				   }
 			   })
-			   replyComment();
-			   
 		   //}
 	   })
 	   
@@ -552,34 +547,33 @@
                         
                      </div>
                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						<form action="" method="post">
-							<div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
-		                           <div class="p-3 d-flex align-items-center w-100" href="#">
-		                              <div class="dropdown-list-image mr-3">
-		                                 <img class="rounded-circle" src="img/user.png" alt="">
-		                                 <div class="status-indicator bg-success"></div>
-		                              </div>
-		                              <div class="w-100">
-		                                 <textarea placeholder="Write your thoughts..." class="form-control border-0 p-0 shadow-none" rows="1"></textarea>
-		                              </div>
-		                           </div>
-		                        
-		                     <div class="border-top p-3 d-flex align-items-center">
-		                        <div class="mr-auto"><a href="#" class="text-link small"><i class="bi bi-file-earmark-image"></i> 이미지</a></div>
-		                        <div class="mr-auto"><a href="#" class="text-link small"><i class="bi bi-file-earmark-image"></i> 동영상</a></div>
-		                        <div class="flex-shrink-1">
-		                           <button type="button" class="btn btn-primary btn-sm">게시글 작성</button>
-		                        </div>
-		                     </div>
-		                  </div>
-	                  </form>
-<!-- 	                  <div id="boardContent" class="box shadow-sm border rounded bg-white mb-3 osahan-post"> -->
-<!-- <!-- 						<div class="box shadow-sm border rounded bg-white mb-3 osahan-post"  > --> 
+
+						<div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+	                           <div class="p-3 d-flex align-items-center w-100" href="#">
+	                              <div class="dropdown-list-image mr-3">
+	                                 <img class="rounded-circle" src="img/user.png" alt="">
+	                                 <div class="status-indicator bg-success"></div>
+	                              </div>
+	                              <div class="w-100">
+	                                 <textarea placeholder="Write your thoughts..." class="form-control border-0 p-0 shadow-none" rows="1"></textarea>
+	                              </div>
+	                           </div>
+	                        
+	                     <div class="border-top p-3 d-flex align-items-center">
+	                        <div class="mr-auto"><a href="#" class="text-link small"><i class="bi bi-file-earmark-image"></i> 이미지</a></div>
+	                        <div class="mr-auto"><a href="#" class="text-link small"><i class="bi bi-file-earmark-image"></i> 동영상</a></div>
+	                        <div class="flex-shrink-1">
+	                           <button type="button" class="btn btn-primary btn-sm">게시글 작성</button>
+	                        </div>
+	                     </div>
+	                  </div>
+	                  <div id="boardContent" class="box shadow-sm border rounded bg-white mb-3 osahan-post">
+<!-- 						<div class="box shadow-sm border rounded bg-white mb-3 osahan-post"  > -->
 							
 	
 	                        
-<!-- <!-- 						</div> --> 
-<!--                      </div>   -->
+<!-- 						</div> -->
+                     </div>  
                      </div>
                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="box shadow-sm border rounded bg-white p-3">

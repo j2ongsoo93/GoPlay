@@ -27,6 +27,10 @@ import java.util.List;
 public class BoardDAOCustom {
     private final JPAQueryFactory queryFactory;
     QBoard Board = QBoard.board;
+    
+    
+    
+    //게시물 전체 보기
     public Page<BoardDTO> listBoardAllCno(Pageable pageable, Integer cNo) {
     	QueryResults<BoardDTO> results = 
     		queryFactory
@@ -36,6 +40,7 @@ public class BoardDAOCustom {
 			    .fetchResults();
 		List<BoardDTO> content = results.getResults();
 		long total = results.getTotal();
+		System.out.println("total " + total);
 		return new PageImpl<>(content, pageable, total);
     }
     
@@ -53,9 +58,16 @@ public class BoardDAOCustom {
 		List<BoardDTO> content = results.getResults();
 		long total = results.getTotal();
 		return new PageImpl<>(content, pageable, total);
+    
     }
-    
-    
+    //insert into board(b_no, b_content, b_date, b_file, b_hit, b_img, b_title, b_type, b_video, sch_date, sch_place, c_no, id) 
+    //values(4,'hihi4', sysdate, '결산.hwp', 20, '첼시.jpg', '첼시 전 후기', 1, '비디오mp4', null, null, 1, 'tiger123')
+//    public void insertBoard() {
+//    	queryFactory
+//    	.insert(Board)
+//    		.columns(Board.bContent, Board.bDate, Board.bFile, Board.bHit, Board.bImg, Board.bTitle, Board.bType, Board.bVideo, Board.schDate, Board.schPlace, Board.club.cNo, Board.member.id)
+//    	.values("hihi4", sysdate, '결산.hwp', 20, '첼시.jpg', '첼시 전 후기', 1, '비디오mp4', null, null, 1, 'tiger123')
+//    }
 //    private BooleanExpression mbAwayClubEq(Integer cNo){
 //        if(cNo == null){
 //            return null;
