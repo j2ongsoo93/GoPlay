@@ -1,19 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
    <head>
    <meta charset="utf-8">
 
 
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-    <style>
-        .fieldError {
-            color: #bd2130;
-        }
-    </style>
-</th:block>
 
-<!-- 사용자 스크립트 추가 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script th:inline="javascript">
     /*<![CDATA[*/
@@ -28,81 +19,6 @@
         /*]]>*/
     </script>
     
-      <script type="text/javascript">
-         $(function(){
-            //시도 지역선택 드롭다운 리스트
-            $.ajax({
-               url:"/listCity",
-               success: function(data){
-                  $.each(data,function(){
-                     let option = $("<option></option>");
-                     option.html(this.acName);
-                     option.attr("value",this.acName);
-                     $("#mbLoc1").append(option);
-                  });
-               }
-            });
-
-            //시도 지역분류 선택 시 세부지역 출력
-            $(document).on("change", "#loc1", function (){
-               $("#mbLoc2").empty();
-               let acName = $(this).val()
-               $.ajax({
-                  url:"/listDistrict/"+acName,
-                  success: function(data) {
-                     let district = data[0].address_district;
-                     $.each(district,function(){
-                        let option = $("<option></option>");
-                        option.html(this.adName);
-                        option.attr("value",this.adName);
-                        $("#mbLoc2").append(option);
-                     });
-                  }
-               });
-            });
-
-            //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-            $.ajax({
-               url:"/listDistrict/"+"서울특별시",
-               success: function(data) {
-                  let district = data[0].address_district;
-                  $.each(district,function(){
-                     let option = $("<option></option>");
-                     option.html(this.adName);
-                     option.attr("value",this.adName);
-                     $("#mbLoc2").append(option);
-                  });
-               }
-            });
-
-            //인원선택 버튼 클릭 시 동호회 회원 표시
-            $('#selectMember').click(function(){
-               $("#memberList").empty();
-               let cNo =  1;
-               $.ajax({
-                  url:"/listClubMemberlist/"+cNo,
-                  success: function(data){
-                     $.each(data, function(){
-                        let div = $("<div></div>").addClass("col-sm-4 div-memberList");
-                        let checkBox = $("<input>").attr("type","checkbox").attr("value", this.id).attr("id",this.id).addClass("memberCheck");
-                        let label = $("<label></label>").addClass("form-check-label").attr("for",this.id).html("&nbsp;&nbsp;"+this.id);
-                        $(div).append(checkBox);
-                        $(div).append(label);
-                        $("#memberList").append(div);
-                     });
-                  }
-               });
-            });
-
-
-
-
-
-         });
-
-      </script>
-
-
 <script type="text/javascript">
 
 const autoHyphen = (target) => {
@@ -352,32 +268,7 @@ let emailCheck = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 			<input type="hidden" name="footvalleyball" value='0' id="footvalleyball_hidden"/>
       		 <label for="footvalleyball" class="form-check-label"></label>
       	</div> 
-      	
-      	                           <div class="row">
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label font-weight-bold">
-                                       지역 선택
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select" id="mbLoc1">
-
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-6 mb-2">
-                                 <div class="js-form-message">
-                                    <label class="form-label font-weight-bold">
-                                       세부지역 선택
-                                       <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="form-group">
-                                       <select class="custom-select" id="mbLoc2">
-
-                                       </select>
-      
+     
 
         <div style="text-align: center">
             <input type="submit" class="btn btn-primary" value="submit"/>

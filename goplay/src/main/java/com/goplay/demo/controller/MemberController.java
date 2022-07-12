@@ -66,14 +66,14 @@ public class MemberController {
 	public ModelAndView insertMember(Model model) {
 		model.addAttribute("memberDTO", new MemberDTO());
 		ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("insertMember");
+        modelAndView.setViewName("insertMember.html");
         return modelAndView;
 		//return "/insertMember"; //member/memberForm
 	}
 	@PostMapping("/insertMember")
 	public ModelAndView memberForm( MemberDTO memberDTO, Model model) {
 		ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("insertMember");
+        modelAndView.setViewName("insertMember.html");
 		
 		try {
 			Member member = Member.createMember(memberDTO, passwordEncoder);
@@ -88,14 +88,18 @@ public class MemberController {
 	}
 	
 	 @GetMapping("/login")
-	    public String loginMember() {
-	        return "/login";
+	    public ModelAndView loginMember() {
+		 ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("insertMember.html");
+	        return modelAndView;
 	    }
 
 	    @GetMapping("/login/error")
-	    public String loginError(Model model) {
+	    public ModelAndView loginError(Model model) {
 	        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-	        return "/login";
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("insertMember.html");
+	        return modelAndView;
 	    }
 	
 }

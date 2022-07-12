@@ -21,10 +21,12 @@ import com.goplay.demo.dto.MemberDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Getter
 @Table(name="member")
 @AllArgsConstructor
 @NoArgsConstructor
