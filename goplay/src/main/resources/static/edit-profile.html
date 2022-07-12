@@ -721,6 +721,7 @@
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <!-- slick Slider JS-->
       <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+    <!--   <script type="text/javascript" src="js/gfd.js"></script> -->
       <!-- Custom scripts for all pages-->
       <script src="js/osahan.js"></script>
    </body>
@@ -729,6 +730,9 @@
      		
      		var acName;
      		var adName;
+     		var acName1;
+     		var adName1;
+     		
      		$.ajax({
      			type: "GET",
      			url:"/selectMember?id="+id,
@@ -743,7 +747,7 @@
      				console.log(data);
      				acName = data.mloc1;
      				adName = data.mloc2;
-     				$("#mbLoc1").val(acName);
+     				
      			}
      		});
      		
@@ -754,19 +758,23 @@
      		$.ajax({
                 url:"/listCity",
                 success: function(data){
-                   $.each(data,function(){
-                      let option = $("<option></option>");
+                   $.each(data,function(index){
+                      let option = $('<option class="op'+ index +'"></option>');
                       option.html(this.acName);
                       option.attr("id",this.acName);
                       option.attr("value",this.acName);
                       $("#mbLoc1").append(option);
+                      var opClass = $(option).attr("class");
+                      console.log("index");
+                      console.log("op");
+                      console.log("opClass");
                      
                    });
                 }
              });
      		
      		  //시도 지역분류 선택 시 세부지역 출력
-            $(document).on("change", "#loc1", function (){
+            $(document).on("change", "#mbloc1", function (){
                $("#mbLoc2").empty();
                let acName = $(this).val()
                $.ajax({
@@ -782,10 +790,28 @@
                   }
                });
             });
+     		  
+          //시도 지역분류 선택 시 세부지역 출력
+            $(document).on("change", "#loc1", function (){
+               $("#mbLoc2").empty();
+               let acName = $(this).val()
+               $.ajax({
+                  url:"/listDistrict/"+acName,
+                  success: function(data) {
+                     let district = data[0].address_district;
+                     $.each(district,function(){
+                        let option = $("<option></option>");
+                        option.html(this.adName);
+                        option.attr("value",this.adName);
+                        $("#mbLoc2").append(option);
+                     });
+                  }
+               });
+            });  
 
      		//시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
             $.ajax({
-               url:"/listDistrict/"+"서울특별시",
+               url:"/listDistrict/"+acName,
                success: function(data) {
                   let district = data[0].address_district;
                   $.each(district,function(){
