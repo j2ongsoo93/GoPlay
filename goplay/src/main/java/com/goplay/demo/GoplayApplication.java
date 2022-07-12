@@ -10,5 +10,6 @@ public class GoplayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GoplayApplication.class, args);
 	}
+	
 
 }
