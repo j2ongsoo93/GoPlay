@@ -57,6 +57,7 @@ public class ClubController {
 			@RequestParam(defaultValue = "") String cloc1,
 			@RequestParam(defaultValue = "") String cloc2
 			){
+		System.out.println("testestestestestestestestestest");
 		System.out.println("cType " + cType);
 		System.out.println("cloc1 " + cloc1);
 		System.out.println("cloc2 " + cloc2);
