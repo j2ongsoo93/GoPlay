@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="_csrf_header" th:content="${_csrf.headerName}">
+        <meta name="_csrf" th:content="${_csrf.token}">
         <link rel="icon" type="image/png" href="img/fav.png">
         <title> 매치 보드 </title>
         <!-- Calendar style for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="calendar/css/style.css">
         <!-- Slick Slider -->
@@ -264,12 +267,12 @@
                                             <legend> 지역을 선택하세요  </legend>
                                             <label>시/도</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc1">
-                                                <option></option>
+                                                <option>지역 선택</option>
                                             </select>
                                             &nbsp;&nbsp;&nbsp;
                                             <label>시/군/구</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc2">
-                                                <option></option>
+                                                <option>세부 지역</option>
                                             </select>
                                         </div>
                                         <!-- End 지역 선택 -->
@@ -277,9 +280,9 @@
                                         <!-- 매치상태 선택 -->
                                         <fieldset data-role="control-group" data-type="horizontal">
                                             <legend>종목을 선택하세요 </legend>
-                                            <input type="checkbox" id="wait" value="대기"/><label for="wait">대기 중인 매치</label>&nbsp;&nbsp;&nbsp;
-                                            <input type="checkbox" id="matched" value="성사" /><label for="matched">성사된 매치</label>&nbsp;&nbsp;&nbsp;
-                                            <input type="checkbox" id="end" value="종료" /><label for="end">종료된 매치</label>&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="mbStat" id="wait" value="대기"/><label for="wait">대기 중인 매치</label>&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="mbStat" id="matched" value="성사" /><label for="matched">성사된 매치</label>&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="mbStat" id="end" value="종료" /><label for="end">종료된 매치</label>&nbsp;&nbsp;&nbsp;
                                         </fieldset>
                                         <!-- End 매치상태 선택 -->
                                         <hr>
@@ -298,16 +301,24 @@
                         </div>
                     </div>
                     <!-- 검색된 매치 목록 -->
-                    <div class="border rounded bg-white mb-3" id="matchContainer">
+
+                    <div class="border rounded bg-white mb-3">
                         <!-- 페이지 설정 -->
                         <div class="d-flex justify-content-end mt-2 pr-2">
                             <select style="width:100px;" class="custom-select" id="sortCol">
-                                <option></option>
+                                <option selected>날짜오름차순</option>
+                                <option>날짜내림차순</option>
                             </select>
                             &nbsp;&nbsp;&nbsp;
                             <select style="width:100px;" class="custom-select" id="size">
-                                <option></option>
+                                <option>6개</option>
+                                <option>12개</option>
+                                <option>18개</option>
+                                <option>24개</option>
                             </select>
+                        </div>
+                        <div id="matchContainer">
+                            <!-- flex-->
                         </div>
                         <!-- End 페이지 설정 -->
 

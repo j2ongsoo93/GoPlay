@@ -27,6 +27,8 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -125,25 +127,25 @@ public class MatchBoardDAOCustom {
         if(mbType==null){
             return null;
         }
-        return matchBoard.mbType.containsIgnoreCase(mbType);
+        return matchBoard.mbType.eq(mbType);
     }
     private BooleanExpression mbLoc1Eq(String mbLoc1){
         if(mbLoc1==null){
             return null;
         }
-        return matchBoard.mbLoc1.containsIgnoreCase(mbLoc1);
+        return matchBoard.mbLoc1.eq(mbLoc1);
     }
     private BooleanExpression mbLoc2Eq(String mbLoc2){
         if(mbLoc2==null){
             return null;
         }
-        return matchBoard.mbLoc2.containsIgnoreCase(mbLoc2);
+        return matchBoard.mbLoc2.eq(mbLoc2);
     }
-    private BooleanExpression mbStatEq(String mbStat){
+    private BooleanExpression mbStatEq(List<String> mbStat){
         if(mbStat==null){
             return null;
         }
-        return matchBoard.mbStat.containsIgnoreCase(mbStat);
+        return matchBoard.mbStat.in(mbStat);
     }
 }
 
