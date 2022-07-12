@@ -59,10 +59,4 @@ public class BoardController {
 		System.out.println("dqwdw " + bs.listBoardAllCno(pageable, cNo).getContent());
 		return bs.listBoardAllCno(pageable, cNo);
 	}
-	
-	//게시판에 글 작성하기
-	@GetMapping("/listBoardAllCno")
-	public void insertBoard() {
-		
-	}
 }
