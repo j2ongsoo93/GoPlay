@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.goplay.demo.constant.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +31,7 @@ public class MemberDTO {
 	private	String	email	;
 	private	String	mName	;
 	private	String	nickname	;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private	LocalDateTime	birth_date	;
 	private	String	gender	;
 	private	Integer	soccer	;
@@ -38,5 +42,5 @@ public class MemberDTO {
 	private	String	mLoc1	;
 	private	String	mLoc2	;
 	private	String	mStat	;
-	private	String	role	;
+	private	Role	role	;
 }

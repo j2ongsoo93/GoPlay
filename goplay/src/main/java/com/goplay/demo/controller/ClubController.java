@@ -50,7 +50,8 @@ public class ClubController {
 			@RequestParam(defaultValue = "") String size,
 			@RequestParam(defaultValue = "") String page
 			){
-		
+
+
 		System.out.println("cType " + cType);
 		System.out.println("cloc1 " + cloc1);
 		System.out.println("cloc2 " + cloc2);
