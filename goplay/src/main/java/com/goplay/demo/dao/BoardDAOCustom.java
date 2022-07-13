@@ -22,9 +22,10 @@ public class BoardDAOCustom {
 
     //게시물 전체 보기
     public Page<BoardDTO> listBoardAllCno(Pageable pageable, Integer cNo) {
+		System.out.println("---------------------");
     	QueryResults<BoardDTO> results = 
     		queryFactory
-                .select(Projections.fields(BoardDTO.class, Board.bNo, Board.bContent,Board.bDate, Board.bFile, Board.bHit, Board.bImg, Board.bTitle,Board.bType,Board.bVideo,Board.schDate,Board.schPlace,Board.club.cNo, Board.member.id))
+                .select(new QBoardDTO(Board.bNo, Board.bTitle, Board.bContent, Board.bImg, Board.bVideo, Board.bFile, Board.bDate, Board.bHit, Board.schDate, Board.schPlace, Board.club.cNo, Board.bType, Board.member.id))
                 .from(Board)
                 .where(Board.club.cNo.eq(cNo))
 			    .fetchResults();
@@ -39,7 +40,7 @@ public class BoardDAOCustom {
     public Page<BoardDTO> listBoardSch(Pageable pageable, Integer cNo) {
     	QueryResults<BoardDTO> results = 
     		queryFactory
-                .select(Projections.fields(BoardDTO.class, Board.bNo, Board.bContent,Board.bDate, Board.bFile, Board.bHit, Board.bImg, Board.bTitle,Board.bType,Board.bVideo,Board.schDate,Board.schPlace,Board.club.cNo, Board.member.id))
+                .select(new QBoardDTO(Board.bNo, Board.bTitle, Board.bContent, Board.bImg, Board.bVideo, Board.bFile, Board.bDate, Board.bHit, Board.schDate, Board.schPlace, Board.club.cNo, Board.bType, Board.member.id))
                 .from(Board)
                 .where(Board.club.cNo.eq(cNo)
                 .and(Board.schDate.isNotNull()))

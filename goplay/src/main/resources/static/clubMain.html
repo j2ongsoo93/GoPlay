@@ -134,6 +134,7 @@
 		   async: false,
 		   success:function(data){
 			   $.each(data['content'],function(){
+                  console.log(data)
 				   boardContentAdd(this);
 				   //listReply(this.bno)
  			   })
