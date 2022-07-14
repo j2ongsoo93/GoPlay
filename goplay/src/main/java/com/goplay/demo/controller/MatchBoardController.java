@@ -7,6 +7,7 @@ import com.goplay.demo.service.MatchRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -89,5 +90,14 @@ public class MatchBoardController {
 	@ResponseBody
 	public List<MatchRecordDTO> matchRecord(@PathVariable int cNo){
 		return mrs.matchRecord(cNo);
+	}
+
+	@GetMapping("/listMatchCno")
+	@ResponseBody
+	//동호회 커뮤니티 스케쥴 출력
+	public Page<MatchBoardDTO> listMatchCno(Pageable pageable) {
+		int cNo = 1; //현재 로그인 한 id의 동호회 cno 받아와아햠
+		System.out.println("dqwdwqwd");
+		return ms.listMatchCno(pageable, cNo);
 	}
 }
