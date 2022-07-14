@@ -53,42 +53,25 @@ $(function(){
                 let option = $("<option></option>");
                 option.html(this.acName);
                 option.attr("value",this.acName);
+                option.attr("acNo", this.acNo);
                 $("#mbLoc1").append(option);
             });
         }
     });
 
-    //시도 지역분류 선택 시 세부지역 출력
-    $(document).on("change", "#loc1", function (){
-        $("#mbLoc2").empty();
-        let acName = $(this).val()
-        $.ajax({
-            url:"/listDistrict/"+acName,
-            success: function(data) {
-                let district = data[0].address_district;
-                $.each(district,function(){
-                    let option = $("<option></option>");
-                    option.html(this.adName);
-                    option.attr("value",this.adName);
-                    $("#mbLoc2").append(option);
-                });
-            }
-        });
-    });
-
-    //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-    $.ajax({
-        url:"/listDistrict/"+"서울특별시",
-        success: function(data) {
-            let district = data[0].address_district;
-            $.each(district,function(){
-                let option = $("<option></option>");
-                option.html(this.adName);
-                option.attr("value",this.adName);
-                $("#mbLoc2").append(option);
-            });
-        }
-    });
+    // //시도 지역선택 초기 값에 따라 서울시 세부지역 표시
+    // $.ajax({
+    //     url:"/listDistrict/"+"서울",
+    //     success: function(data) {
+    //         let district = data[0].address_district;
+    //         $.each(district,function(){
+    //             let option = $("<option></option>");
+    //             option.html(this.adName);
+    //             option.attr("value",this.adName);
+    //             $("#mbLoc2").append(option);
+    //         });
+    //     }
+    // });
 
     // 검색조건 전역 변수
     let mbDate=null;
@@ -295,8 +278,22 @@ $(function(){
     // 지역 선택 시 이벤트
     $(document).on("change", "#mbLoc1", function(){
         $("#matchContainer").empty();
-        console.log($(this).val())
+        $("#mbLoc2").empty();
+        console.log($(this).val());
         mbLoc1 = $(this).val();
+
+        //시도 지역분류 선택 시 세부지역 출력
+        $.ajax({
+            url:"/listDistrict/"+mbLoc1,
+            success: function(data) {
+                $.each(data,function(){
+                    let option = $("<option></option>");
+                    option.html(this.adName);
+                    option.attr("value",this.adName);
+                    $("#mbLoc2").append(option);
+                });
+            }
+        });
         printPage();
     });
 
