@@ -7,7 +7,6 @@ import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import com.goplay.demo.vo.MatchBoard;
 import com.goplay.demo.vo.QMatchBoard;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -72,50 +71,6 @@ public class MatchBoardDAOCustom {
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
     }
 
-    //select * from match_board where away_club=1 or home_club=1
-    public Page<MatchBoardDTO> listMatchCno(Pageable pageable, Integer cNo) {
-        QueryResults<MatchBoardDTO> results =
-                queryFactory
-                        .select(new QMatchBoardDTO(
-                                matchBoard.mb_no,
-                                matchBoard.club.cNo,
-                                matchBoard.awayClub,
-                                matchBoard.mbDate,
-                                matchBoard.mbType,
-                                matchBoard.mbLoc1,
-                                matchBoard.mbLoc2,
-                                matchBoard.mbStadium,
-                                matchBoard.mbFee,
-                                matchBoard.homeUcolor,
-                                matchBoard.awayUcolor,
-                                matchBoard.homeLevel,
-                                matchBoard.awayLevel,
-                                matchBoard.homeSay,
-                                matchBoard.awaySay,
-                                matchBoard.hScore,
-                                matchBoard.aScore,
-                                matchBoard.mbStat))
-                        .from(matchBoard)
-                        .where(mbHomeClubEq(cNo)
-                                .or(mbAwayClubEq(cNo)))
-                        .fetchResults();
-        List<MatchBoardDTO> content = results.getResults();
-        long total = results.getTotal();
-        return new PageImpl<>(content, pageable, total);
-    }
-    private BooleanExpression mbAwayClubEq(Integer cNo){
-        if(cNo == null){
-            return null;
-        }
-        return matchBoard.awayClub.eq(cNo);
-    }
-    private BooleanExpression mbHomeClubEq(Integer cNo){
-        if(cNo == null){
-            return null;
-        }
-        return matchBoard.club.cNo.eq(cNo);
-    }
-
     private BooleanExpression mbDateEq(LocalDateTime mbDate){
         if(mbDate == null){
             return null;
@@ -133,13 +88,13 @@ public class MatchBoardDAOCustom {
         if(mbLoc1==null){
             return null;
         }
-        return matchBoard.mbLoc1.eq(mbLoc1);
+        return matchBoard.mbLoc1.contains(mbLoc1);
     }
     private BooleanExpression mbLoc2Eq(String mbLoc2){
         if(mbLoc2==null){
             return null;
         }
-        return matchBoard.mbLoc2.eq(mbLoc2);
+        return matchBoard.mbLoc2.contains(mbLoc2);
     }
     private BooleanExpression mbStatEq(List<String> mbStat){
         if(mbStat==null){

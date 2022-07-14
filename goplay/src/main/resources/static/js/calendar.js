@@ -26,7 +26,7 @@ $(function(){
             if(i < thisFirst.getDay()){
                 htmlDates += '<div class="date last">'+dates[i]+'</div>';
             }else if(today.getDate()==dates[i] && today.getMonth()==CDate.getMonth() && today.getFullYear()==CDate.getFullYear()){
-                htmlDates += '<div id="date_'+dates[i]+'" class="date today" style="background-color: dodgerblue; color: white;">'+dates[i]+'</div>';
+                htmlDates += '<div id="date_'+dates[i]+'" class="date today">'+dates[i]+'</div>';
             }else if(i >= thisFirst.getDay() + thisLast.getDate()){
                 htmlDates += '<div class="date next">'+dates[i]+'</div>';
             }else{
