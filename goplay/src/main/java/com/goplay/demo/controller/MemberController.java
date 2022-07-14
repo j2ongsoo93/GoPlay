@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.goplay.demo.service.MemberService;
 import com.goplay.demo.vo.Member;
 import lombok.Setter;
+import org.springframework.web.servlet.ModelAndView;
 
 @Setter
 @RestController
@@ -44,5 +45,22 @@ public class MemberController {
 	@GetMapping("/findByIdTypeLoc")
 	public Member findByIdTypeLoc(String id){
 		return ms.findByIdTypeLoc(id);
+	}
+
+
+	@GetMapping("/login")
+	public ModelAndView loginMember() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login.html");
+		return modelAndView;
+	}
+
+	@GetMapping("/login/error")
+	public ModelAndView loginError(Model model) {
+		ModelAndView modelAndView = new ModelAndView();
+		//model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+		modelAndView.addObject("loginErrorMsg","아이디 또는 비밀번호를 확인해주세요");
+		modelAndView.setViewName("login.html");
+		return modelAndView;
 	}
 }

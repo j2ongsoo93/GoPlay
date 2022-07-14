@@ -22,8 +22,7 @@ public class BoardDAOCustom {
 
     //게시물 전체 보기
     public Page<BoardDTO> listBoardAllCno(Pageable pageable, Integer cNo) {
-		System.out.println("---------------------");
-    	QueryResults<BoardDTO> results = 
+    	QueryResults<BoardDTO> results =
     		queryFactory
                 .select(new QBoardDTO(Board.bNo, Board.bTitle, Board.bContent, Board.bImg, Board.bVideo, Board.bFile, Board.bDate, Board.bHit, Board.schDate, Board.schPlace, Board.club.cNo, Board.bType, Board.member.id))
                 .from(Board)
@@ -31,7 +30,6 @@ public class BoardDAOCustom {
 			    .fetchResults();
 		List<BoardDTO> content = results.getResults();
 		long total = results.getTotal();
-		System.out.println("total " + total);
 		return new PageImpl<>(content, pageable, total);
     }
     

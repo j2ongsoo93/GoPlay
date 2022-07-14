@@ -33,6 +33,12 @@ public class ClubController {
 	Page<ClubDTO> clubDTOPage;
 	int startPage;
 	int endpage;
+
+	@GetMapping("/clubMain")
+	public String clubMain(){
+		return "clubMain";
+	}
+
 	//클럽 검색 기능(listClubAll)
 	@GetMapping("/listClubAll3")
 	@ResponseBody
