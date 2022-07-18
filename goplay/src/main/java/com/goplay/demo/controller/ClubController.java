@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.goplay.demo.dto.ClubDTO;
@@ -15,6 +16,8 @@ import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.service.ClubService;
 import com.goplay.demo.service.MemberService;
 import lombok.Setter;
+
+import java.util.List;
 
 @Controller
 @Setter
@@ -66,4 +69,10 @@ public class ClubController {
 	public void listClubRecommend() {
 	}
 
+	// 클럽번호로 클럽 검색(matchBoard에서 사용)
+	@GetMapping("/findClub/{cNo}")
+	@ResponseBody
+	public List<ClubDTO> findClub(@PathVariable int cNo){
+		return cs.findClub(cNo);
+	}
 }
