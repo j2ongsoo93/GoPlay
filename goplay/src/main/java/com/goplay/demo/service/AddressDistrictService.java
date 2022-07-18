@@ -15,7 +15,11 @@ public class AddressDistrictService {
     @Autowired
     private AddressDistrictDAO dao;
 
-    public List<AddressDistrictDTO> listDistrict(int acNo){
-        return dao.listDistrict(acNo);
+    public List<AddressDistrictDTO> listDistrictByAcNO(int acNo){
+        return dao.listDistrictByAcNO(acNo);
+    }
+
+    public List<AddressDistrictDTO> listDistrict(String acName){
+        return dao.listDistrict(acName);
     }
 }

@@ -54,42 +54,25 @@ $(function(){
                 let option = $("<option></option>");
                 option.html(this.acName);
                 option.attr("value",this.acName);
+                option.attr("acNo", this.acNo);
                 $("#mbLoc1").append(option);
             });
         }
     });
 
-    //시도 지역분류 선택 시 세부지역 출력
-    $(document).on("change", "#loc1", function (){
-        $("#mbLoc2").empty();
-        let acName = $(this).val()
-        $.ajax({
-            url:"/listDistrict/"+acName,
-            success: function(data) {
-                let district = data[0].address_district;
-                $.each(district,function(){
-                    let option = $("<option></option>");
-                    option.html(this.adName);
-                    option.attr("value",this.adName);
-                    $("#mbLoc2").append(option);
-                });
-            }
-        });
-    });
-
-    //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-    $.ajax({
-        url:"/listDistrict/"+"서울특별시",
-        success: function(data) {
-            let district = data[0].address_district;
-            $.each(district,function(){
-                let option = $("<option></option>");
-                option.html(this.adName);
-                option.attr("value",this.adName);
-                $("#mbLoc2").append(option);
-            });
-        }
-    });
+    // //시도 지역선택 초기 값에 따라 서울시 세부지역 표시
+    // $.ajax({
+    //     url:"/listDistrict/"+"서울",
+    //     success: function(data) {
+    //         let district = data[0].address_district;
+    //         $.each(district,function(){
+    //             let option = $("<option></option>");
+    //             option.html(this.adName);
+    //             option.attr("value",this.adName);
+    //             $("#mbLoc2").append(option);
+    //         });
+    //     }
+    // });
 
     // 검색조건 전역 변수
     let mbDate=null;
@@ -128,7 +111,7 @@ $(function(){
                 jqXHR.setRequestHeader(header, token);
             },
             error: function(){
-                console.log("error")
+              console.log("error")
             },
             success: function(data){
                 let mb = data.content;

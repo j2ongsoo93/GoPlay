@@ -832,7 +832,7 @@
       $("#mbLoc2").empty();
       let acName = $(this).val()
       $.ajax({
-         url:"/listDistrict/"+acName,
+         url:"/listDistrict2/"+acName,
          success: function(data) {
             let district = data[0].address_district;
             $.each(district,function(){
@@ -847,7 +847,7 @@
 
    //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
    $.ajax({
-      url:"/listDistrict/"+acName,
+      url:"/listDistrict2/"+acName,
       success: function(data) {
          let district = data[0].address_district;
          $.each(district,function(index){

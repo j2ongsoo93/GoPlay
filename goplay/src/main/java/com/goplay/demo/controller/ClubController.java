@@ -17,6 +17,8 @@ import com.goplay.demo.service.ClubService;
 import com.goplay.demo.service.MemberService;
 import lombok.Setter;
 
+import java.util.List;
+
 @Controller
 @Setter
 public class ClubController {

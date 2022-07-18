@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.goplay.demo.service.MemberService;
 import com.goplay.demo.vo.Member;
 import lombok.Setter;
+import org.springframework.web.servlet.ModelAndView;
 
 @Setter
 @Controller
