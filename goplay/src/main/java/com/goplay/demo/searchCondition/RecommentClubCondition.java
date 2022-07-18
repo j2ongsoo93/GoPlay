@@ -10,4 +10,6 @@ public class RecommentClubCondition {
 	private String footsal;
 	private String footvalleyball;
 	private String bascketball;
+
 }
+

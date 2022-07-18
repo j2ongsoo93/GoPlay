@@ -25,7 +25,7 @@
       		var pageSize=3;			//한화면에 보여줄 레코드 수
       		var pageGroup = 3;		//한화면에 보여줄 페이지 수
       		
-     		let acName="인천광역시"; 	//시 도 지역 초기 값
+     		let acName="인천"; 	//시 도 지역 초기 값
       		let ctype="축구";  		//종목 초기 값
       		let acName2="계양구"; 	//도 구 지역 초기 값
       		
@@ -253,15 +253,17 @@
       			  }
       		  })
        	  })
-             
-             //지역1 선택 - '시/도' 선택 시 '도/구' 받아옴 
+             //지역1 선택 - '시/도' 선택 시 '도/구' 받아옴
              $(document).on("change", "#cloc1", function (){
                  $("#cloc2").empty();
                  acName = $(this).val()
                  $.ajax({
                     url:"/listDistrict/"+acName,
                     success: function(data) {
-                        let district = data[0].address_district;
+
+                        let district = data;
+                       // console.log("---")
+                        //console.log(data)
                         $.each(district,function(){
                            let option = $("<option></option>");
                            option.html(this.adName);
@@ -272,7 +274,7 @@
                     		url:"/listClubAll3",
         					data : {
         						cType : ctype,
-        						cloc1 : acName,
+        						cloc1 : acName+"시",
         						cloc2 : acName2,
         					},
         					 success: function(data){

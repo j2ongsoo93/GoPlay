@@ -74,6 +74,7 @@
                   this.mimg="noimage.png";
                }
                console.log(this)
+               var newbBirth_date = this.birth_date.substring(0,11).replace("T", " ");
                $("#retro-comments")
                        .append($("<div></div>").addClass(("reviews-members"))
                                .append($("<div></div>").addClass("media")
@@ -84,10 +85,10 @@
                                                .append($("<div></div>").addClass("reviews-members-header")
                                                        .append($("<h6></h6>").addClass("mb-1").html(this.nickname)))
                                                .append($("<div></div>").addClass("reviews-members-body")
-                                                       .append($("<p></p>").html(this.gender))
-                                                       .append($("<p></p>").html(this.phone))
-                                                       .append($("<p></p>").html(this.email))
-                                                       .append($("<p></p>").html(this.birth_date))
+                                                       .append($("<p></p>").html("성별: " + this.gender))
+                                                       .append($("<p></p>").html("휴대전화: " + this.phone))
+                                                       .append($("<p></p>").html("이메일: " + this.email))
+                                                       .append($("<p></p>").html("생년월일:" + newbBirth_date))
                                                ))
                                )
                        )

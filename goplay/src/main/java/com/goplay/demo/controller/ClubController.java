@@ -53,8 +53,8 @@ public class ClubController {
 		System.out.println("cloc2 " + cloc2);
 		ClubSearchCondition condition = new ClubSearchCondition();
 		condition.setC_type(cType);
-		//condition.setC_loc1(cloc1); //우선 주석했기 때문에 pageing 시 null 나옴
-		//condition.setC_loc2(cloc2); //우선 주석했기 때문에 pageing 시 null 나옴
+		//condition.setC_loc1(cloc1);
+		//condition.setC_loc2(cloc2);
 		condition.setC_keyword(searchText);
 		clubDTOPage =  cs.listClubAll(pageable ,condition); // List타입 to Page 타입으로 변환
 		return clubDTOPage;
@@ -94,16 +94,6 @@ public class ClubController {
 		condition.setC_loc1(resultType[4]);
 		condition.setC_loc2(resultType[5]);
 
-//		System.out.println("resultType[0] "+ resultType[0]);
-//		System.out.println("resultType[1] "+ resultType[1]);
-//		System.out.println("resultType[2] "+ resultType[2]);
-//		System.out.println("resultType[3] "+ resultType[3]);
-//		System.out.println("resultType[4] "+ resultType[4]);
-//		System.out.println("resultType[5] "+ resultType[5]);
-
-//		if(cs.listRecommendClub(pageable ,condition).getContent().size()==0) {
-//
-//		}
 		return cs.listRecommendClub(pageable ,condition);
 	}
 

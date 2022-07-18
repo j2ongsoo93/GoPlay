@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClubInfoDTO {
+
 	private	int	cNo	;
 	private	String id;
 	private	String	cName	;
@@ -24,5 +25,4 @@ public class ClubInfoDTO {
 	private Long draw;
 	private Long lose;
 	private Long recordCount;
-	
 }
