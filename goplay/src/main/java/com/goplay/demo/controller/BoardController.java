@@ -70,12 +70,6 @@ public class BoardController {
 	private ServletContext sct;
 
 	@Autowired
-	private ReplyService rs;
-
-	@Autowired
-	private ServletContext sct;
-
-	@Autowired
 	ModelMapper modelMapper;
 
 	@Autowired

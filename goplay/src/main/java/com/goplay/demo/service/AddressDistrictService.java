@@ -16,7 +16,7 @@ public class AddressDistrictService {
     private AddressDistrictDAO dao;
 
     public List<AddressDistrictDTO> listDistrict(int acNo){
-        return dao.listDistrict(acNo);
+        return dao.listDistrictByAcNO(acNo);
     }
 
     public List<AddressDistrictDTO> listDistrict(String acName){

@@ -108,8 +108,4 @@ public class BoardDAOCustom {
 		return Board.schDate.loe(formatThisLast);
 	}
 
-	private BooleanExpression idEq(String id) {
-		return qb.member.id.eq(id);
-	}
-
 }

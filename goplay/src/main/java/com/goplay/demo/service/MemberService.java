@@ -1,6 +1,9 @@
 package com.goplay.demo.service;
 
 import java.util.List;
+
+import com.goplay.demo.dao.MemberDAOCustom;
+import com.goplay.demo.dto.MemberDTOChangHee;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

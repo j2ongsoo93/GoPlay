@@ -2,6 +2,7 @@ package com.goplay.demo.service;
 
 import java.util.List;
 
+import com.goplay.demo.dao.ClubDAO;
 import com.goplay.demo.dto.ClubInfoDTO;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
 import org.springframework.beans.factory.annotation.Autowired;

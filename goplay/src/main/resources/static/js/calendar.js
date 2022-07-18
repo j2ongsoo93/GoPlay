@@ -3,7 +3,7 @@ $(function(){
     let today = new Date();
     let selectCk = 0;
 
-    let printCalendar = function(year, month){
+    let printCalendar = function(){
         let htmlDates = '';
         let prevLast = new Date(CDate.getFullYear(), CDate.getMonth(), 0); //지난 달의 마지막 날
         let thisFirst = new Date(CDate.getFullYear(), CDate.getMonth(), 1); //이번 달의 첫쨰 날
@@ -22,15 +22,19 @@ $(function(){
             dates.push(i); // 다음 달 날짜 채우기 (나머지 다 채운 다음 출력할 때 42개만 출력함)
         }
 
+
         for(let i = 0; i < 42; i++){
+            let year = CDate.getFullYear();
+            let month = convertMonth(CDate.getMonth()+1);
+            let day = convertMonth(dates[i]);
             if(i < thisFirst.getDay()){
                 htmlDates += '<div class="date last">'+dates[i]+'</div>';
             }else if(today.getDate()==dates[i] && today.getMonth()==CDate.getMonth() && today.getFullYear()==CDate.getFullYear()){
-                htmlDates += '<div id="date_'+dates[i]+'" class="date today" style="background-color: dodgerblue; color: white;">'+dates[i]+'</div>';
+                htmlDates += '<div id='+CDate.getFullYear()+'-'+convertMonth(CDate.getMonth()+1)+'-'+convertMonth(dates[i])+' class="date today matchDate"><div>'+dates[i]+'</div></div>';
             }else if(i >= thisFirst.getDay() + thisLast.getDate()){
                 htmlDates += '<div class="date next">'+dates[i]+'</div>';
             }else{
-                htmlDates += '<div id="date_'+dates[i]+'" class="date">'+dates[i]+'</div>';
+                htmlDates += '<div id='+CDate.getFullYear()+'-'+convertMonth(CDate.getMonth()+1)+'-'+convertMonth(dates[i])+' class="date matchDate"><div>'+dates[i]+'</div></div>';
             }
         }
 
@@ -46,47 +50,44 @@ $(function(){
                     .append($(htmlDates)));
 
         $('#calendarContainer').append(calendarForm);
+
+        $.ajax({
+            url: "/matchDate",
+            success: function(data){
+                $.each(data, function(){
+                    //"2022-06-11T00:00:00"
+                    let matchDate = this.mbDate.substring(0, 10);
+                    let match_cnt = this.cnt;
+                    console.log(matchDate +"->"+match_cnt);
+                    let link_date = $('<p style="margin-top: -20px; color: red">'+match_cnt+'경기</p>').attr("id", match_cnt);
+                    $("#"+matchDate).append(link_date);
+                });
+            }
+        });
     }
 
-    // function fn_selectDate(date){
-    //     let year = CDate.getFullYear();
-    //     let month = CDate.getMonth() + 1;
-    //     let date_txt = "";
-    //     if(CDate.getMonth + 1 < 10){
-    //         month = "0" + (CDate.getMonth() + 1);
-    //     }
-    //     if(date < 10){
-    //         date_txt = "0" + date;
-    //     }
-    //
-    //     if(selectCk == 0){
-    //         $(".date").css("background-color", "");
-    //         $(".date").css("color", "");
-    //         $("#date_"+date).css("background-color", "red");
-    //         $("#date_"+date).css("color", "white");
-    //
-    //         $("#period_1").val(year+"-"+month+"-"+date);
-    //         $("#period_2").val("");
-    //         selectCk = date;
-    //     }else{
-    //         $(".date").css("background-color", "");
-    //         $(".date").css("color", "");
-    //         $("#date_"+date).css("background-color", "red");
-    //         $("#date_"+date).css("color", "white");
-    //
-    //         $("#period_2").val(year+"-"+month+"-"+date);
-    //         selectCk = 0;
-    //     }
-    // }
+    // 한자리 숫자 앞에 0붙여서 String 반환하는 function
+    let convertMonth = function(n){
+        let str = n;
+        if(n<10){
+            str = "0"+n;
+            return str;
+        }else{
+            return n;
+        }
+
+    }
 
     printCalendar();
 
+    // 이전 달 달력 출력
     $(document).on("click", "#prevCal", function(){
         $('#calendarContainer').empty();
         CDate.setMonth(CDate.getMonth()-1);
         printCalendar();
     });
 
+    // 다음 달 달력 출력
     $(document).on("click", "#nextCal", function(){
         $('#calendarContainer').empty();
         CDate.setMonth(CDate.getMonth()+1);
@@ -94,4 +95,3 @@ $(function(){
     });
 
 });
-

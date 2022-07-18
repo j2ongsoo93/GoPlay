@@ -124,15 +124,6 @@ public class ClubDAOCustom {
 				.fetch();
 	}
 
-    public List<ClubDTO> findClub(int cNo){
-        return queryFactory
-                .select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
-                .from(qClub)
-                .where(cNoEq(cNo))
-                .fetch();
-    }
-
-
     private BooleanExpression cTypeEq(String cType){
         if(cType == null || cType.equals("")){
             return null;
