@@ -20,10 +20,9 @@
       
       <script th:inline="javascript">
       	$(function(){
-      		
       		var totalRecords=1;		//전체레코드 수
       		var totalPage=1;		//전체페이지 수	
-      		var pageSize=1;			//한화면에 보여줄 레코드 수 
+      		var pageSize=3;			//한화면에 보여줄 레코드 수
       		var pageGroup = 3;		//한화면에 보여줄 페이지 수
       		
      		let acName="인천광역시"; 	//시 도 지역 초기 값
@@ -44,7 +43,6 @@
 	          	      		.append($("<h3></h3>").attr('id',"recommendClubCname").html(data.cname))
 	          	      		.append($("<ul></ul>").attr('id', "recommendClubLoc1").html(data.cloc1))
 	          	      		.append($("<p></p>").attr('id','recommendClubIntro').html(data.cintro)))
-	          	      		
           				)
       		}
       		$.ajax({

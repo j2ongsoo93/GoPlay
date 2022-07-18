@@ -1,25 +1,26 @@
 package com.goplay.demo.service;
 
-import com.goplay.demo.dao.ClubDAO;
-import com.goplay.demo.vo.Club;
+import java.util.List;
+
+import com.goplay.demo.dto.ClubInfoDTO;
+import com.goplay.demo.searchCondition.RecommentClubCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.goplay.demo.dao.ClubDAOCustom;
-import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.dto.ClubDTO;
+import com.goplay.demo.searchCondition.ClubSearchCondition;
+import com.goplay.demo.vo.Club;
 
 import lombok.Setter;
-
-import java.util.List;
 
 @Service
 @Setter
 public class ClubService {
-	@Autowired
-	private ClubDAO dao;
+
+
 	@Autowired
 	private ClubDAOCustom daoCustom;
 	
@@ -28,8 +29,17 @@ public class ClubService {
 		return daoCustom.listClubAll(pageable, condition);
 	}
 
-	//클럽찾기
-	public List<ClubDTO> findByCno(int cNo){
-		return daoCustom.findClub(cNo);
+	//추천 동호회(지역, 종목)
+	public Page<ClubDTO> listRecommendClub(Pageable pageable, RecommentClubCondition condition) {
+		return daoCustom.listRecommendClub(pageable, condition);
+	}
+
+	public List<ClubInfoDTO> getClubProfileResult(int cNo) {
+		return daoCustom.getClubProfileResult(cNo);
+	}
+
+
+	public List<ClubDTO> listAllClub(){
+		return daoCustom.listAllClub();
 	}
 }
