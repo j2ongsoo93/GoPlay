@@ -271,6 +271,7 @@ $(function(){
     // 종목선택 시 이벤트
     $(document).on("change", "input[name='mbType']", function(){
        $("#matchContainer").empty();
+        page = 0;
        if($(this).val()=="all"){
         mbType = null;
        }else{
@@ -283,6 +284,7 @@ $(function(){
     $(document).on("change", "#mbLoc1", function(){
         $("#matchContainer").empty();
         $("#mbLoc2").empty();
+        page = 0;
         mbLoc2 = null;
         console.log($(this).val());
         mbLoc1 = $(this).val();
@@ -309,6 +311,7 @@ $(function(){
     // 세부지역 선택 시 이벤트
     $(document).on("change", "#mbLoc2", function(){
         $("#matchContainer").empty();
+        page = 0;
         console.log($(this).val());
         mbLoc2 = $(this).val();
         console.log(mbLoc2)
@@ -318,6 +321,7 @@ $(function(){
     //매치상태 선택 시 이벤트
     $(document).on("change", "input[name='mbStat']", function(){
         $("#matchContainer").empty();
+        page = 0;
         console.log($(this).is(":checked"))
         if($(this).is(":checked")) {
             if ($(this).val() == "대기") {
@@ -342,6 +346,7 @@ $(function(){
     // 달력 날짜 선택 시 이벤트
     $(document).on("click", ".matchDate", function(){
         $("#matchContainer").empty();
+        page = 0;
         mbDate = new Date($(this).attr("id")).toISOString();
         console.log(mbDate);
         printPage();
@@ -366,5 +371,5 @@ $(function(){
             page = page + 1;
             printPage();
         }
-    });
+    })
 });
