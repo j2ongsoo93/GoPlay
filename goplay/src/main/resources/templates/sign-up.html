@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">
+   /*<![CDATA[*/
+   $(document).ready(function(){
+
+      var errorMessage = /*[[${errorMessage}]]*/'default';
+
+      if(errorMessage != null){
+         alert(errorMessage);
+      }
+   });
+   /*]]>*/
+</script>
+
+<script type="text/javascript">
+
+   const autoHyphen = (target) => {
+      target.value = target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+   }
+
+
+   let idCheck = /^[a-z_-]+[a-z0-9_-]{5,20}$/g; //	let idCheck = /[A-Za-z_-]{5,20}$/;	최소5자, 최대 10자의 문자
+   let pwCheck = /^(?=.*[a-zA-Z]{1,11})(?=.*[0-9]{1,11}).{6,12}$/;	//	숫자, 영문 각 1개 이상, 11개 이하 사용하여 6자리 이상, 12자 이하로 입력
+   let numberCheck = /^[0-9]{1,4}$/;	//	숫자만 입력해야하는 경우
+   let hanguel = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힝]/;	//	한글테스트
+   let nameCheck = /[가-힝]/; 	//	한글, 영어만
+   let phoneCheck = /^\d{3}-\d{3,4}-\d{4}$/;
+   let emailCheck = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+
+   function check(){
+
+
+      if($('#id').val() == ''){
+         alert("아이디는 필수입력값입니다.");
+         return false;
+      }
+
+      if($('#pwd').val() == ''){
+         alert("비밀번호는 필수입력값입니다.");
+         return false;
+      }
+
+      if($('#pwdcheck').val() = ''){
+         alert("비밀번호확인은 필수입력값입니다.");
+         return false;
+      }
+      if($('#pwdrecheck').val() != $('#pwd').val()){
+         alert("비밀번호를 확인해주세요.");
+         return false;
+      }
+
+
+      if($('#mName').val() == ''){
+         alert("이름은 필수입력값입니다.");
+         return false;
+      }
+
+      if($('#email').val() == ''){
+         alert("이메일은 필수입력값입니다.");
+         return false;
+      }
+      if($('#nickname').val() == ''){
+         alert("닉네임은 필수입력값입니다.");
+         return false;
+      }
+      if($('#birth_date').val() == ''){
+         alert("날짜를 선택해주세요");
+         return false;
+      }
+
+      if($('#gender').val() == ''){
+         alert("성별을 선택해주세요");
+         return false;
+      }
+
+      if($('.redtext').text() != ''){
+         alert("폼 양식에 맞춰 입력해주세요");
+         return false;
+      }
+
+      // $('#birth_date').val().append('00:00:00');
+      //
+      // alert($('#birth_date').val())
+
+      return true;
+
+   };
+
+
+   $(function (){
+
+
+
+
+
+      $('#id').keyup(function(){
+
+         if(hanguel.test($('#id').val())){
+            $('#idcheck').attr('style','color:#B70000');
+            $('#idcheck').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+            return false;
+         }
+         else {
+            $('#idcheck').empty();
+         }
+
+         if($('#id').val().toString().length < 5){
+            $('#idcheck').attr('style','color:#B70000');
+            $('#idcheck').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+            //$('#idcheck').removeAttr('class');	//	idSub의 class속성을 지운다.
+            return false;
+         } else if($('#id').val().toString().length > 20){
+            $('#idcheck').attr('style','color:#B70000');
+            $('#idcheck').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+            //$('#idcheck').removeAttr('class');	//	idSub의 class속성을 지운다.
+            return false;
+         }
+
+         else {
+            $('#idcheck').empty();
+         }
+
+
+      });
+
+      $('#pwd').keyup(function() {		//	비밀번호
+         if ($('#pwd').val() != ''){
+            if(!pwCheck.test($('#pwd').val())){
+               $('#pwdcheck').attr('style','color:#B70000');
+               $('#pwdcheck').text('6~12자 영문과 숫자를 사용하세요.');
+               return false;
+            } else {
+               $('#pwdcheck').empty();
+            }
+         }
+      });
+      $('#pwdrecheck').keyup(function() {		//	비밀번호
+         if ($('#pwdrecheck').val() != $('#pwd').val()){
+            $('#pwdrecheckcheck').attr('style','color:#B70000');
+            $('#pwdrecheckcheck').text('비밀번호와 값이 다릅니다');
+            return false;
+         } else {
+            $('#pwdrecheckcheck').empty();
+         }
+
+      });
+
+      $('#mName').keyup(function() {		//	이름
+         if ($('#mName').val() != ''){
+            if(!nameCheck.test($('#mName').val())){
+               $('#mnamecheck').attr('style','color:#B70000');
+               $('#mnamecheck').text('이름은 한글만 사용가능합니다.');
+               return false;
+            } else {
+               $('#mnamecheck').empty();
+            }
+         }
+      });
+
+      $('#email').keyup(function() {		//	이메일
+         if ($('#email').val() != ''){
+            if(!emailCheck.test($('#email').val())){
+               $('#emailcheck').attr('style','color:#B70000');
+               $('#emailcheck').text('이메일양식을 지켜주세요.');
+               return false;
+            } else {
+               $('#emailcheck').empty();
+            }
+         }
+      });
+
+      $('#phone').keyup(function() {		//	핸드폰
+         if ($('#phone').val() != ''){
+            if(!phoneCheck.test($('#phone').val())){
+               $('#phonecheck').attr('style','color:#B70000');
+               $('#phonecheck').text('핸드폰번호 11자리를 입력해주세요');
+               return false;
+            } else {
+               $('#phonecheck').empty();
+            }
+         }
+      });
+
+      $('#nickname').keyup(function() {		//	닉네임
+         if ($('#nickname').val() != ''){
+            if(!nameCheck.test($('#nickname').val())){
+               $('#nicknamecheck').attr('style','color:#B70000');
+               $('#nicknamecheck').text('닉네임은 한글만 사용가능합니다.');
+               return false;
+            } else {
+               $('#nicknamecheck').empty();
+            }
+         }
+      });
+
+
+
+   });
+
+
+
+
+
+
+</script>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <link rel="icon" type="image/png" href="img/fav.png">
+   <title>Olink - Job Portal & Social Network HTML</title>
+   <!-- Slick Slider -->
+   <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css"/>
+   <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css"/>
+   <!-- Feather Icon-->
+   <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
+   <!-- Bootstrap core CSS -->
+   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Custom styles for this template -->
+   <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="bg-white">
+   <div class="container">
+      <div class="row justify-content-center align-items-center d-flex vh-100">
+         <div class="col-md-4 mx-auto">
+            <div class="osahan-login py-4">
+               <div class="text-center mb-4">
+                  <a href="index.html"><img src="img/logo.svg" alt=""></a>
+                  <h5 class="font-weight-bold mt-3">Join Olink</h5>
+               </div>
+               <form action="/insertMember" id="submit" method="post"  th:object="${memberDTO}" onsubmit="return check();">
+                  <div class="form-row">
+                     <div class="col">
+                        <div class="form-group">
+                           <label th:for="id" class="mb-1">아이디</label>
+                           <div class="position-relative icon-form-control">
+                              <i class="feather-user position-absolute"></i>
+                              <input type="text" th:field="*{id}" class="form-control" placeholder="아이디를 입력해주세요">
+                           </div>
+                           <p id="idcheck" class="redtext"></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label th:for="pwd">비밀번호</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-unlock position-absolute"></i>
+                        <input type="password" th:field="*{pwd}" class="form-control" placeholder="비밀번호 입력">
+
+                     </div>
+                     <p id="pwdcheck" class="redtext"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label>비밀번호 확인</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-unlock position-absolute"></i>
+                        <input type="password" id="pwdrecheck" name="pwdrecheck" class="form-control" placeholder="비밀번호 확인">
+
+                     </div>
+                     <p id="pwdrecheckcheck" class="redtext"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label th:for="mName">이름</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-user position-absolute"></i>
+                        <input type="text" th:field="*{mName}" class="form-control" placeholder="이름을 입력해주세요">
+
+                     </div>
+                     <p id="mnamecheck" class="redtext"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label th:for="phone">핸드폰번호</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-phone position-absolute"></i>
+                        <input type="text" th:field="*{phone}" class="form-control" placeholder="핸드폰번호 입력" oninput="autoHyphen(this)" maxlength="13">
+
+                     </div>
+                     <p id="phonecheck" class="redtext"></p>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="mb-1">Email</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-at-sign position-absolute"></i>
+                        <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요">
+
+                     </div>
+                     <p id="emailcheck" class="redtext"></p>
+                  </div>
+                  <div class="form-group">
+                     <label th:for="nickname">닉네임</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-user position-absolute"></i>
+                        <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임 입력">
+
+                     </div>
+                     <p id="nicknamecheck" class="redtext"></p>
+                  </div>
+                  <div class="form-group">
+                     <label th:for="birth_date">생년월일</label>
+                     <div class="position-relative icon-form-control">
+                        <i class="feather-calendar position-absolute"></i>
+                        <input type="date"  th:field="*{birth_date}" class="form-control">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label th:for="gender">성별</label>
+                     <select th:field="*{gender}" class="form-control" th:value="${gender}">
+                        <option th:value="남성" selected>남성</option>
+                        <option th:value="여성">여성</option>
+                     </select>
+                  </div>
+
+                  <div class="form-group">
+
+                     <label th:for="soccer">축구</label>
+                     <input type="checkbox" name="soccer" value='1' id="soccer"/>
+                     <input type="hidden" name="soccer" value='0' id="soccer_hidden"/>
+                     <label for="soccer" class="form-check-label"></label>
+
+
+                     <label th:for="footsal">풋살</label>
+                     <input type="checkbox" name="footsal" value='1' id="footsal"/>
+                     <input type="hidden" name="footsal" value='0' id="footsal_hidden"/>
+                     <label for="footsal" class="form-check-label"></label>
+
+
+                     <label th:for="bascketball">야구</label>
+                     <input type="checkbox" name="bascketball" value='1' id="bascketball"/>
+                     <input type="hidden" name="bascketball" value='0' id="bascketball_hidden"/>
+                     <label for="bascketball" class="form-check-label"></label>
+
+
+                     <label th:for="footvalleyball">족구</label>
+                     <input type="checkbox" name="footvalleyball" value='1' id="footvalleyball"/>
+                     <input type="hidden" name="footvalleyball" value='0' id="footvalleyball_hidden"/>
+                     <label for="footvalleyball" class="form-check-label"></label>
+                  </div>
+
+                  <button class="btn btn-primary btn-block text-uppercase" type="submit"> Agree & Join </button>
+
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+               </form>
+
+               <div class="form-group">
+                  <label class="mb-1">You agree to the Olink <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a  href="#">Cookie Policy</a>.</label>
+               </div>
+
+               <div class="py-3 d-flex align-item-center">
+                  <a href="forgot-password.html">Forgot password?</a>
+                  <span class="ml-auto"> Already on Olink? <a class="font-weight-bold" href="sign-in.html">Sign in</a></span>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- slick Slider JS-->
+<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="js/osahan.js"></script>
+</body>
+</html>

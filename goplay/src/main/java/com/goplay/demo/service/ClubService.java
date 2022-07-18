@@ -40,9 +40,10 @@ public class ClubService {
 	public List<ClubDTO> listAllClub(){
 		return daoCustom.listAllClub();
 	}
-
+	
 	//cNo로 클럽 검색
 	public List<ClubDTO> findClub(int cNo){
 		return daoCustom.findClub(cNo);
 	}
+	
 }

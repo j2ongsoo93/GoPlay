@@ -2,6 +2,10 @@ package com.goplay.demo.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +28,9 @@ public class BoardController {
 	@Autowired
 	private ReplyService rs;
 
+	@Autowired
+	private ServletContext sct;
+	
 	//동호회 커뮤니티 내 클럽 정보
 	@GetMapping("/listBoardSch")
 	@ResponseBody
