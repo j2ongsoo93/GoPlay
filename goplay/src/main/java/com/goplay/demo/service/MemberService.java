@@ -21,6 +21,9 @@ public class MemberService implements UserDetailsService{
 	@Autowired
 	private MemberDAO dao;
 
+	@Autowired
+	private MemberDAOCustom mCustom;
+
 	public List<Member> findAll(){
 		return dao.findAll();
 	}
@@ -31,8 +34,8 @@ public class MemberService implements UserDetailsService{
 		validateDuplicateMember(m);
 		dao.save(m);
 	}
-
-
+	
+	
 	public Member getById(String id) {
 		return dao.getById(id);
 	}
@@ -78,9 +81,10 @@ public class MemberService implements UserDetailsService{
 				.password(member.getPwd())
 				.roles(member.getRole().toString())
 				.build();
-
-
 	}
 
+	public List<MemberDTOChangHee> findClubMemberCno(int cNo){
+		return mCustom.findClubMemberCno(cNo);
+	}
 }
 

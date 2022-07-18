@@ -7,10 +7,16 @@
     <list default="true" id="72833b34-facc-4ecc-8166-922493e7b11c" name="변경" comment="[박정수] 220714&#10;추가: calender.js (달력 출력 function)">
       <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/LoginController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchDateDTO.java" afterDir="false" />
+    <list default="true" id="72833b34-facc-4ecc-8166-922493e7b11c" name="변경" comment="이창희 - 220718 푸시 전 커밋">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ClubController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/ClubInfoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/RecommentClubCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/RecommentClubCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/listClubAll3.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/listClubAll3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/clubMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/clubMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +32,8 @@
         <option value="Interface" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
         <option value="Class" />
       </list>
     </option>
@@ -34,6 +42,7 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="realMain" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +58,7 @@
     <option name="myId2Visible">
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
@@ -100,7 +109,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;5bf396b10038348453209c8033c86e34&quot;
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gyh03\OneDrive\file\GitHub\GoPlay\goplay" />
@@ -110,6 +119,11 @@
       <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\searchCondition" />
       <recent name="C:\Users\HOME\Documents\GitHub\GoPlay\goplay\src\main\resources" />
       <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\resources\static\js" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\resources\templates" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\resources" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\searchCondition" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gyh03\OneDrive\file\GitHub\GoPlay\goplay\src\main\resources\static\js" />
@@ -117,11 +131,19 @@
       <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\service" />
       <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\dao" />
       <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\controller" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\webapp\static\uploads" />
+      <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
+      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\dto" />
+      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\service" />
+      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\dao" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.goplay.demo.dto" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.goplay.demo.dto" />
+      <recent name="com.goplay.demo" />
+      <recent name="com.goplay.demo.controller" />
       <recent name="com.goplay.demo.vo" />
       <recent name="com.goplay.demo.dao" />
     </key>
@@ -167,6 +189,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7c9e63bb-4229-421a-b466-f6a2c8bbb752" name="변경" comment="[박정수] 220714&#10;추가: calender.js (달력 출력 function)" />
+      <changelist id="72833b34-facc-4ecc-8166-922493e7b11c" name="변경" comment="이창희 -" />
       <created>1656513430120</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -222,6 +245,25 @@
       <workItem from="1657872045268" duration="2776000" />
       <workItem from="1658066300391" duration="492000" />
       <workItem from="1658066810336" duration="10582000" />
+      <workItem from="1657610262019" duration="35000" />
+      <workItem from="1657610305075" duration="484000" />
+      <workItem from="1657627054544" duration="5403000" />
+      <workItem from="1657670403515" duration="444000" />
+      <workItem from="1657670861140" duration="33173000" />
+      <workItem from="1657760303954" duration="29027000" />
+      <workItem from="1657844483252" duration="177000" />
+      <workItem from="1657844670495" duration="2543000" />
+      <workItem from="1657847338861" duration="23946000" />
+      <workItem from="1657893167857" duration="450000" />
+      <workItem from="1657893630782" duration="692000" />
+      <workItem from="1657941436500" duration="15334000" />
+      <workItem from="1658028104010" duration="7447000" />
+      <workItem from="1658036351494" duration="11079000" />
+      <workItem from="1658102542502" duration="5978000" />
+      <workItem from="1658109002688" duration="124000" />
+      <workItem from="1658109137008" duration="435000" />
+      <workItem from="1658109586348" duration="2800000" />
+      <workItem from="1658112420527" duration="8348000" />
     </task>
     <task id="LOCAL-00001" summary="[박정수] 추가: Querydsl dependency">
       <created>1656569367336</created>
@@ -237,7 +279,56 @@
       <option name="project" value="LOCAL" />
       <updated>1656979687434</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="이창희 - 220713:1 오류 잡기 완료">
+      <created>1657671162188</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657671162188</updated>
+    </task>
+    <task id="LOCAL-00004" summary="이창희 - 220714 게시판 작업 중">
+      <created>1657775472605</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657775472605</updated>
+    </task>
+    <task id="LOCAL-00005" summary="이창희 - 220715 달력 클릭 시 내용 변경하기 (단일 날짜 클릭 미구현)">
+      <created>1657862220929</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657862220929</updated>
+    </task>
+    <task id="LOCAL-00006" summary="이창희 - 220716 동호회 : 동호회메인 일정부분 수정&#10;               동호회 : 게시글 insert확인(단, 이미지 업로드 제대로 안되므로 수정할 것)">
+      <created>1657958694662</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1657958694662</updated>
+    </task>
+    <task id="LOCAL-00007" summary="이창희 - 220716 동호회 커뮤니티 이미지 출력 완료">
+      <created>1658105293969</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1658105293969</updated>
+    </task>
+    <task id="LOCAL-00008" summary="이창희 - 220718 동호회/게시글 image null 값 처리&#10;  동호회원 탭 내용 출력">
+      <created>1658120889255</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658120889255</updated>
+    </task>
+    <task id="LOCAL-00009" summary="이창희 - 220718 푸시 전 커밋">
+      <created>1658132255163</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1658132255163</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +350,7 @@
                     <value>
                       <list>
                         <option value="pjs_0718_2" />
+                        <option value="realMain" />
                       </list>
                     </value>
                   </entry>
@@ -277,5 +369,13 @@
     <MESSAGE value="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경" />
     <MESSAGE value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
     <option name="LAST_COMMIT_MESSAGE" value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
+    <MESSAGE value="이창희 - 220713:1 오류 잡기 완료" />
+    <MESSAGE value="이창희 - 220714 게시판 작업 중" />
+    <MESSAGE value="이창희 - 220715 달력 클릭 시 내용 변경하기 (단일 날짜 클릭 미구현)" />
+    <MESSAGE value="이창희 - 220716 동호회 : 동호회메인 일정부분 수정&#10;               동호회 : 게시글 insert확인(단, 이미지 업로드 제대로 안되므로 수정할 것)" />
+    <MESSAGE value="이창희 - 220716 동호회 커뮤니티 이미지 출력 완료" />
+    <MESSAGE value="이창희 - 220718 동호회/게시글 image null 값 처리&#10;  동호회원 탭 내용 출력" />
+    <MESSAGE value="이창희 - 220718 푸시 전 커밋" />
+    <option name="LAST_COMMIT_MESSAGE" value="이창희 - 220718 푸시 전 커밋" />
   </component>
 </project>

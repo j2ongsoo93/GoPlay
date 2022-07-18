@@ -2,9 +2,12 @@ package com.goplay.demo.dto;
 
 import java.time.LocalDateTime;
 import com.querydsl.core.annotations.QueryProjection;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class BoardDTO {
 
 	private	int	bNo;
@@ -23,7 +26,7 @@ public class BoardDTO {
 
 	@QueryProjection
 	public BoardDTO(int bNo, String bTitle, String bContent, String bImg, String bVideo, String bFile,
-			LocalDateTime bDate, int bHit, LocalDateTime schDate, String schPlace, int cNo, int bType, String id) {
+					LocalDateTime bDate, int bHit, LocalDateTime schDate, String schPlace, int cNo, int bType, String id) {
 		this.bNo = bNo;
 		this.bTitle = bTitle;
 		this.bContent = bContent;

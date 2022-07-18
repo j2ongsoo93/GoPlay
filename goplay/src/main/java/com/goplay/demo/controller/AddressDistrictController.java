@@ -19,13 +19,12 @@ public class AddressDistrictController {
     private AddressDistrictService as;
 
     @GetMapping("/listCity/{acNo}")
-    public List<AddressDistrictDTO> listDistrictByAcNO(@PathVariable int acNo){
-        return as.listDistrictByAcNO(acNo);
+    public List<AddressDistrictDTO> listDistrict(@PathVariable int acNo){
+        return as.listDistrict(acNo);
     }
 
     @GetMapping("/listDistrict/{acName}")
     public List<AddressDistrictDTO> listDistrict(@PathVariable String acName){
         return as.listDistrict(acName);
     }
-    
 }

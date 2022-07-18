@@ -55,4 +55,5 @@ public class Board {
 	@OneToMany(mappedBy = "board")
 	@JsonManagedReference
 	private List<Reply> reply;
+
 }

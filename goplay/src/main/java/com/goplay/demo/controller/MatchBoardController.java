@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import com.goplay.demo.service.MatchBoardService;
 import com.goplay.demo.vo.MatchBoard;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -126,6 +129,16 @@ public class MatchBoardController {
 	@ResponseBody
 	public List<MatchRecordDTO> matchRecord(@PathVariable int cNo){
 		return mrs.matchRecord(cNo);
+	}
+
+	@PostMapping("/listMatchCno")
+	@ResponseBody
+	//동호회 커뮤니티 경기 일정 스케쥴 출력
+	public Page<MatchBoardDTO> listMatchCno(Pageable pageable, @RequestParam @Nullable String thisFirstISO, @RequestParam @Nullable String thisLastISO) {
+
+		int cNo = 1; //현재 로그인 한 id의 동호회 cno 받아와아햠
+
+		return ms.listMatchCno(pageable, cNo, thisFirstISO, thisLastISO);
 	}
 
 	// 날짜별 매치 수 조회

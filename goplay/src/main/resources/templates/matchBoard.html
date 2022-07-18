@@ -10,7 +10,9 @@
         <link rel="icon" type="image/png" href="img/fav.png">
         <title> 매치 보드 </title>
         <!-- Calendar style for this template -->
-        <link rel="stylesheet" href="css/calendar.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="calendar/css/style.css">
         <!-- Slick Slider -->
         <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css"/>
         <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css"/>
@@ -22,6 +24,9 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- jquery script -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- 검색결과 표시 script -->
+        <script src="js/matchBoard.js"></script>
+
     </head>
     <body>
         <!-- Navigation -->
@@ -228,11 +233,20 @@
                             <h3 class="m-0 font-weight-normal">매치검색</h3>
                         </div>
                         <div class="box-body p-3">
+                            <form class="js-validate" novalidate="novalidate">
                                 <!-- 검색조건  -->
                                 <div class="row">
                                     <!-- 달력 -->
-                                    <div class="col-sm-6 mb-3 mb-sm-6" id="calendarContainer">
-
+                                    <div class="col-sm-6 mb-3 mb-sm-6">
+                                        <div class="calendar calendar-first" id="calendar_first">
+                                            <div class="calendar_header">
+                                                <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+                                                <h2></h2>
+                                                <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
+                                            </div>
+                                            <div class="calendar_weekdays"></div>
+                                            <div class="calendar_content"></div>
+                                        </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-sm-3 pl-5">
@@ -240,7 +254,6 @@
                                         <div data-role="fieldcontain" >
                                             <fieldset data-role="control-group" data-type="horizontal">
                                                 <legend>종목을 선택하세요 </legend>
-                                                <input type="radio" name="mbType" id="typeAll" value="all"/><label for="typeAll">전체</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="soccer" value="축구"/><label for="soccer">축구</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="footVolleyball" value="족구" /><label for="footVolleyball">족구</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="futsal" value="풋살" /><label for="futsal">풋살</label>&nbsp;&nbsp;&nbsp;
@@ -248,21 +261,22 @@
                                             </fieldset>
                                         </div>
                                         <!-- End 종목 선택 -->
-                                        <hr><br><br>
+                                        <hr>
                                         <!-- 지역 선택 -->
                                         <div>
                                             <legend> 지역을 선택하세요  </legend>
                                             <label>시/도</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc1">
+                                                <option>지역 선택</option>
                                             </select>
                                             &nbsp;&nbsp;&nbsp;
                                             <label>시/군/구</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc2">
-                                                <option value=null>전체</option>
+                                                <option>세부 지역</option>
                                             </select>
                                         </div>
                                         <!-- End 지역 선택 -->
-                                        <hr><br><br>
+                                        <hr>
                                         <!-- 매치상태 선택 -->
                                         <fieldset data-role="control-group" data-type="horizontal">
                                             <legend>종목을 선택하세요 </legend>
@@ -272,23 +286,39 @@
                                         </fieldset>
                                         <!-- End 매치상태 선택 -->
                                         <hr>
-
-<!--                                        &lt;!&ndash;키워드 검색 &ndash;&gt;-->
-<!--                                        <span>-->
-<!--                                            <legend> 검색 할 키워드를 입력하세요  </legend>-->
-<!--                                            <input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >-->
-<!--                                        </span>-->
-<!--                                        <span>-->
-<!--                                            <button style="width:100px"class="btn btn-primary">검색</button>-->
-<!--                                        </span>-->
-<!--                                        &lt;!&ndash; End 키워드 검색 &ndash;&gt;-->
+                                        <!--키워드 검색 -->
+                                        <span>
+                                            <legend> 검색 할 키워드를 입력하세요  </legend>
+                                            <input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >
+                                        </span>
+                                        <span>
+                                            <button style="width:100px"class="btn btn-primary">검색</button>
+                                        </span>
+                                        <!-- End 키워드 검색 -->
                                     </div>
                                 </div>
+                            </form>
                         </div>
                     </div>
                     <!-- 검색된 매치 목록 -->
 
                     <div class="border rounded bg-white mb-3">
+                        <!-- 페이지 설정 -->
+                        <div class="d-flex justify-content-end mt-2 pr-2">
+                            <select style="width:100px;" class="custom-select" id="sortCol">
+                                <option selected>날짜순</option>
+                                <option>12개</option>
+                                <option>18개</option>
+                                <option>24개</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+                            <select style="width:100px;" class="custom-select" id="size">
+                                <option>6개</option>
+                                <option>12개</option>
+                                <option>18개</option>
+                                <option>24개</option>
+                            </select>
+                        </div>
                         <div id="matchContainer">
                             <!-- flex-->
                         </div>
@@ -311,9 +341,10 @@
         <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/osahan.js"></script>
-        <!-- 검색결과 표시 script -->
-        <script src="js/calendar.js"></script>
-        <!-- 달력 표시 script -->
-        <script src="js/matchBoard.js"></script>
+        <!-- Calendar script -->
+        <script src="calendar/js/jquery.min.js"></script>
+        <script src="calendar/js/popper.js"></script>
+        <script src="calendar/js/bootstrap.min.js"></script>
+        <script src="calendar/js/main.js"></script>
     </body>
 </html>

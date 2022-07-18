@@ -1,6 +1,7 @@
 package com.goplay.demo;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,5 +16,10 @@ public class QuerydslConfiguration {
     @Bean
     public JPAQueryFactory jpaQueryFactory(){
         return new JPAQueryFactory(em);
+    }
+
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 }

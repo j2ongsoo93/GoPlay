@@ -2,6 +2,7 @@ package com.goplay.demo.controller;
 
 import java.util.List;
 
+import com.goplay.demo.dto.MemberDTOChangHee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,4 +53,12 @@ public class MemberController {
 
 	@GetMapping("/asdf")
 	public String profilePrivacy(Model model){return "profile-privacy";}
+
+	//커뮤니티 게시판 동호회원 목록 출력
+	@GetMapping("/findClubMemberCno")
+	@ResponseBody
+	public List<MemberDTOChangHee> findClubMemberCno() {
+		int cNo=1;
+		return ms.findClubMemberCno(cNo);
+	}
 }
