@@ -47,4 +47,7 @@ public class MatchBoardDTO {
         this.aScore = aScore;
         this.mbStat = mbStat;
     }
+
+    public MatchBoardDTO() {
+    }
 }

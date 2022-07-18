@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c9e63bb-4229-421a-b466-f6a2c8bbb752" name="변경" comment="[박정수] 220714&#10;추가: calender.js (달력 출력 function)">
+    <list default="true" id="7c9e63bb-4229-421a-b466-f6a2c8bbb752" name="변경" comment="[박정수] 220715&#10;추가: calender.js (달력 칸의 id에 날짜 삽입)">
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchDateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/GetSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/insertMatchBoard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/css/calendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchBoardDAOCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchBoardDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dto/MatchBoardDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/MatchBoardSearchCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/searchCondition/MatchBoardSearchCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchBoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/MatchBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/insertMatchBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard_copy.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +34,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="PJS_0714" />
+        <entry key="$PROJECT_DIR$" value="PJS_0718" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,7 +59,7 @@
     <option name="myId2Visible">
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
@@ -93,7 +107,7 @@
     &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;5bf396b10038348453209c8033c86e34&quot;
   }
 }</component>
@@ -160,7 +174,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="72833b34-facc-4ecc-8166-922493e7b11c" name="변경" comment="이창희 -" />
+      <changelist id="7c9e63bb-4229-421a-b466-f6a2c8bbb752" name="변경" comment="[박정수] 220714&#10;추가: calender.js (달력 출력 function)" />
       <created>1656513430120</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -207,6 +221,13 @@
       <workItem from="1657627054544" duration="5403000" />
       <workItem from="1657670403515" duration="444000" />
       <workItem from="1657670861140" duration="106000" />
+      <workItem from="1657784540102" duration="3835000" />
+      <workItem from="1657843400518" duration="3488000" />
+      <workItem from="1657846980092" duration="382000" />
+      <workItem from="1657858680419" duration="12127000" />
+      <workItem from="1657872045268" duration="2776000" />
+      <workItem from="1658066300391" duration="492000" />
+      <workItem from="1658066810336" duration="10582000" />
     </task>
     <task id="LOCAL-00001" summary="[박정수] 추가: Querydsl dependency">
       <created>1656569367336</created>
@@ -229,7 +250,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657775404278</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[박정수] 220714&#10;추가: calender.js (달력 출력 function)">
+      <created>1657776852455</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657776852455</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[박정수] 220715&#10;추가: calender.js (달력 칸의 id에 날짜 삽입)">
+      <created>1657862204071</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657862204071</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,6 +304,11 @@
     <MESSAGE value="[박정수] 추가: DTO package 수정: DTO로 받아오도록 변경" />
     <MESSAGE value="[박정수] 220711&#10;수정:&#10;ClubController.java: findByCno method 추가&#10;ClubDAOCustom.java: findByCno method 추가&#10;ClubDTO.java: @QueryProjection anotation 추가&#10;ClubService.java: findByCno method 추가&#10;matchBoard.html: 화면 출력완료&#10;MatchBoardController.java: 전적검색 method 추가&#10;&#10;추가:&#10;matchBoard.js: html파일과 분리&#10;MatchRecordDAOCustom.java&#10;MatchRecordDTO.java&#10;MatchRecordService.java" />
     <MESSAGE value="[박정수] 220714&#10;추가: calender.js (달력 출력 function)" />
-    <option name="LAST_COMMIT_MESSAGE" value="[박정수] 220714&#10;추가: calender.js (달력 출력 function)" />
+    <MESSAGE value="[박정수] 220715&#10;추가: calender.js (달력 칸의 id에 날짜 삽입)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[박정수] 220715&#10;추가: calender.js (달력 칸의 id에 날짜 삽입)" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

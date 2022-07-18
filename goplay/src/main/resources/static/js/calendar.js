@@ -24,6 +24,9 @@ $(function(){
 
 
         for(let i = 0; i < 42; i++){
+            let year = CDate.getFullYear();
+            let month = convertMonth(CDate.getMonth()+1);
+            let day = convertMonth(dates[i]);
             if(i < thisFirst.getDay()){
                 htmlDates += '<div class="date last">'+dates[i]+'</div>';
             }else if(today.getDate()==dates[i] && today.getMonth()==CDate.getMonth() && today.getFullYear()==CDate.getFullYear()){
@@ -56,12 +59,13 @@ $(function(){
                     let matchDate = this.mbDate.substring(0, 10);
                     let match_cnt = this.cnt;
                     console.log(matchDate +"->"+match_cnt);
-                    let link_date = $('<div>'+match_cnt+'경기</div>').attr("id", match_cnt);
+                    let link_date = $('<p style="margin-top: -20px; color: red">'+match_cnt+'경기</p>').attr("id", match_cnt);
                     $("#"+matchDate).append(link_date);
                 });
             }
         });
     }
+
     // 한자리 숫자 앞에 0붙여서 String 반환하는 function
     let convertMonth = function(n){
         let str = n;

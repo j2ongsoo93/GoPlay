@@ -49,6 +49,7 @@ $(function(){
     $.ajax({
         url:"/listCity",
         success: function(data){
+            $("#mbLoc1").append($('<option value="">전체</option>'));
             $.each(data,function(){
                 let option = $("<option></option>");
                 option.html(this.acName);
@@ -81,7 +82,7 @@ $(function(){
     let mbStat_wait=null;
     let mbStat_matched=null;
     let mbStat_end=null;
-    let size = 6;
+    let size = 3;
     let page = 0;
 
 
@@ -124,7 +125,7 @@ $(function(){
                     let mbDate;
 
                     if(mbStat == '대기'){
-                        homeClubName = getClubName(this.homeClub)
+                        homeClubName = getClubName(this.homeClub);
                         homeRecord = getMatchRecord(this.homeClub);
                         mbDate = printDate(this.mbDate);
 
@@ -270,8 +271,11 @@ $(function(){
     // 종목선택 시 이벤트
     $(document).on("change", "input[name='mbType']", function(){
        $("#matchContainer").empty();
-        console.log($(this).val())
+       if($(this).val()=="all"){
+        mbType = null;
+       }else{
         mbType = $(this).val();
+       }
         printPage();
     });
 
@@ -279,21 +283,26 @@ $(function(){
     $(document).on("change", "#mbLoc1", function(){
         $("#matchContainer").empty();
         $("#mbLoc2").empty();
+        mbLoc2 = null;
         console.log($(this).val());
         mbLoc1 = $(this).val();
-
-        //시도 지역분류 선택 시 세부지역 출력
-        $.ajax({
-            url:"/listDistrict/"+mbLoc1,
-            success: function(data) {
-                $.each(data,function(){
-                    let option = $("<option></option>");
-                    option.html(this.adName);
-                    option.attr("value",this.adName);
-                    $("#mbLoc2").append(option);
-                });
-            }
-        });
+        if(mbLoc1 == null){
+            mbLoc2 = null;
+        }else{
+            //시도 지역분류 선택 시 세부지역 출력
+            $.ajax({
+                url:"/listDistrict/"+mbLoc1,
+                success: function(data) {
+                    $("#mbLoc2").append($('<option value="">전체</option>'));
+                    $.each(data,function(){
+                        let option = $("<option></option>");
+                        option.html(this.adName);
+                        option.attr("value",this.adName);
+                        $("#mbLoc2").append(option);
+                    });
+                }
+            });
+        }
         printPage();
     });
 
@@ -302,6 +311,7 @@ $(function(){
         $("#matchContainer").empty();
         console.log($(this).val());
         mbLoc2 = $(this).val();
+        console.log(mbLoc2)
         printPage();
     });
 
@@ -327,5 +337,34 @@ $(function(){
             }
         }
         printPage();
+    });
+
+    // 달력 날짜 선택 시 이벤트
+    $(document).on("click", ".matchDate", function(){
+        $("#matchContainer").empty();
+        mbDate = new Date($(this).attr("id")).toISOString();
+        console.log(mbDate);
+        printPage();
+    });
+
+    // pageSize 선택 시 이벤트
+    $(document).on("change", "#size", function(){
+        $("#matchContainer").empty();
+        size = $(this).val();
+        console.log(size);
+        printPage();
+    });
+
+    //무한 스크롤 이벤트
+    $(window).scroll(function(){
+        let $window = $(this);
+        let scrollTop = $(window).scrollTop();
+        let windowHeight = $window.height();
+        let documentHeight = $(document).height();
+        if (scrollTop + windowHeight + 10 > documentHeight) {
+            console.log("페이지 바닥 도착");
+            page = page + 1;
+            printPage();
+        }
     });
 });

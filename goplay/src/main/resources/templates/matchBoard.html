@@ -240,6 +240,7 @@
                                         <div data-role="fieldcontain" >
                                             <fieldset data-role="control-group" data-type="horizontal">
                                                 <legend>종목을 선택하세요 </legend>
+                                                <input type="radio" name="mbType" id="typeAll" value="all"/><label for="typeAll">전체</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="soccer" value="축구"/><label for="soccer">축구</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="footVolleyball" value="족구" /><label for="footVolleyball">족구</label>&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" name="mbType" id="futsal" value="풋살" /><label for="futsal">풋살</label>&nbsp;&nbsp;&nbsp;
@@ -247,22 +248,21 @@
                                             </fieldset>
                                         </div>
                                         <!-- End 종목 선택 -->
-                                        <hr>
+                                        <hr><br><br>
                                         <!-- 지역 선택 -->
                                         <div>
                                             <legend> 지역을 선택하세요  </legend>
                                             <label>시/도</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc1">
-                                                <option value="">전체</option>
                                             </select>
                                             &nbsp;&nbsp;&nbsp;
                                             <label>시/군/구</label>
                                             <select style="width:100px;" class="custom-select" id="mbLoc2">
-                                                <option value="">전체</option>
+                                                <option value=null>전체</option>
                                             </select>
                                         </div>
                                         <!-- End 지역 선택 -->
-                                        <hr>
+                                        <hr><br><br>
                                         <!-- 매치상태 선택 -->
                                         <fieldset data-role="control-group" data-type="horizontal">
                                             <legend>종목을 선택하세요 </legend>
@@ -272,15 +272,16 @@
                                         </fieldset>
                                         <!-- End 매치상태 선택 -->
                                         <hr>
-                                        <!--키워드 검색 -->
-                                        <span>
-                                            <legend> 검색 할 키워드를 입력하세요  </legend>
-                                            <input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >
-                                        </span>
-                                        <span>
-                                            <button style="width:100px"class="btn btn-primary">검색</button>
-                                        </span>
-                                        <!-- End 키워드 검색 -->
+
+<!--                                        &lt;!&ndash;키워드 검색 &ndash;&gt;-->
+<!--                                        <span>-->
+<!--                                            <legend> 검색 할 키워드를 입력하세요  </legend>-->
+<!--                                            <input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >-->
+<!--                                        </span>-->
+<!--                                        <span>-->
+<!--                                            <button style="width:100px"class="btn btn-primary">검색</button>-->
+<!--                                        </span>-->
+<!--                                        &lt;!&ndash; End 키워드 검색 &ndash;&gt;-->
                                     </div>
                                 </div>
                         </div>
@@ -288,22 +289,6 @@
                     <!-- 검색된 매치 목록 -->
 
                     <div class="border rounded bg-white mb-3">
-                        <!-- 페이지 설정 -->
-                        <div class="d-flex justify-content-end mt-2 pr-2">
-                            <select style="width:100px;" class="custom-select" id="sortCol">
-                                <option selected>날짜순</option>
-                                <option>12개</option>
-                                <option>18개</option>
-                                <option>24개</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;
-                            <select style="width:100px;" class="custom-select" id="size">
-                                <option>6개</option>
-                                <option>12개</option>
-                                <option>18개</option>
-                                <option>24개</option>
-                            </select>
-                        </div>
                         <div id="matchContainer">
                             <!-- flex-->
                         </div>
