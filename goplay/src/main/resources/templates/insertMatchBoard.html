@@ -5,6 +5,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta name="description" content="">
       <meta name="author" content="">
+      <meta name="_csrf_header" th:content="${_csrf.headerName}">
+      <meta name="_csrf" th:content="${_csrf.token}">
       <link rel="icon" type="image/png" href="img/fav.png">
       <title>title</title>
       <!-- Slick Slider -->
@@ -17,79 +19,7 @@
       <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-         $(function(){
-            //시도 지역선택 드롭다운 리스트
-            $.ajax({
-               url:"/listCity",
-               success: function(data){
-                  $.each(data,function(){
-                     let option = $("<option></option>");
-                     option.html(this.acName);
-                     option.attr("value",this.acName);
-                     $("#mbLoc1").append(option);
-                  });
-               }
-            });
-
-            //시도 지역분류 선택 시 세부지역 출력
-            $(document).on("change", "#loc1", function (){
-               $("#mbLoc2").empty();
-               let acName = $(this).val()
-               $.ajax({
-                  url:"/listDistrict/"+acName,
-                  success: function(data) {
-                     let district = data[0].address_district;
-                     $.each(district,function(){
-                        let option = $("<option></option>");
-                        option.html(this.adName);
-                        option.attr("value",this.adName);
-                        $("#mbLoc2").append(option);
-                     });
-                  }
-               });
-            });
-
-            //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-            $.ajax({
-               url:"/listDistrict/"+"서울특별시",
-               success: function(data) {
-                  let district = data[0].address_district;
-                  $.each(district,function(){
-                     let option = $("<option></option>");
-                     option.html(this.adName);
-                     option.attr("value",this.adName);
-                     $("#mbLoc2").append(option);
-                  });
-               }
-            });
-
-            //인원선택 버튼 클릭 시 동호회 회원 표시
-            $('#selectMember').click(function(){
-               $("#memberList").empty();
-               let cNo =  1;
-               $.ajax({
-                  url:"/listClubMemberlist/"+cNo,
-                  success: function(data){
-                     $.each(data, function(){
-                        let div = $("<div></div>").addClass("col-sm-4 div-memberList");
-                        let checkBox = $("<input>").attr("type","checkbox").attr("value", this.id).attr("id",this.id).addClass("memberCheck");
-                        let label = $("<label></label>").addClass("form-check-label").attr("for",this.id).html("&nbsp;&nbsp;"+this.id);
-                        $(div).append(checkBox);
-                        $(div).append(label);
-                        $("#memberList").append(div);
-                     });
-                  }
-               });
-            });
-
-
-
-
-
-         });
-
-      </script>
+      <script src="js/insertMatchBoard.js"></script>
    </head>
    <body>
       <!-- Navigation -->
@@ -351,10 +281,10 @@
                                     </label>
                                     <div class="form-group">
                                        <select class="custom-select" id="mbType">
-                                          <option value="languageSelect1" selected="">축구</option>
-                                          <option value="languageSelect2">풋살</option>
-                                          <option value="languageSelect3">농구</option>
-                                          <option value="languageSelect4">족구</option>
+                                          <option value="축구" selected="">축구</option>
+                                          <option value="풋살">풋살</option>
+                                          <option value="농구">농구</option>
+                                          <option value="족구">족구</option>
                                        </select>
                                     </div>
                                  </div>
@@ -372,7 +302,6 @@
                                     </label>
                                     <div class="form-group">
                                        <select class="custom-select" id="mbLoc1">
-
                                        </select>
                                     </div>
                                  </div>
@@ -439,7 +368,7 @@
                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                       <button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
+                                       <button type="button" class="btn btn-default" data-dismiss="modal" id="saveMatchMember">저장</button>
                                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                                     </div>
                                  </div>
@@ -499,7 +428,7 @@
                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <input type="text" id="home_Level" class="form-control">
+                                       <input type="text" id="homeLevel" class="form-control">
                                        <small class="form-text text-muted"> ex) 상 중 하 </small>
                                     </div>
                                  </div>
@@ -516,7 +445,7 @@
                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="form-group">
-                                       <textarea class="form-control" rows="5"></textarea>
+                                       <textarea class="form-control" id="homeSay" rows="5"></textarea>
                                     </div>
                                  </div>
                               </div>
@@ -526,8 +455,8 @@
                      </div>
                   </div>
                   <div class="mb-3 text-right">
-                     <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; Cancel &nbsp;&nbsp;&nbsp;&nbsp; </a>
-                     <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;  Sava Chenges &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                     <a class="font-weight-bold btn btn-link rounded p-3" id="cancel"> &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </a>
+                     <a class="font-weight-bold btn btn-primary rounded p-3" id="insertMatch"> &nbsp;&nbsp;&nbsp;&nbsp;  등록 &nbsp;&nbsp;&nbsp;&nbsp; </a>
                   </div>
                </main>
                <!-- End Main contents-->

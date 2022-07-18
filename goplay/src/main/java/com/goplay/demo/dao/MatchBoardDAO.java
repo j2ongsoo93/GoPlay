@@ -1,7 +1,10 @@
 package com.goplay.demo.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.goplay.demo.dto.MatchDateDTO;
+import com.querydsl.core.Tuple;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,4 +21,6 @@ public interface MatchBoardDAO extends JpaRepository<MatchBoard, Integer>{
 			"WHERE m.club_memberlist.listNo = (SELECT cm.listNo FROM ClubMemberlist cm " +
 			"WHERE cm.member.id = :id))")
 	List<MatchBoard> myMatch(@Param("id") String id);
+
+
 }

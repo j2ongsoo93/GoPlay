@@ -1,8 +1,6 @@
 package com.goplay.demo.dao;
 
-import com.goplay.demo.dto.ClubDTO;
-import com.goplay.demo.dto.MatchBoardDTO;
-import com.goplay.demo.dto.QMatchBoardDTO;
+import com.goplay.demo.dto.*;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import com.goplay.demo.vo.MatchBoard;
 import com.goplay.demo.vo.QMatchBoard;
@@ -56,6 +54,7 @@ public class MatchBoardDAOCustom {
                         mbLoc1Eq(condition.getMbLoc1()),
                         mbLoc2Eq(condition.getMbLoc2()),
                         mbStatEq(condition.getMbStat()))
+                .orderBy(matchBoard.mbDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -69,6 +68,17 @@ public class MatchBoardDAOCustom {
                         mbLoc2Eq(condition.getMbLoc2()),
                         mbStatEq(condition.getMbStat()));
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+    }
+
+    public List<MatchDateDTO> matchDate(){
+        return queryFactory
+                .select(new QMatchDateDTO(
+                        matchBoard.mbDate,
+                        matchBoard.mbDate.count()
+                ))
+                .from(matchBoard)
+                .groupBy(matchBoard.mbDate)
+                .fetch();
     }
 
     private BooleanExpression mbDateEq(LocalDateTime mbDate){
@@ -88,13 +98,13 @@ public class MatchBoardDAOCustom {
         if(mbLoc1==null){
             return null;
         }
-        return matchBoard.mbLoc1.eq(mbLoc1);
+        return matchBoard.mbLoc1.contains(mbLoc1);
     }
     private BooleanExpression mbLoc2Eq(String mbLoc2){
         if(mbLoc2==null){
             return null;
         }
-        return matchBoard.mbLoc2.eq(mbLoc2);
+        return matchBoard.mbLoc2.contains(mbLoc2);
     }
     private BooleanExpression mbStatEq(List<String> mbStat){
         if(mbStat==null){
@@ -102,6 +112,7 @@ public class MatchBoardDAOCustom {
         }
         return matchBoard.mbStat.in(mbStat);
     }
+
 }
 
 

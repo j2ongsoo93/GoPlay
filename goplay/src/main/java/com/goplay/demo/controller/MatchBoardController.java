@@ -1,9 +1,11 @@
 package com.goplay.demo.controller;
 
 import com.goplay.demo.dto.MatchBoardDTO;
+import com.goplay.demo.dto.MatchDateDTO;
 import com.goplay.demo.dto.MatchRecordDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import com.goplay.demo.service.MatchRecordService;
+import com.goplay.demo.vo.Club;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,10 +18,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @Setter
@@ -47,14 +46,22 @@ public class MatchBoardController {
 		if(map.get("mbStat_wait")==null && map.get("mbStat_matched")==null && map.get("mbStat_end")==null){
 			mbStat = null;
 		}
-		LocalDateTime mbDate;
+
+		String mbDate;
+		LocalDateTime mbDateTime;
 		if(map.get("mbDate") == null){
-			mbDate = null;
+			mbDateTime = null;
 		}else{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-			mbDate = LocalDateTime.parse(map.get("mbDate"), formatter);
+			mbDate = map.get("mbDate");
+			mbDate = mbDate.substring(0,19);
+			mbDate = mbDate.replace("T", " ");
+			mbDate = mbDate.replace("Z", "");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			mbDateTime = LocalDateTime.parse(mbDate, formatter);
+			System.out.println(mbDateTime);
 		}
-		MatchBoardSearchCondition condition = new MatchBoardSearchCondition(mbDate, map.get("mbType"), map.get("mbLoc1"), map.get("mbLoc2"), mbStat);
+
+		MatchBoardSearchCondition condition = new MatchBoardSearchCondition(mbDateTime, map.get("mbType"), map.get("mbLoc1"), map.get("mbLoc2"), mbStat);
 		PageRequest pageRequest = PageRequest.of(Integer.parseInt(map.get("page")), Integer.parseInt(map.get("size")));
 		return ms.searchMatchBoard(condition, pageRequest);
 	}
@@ -62,7 +69,36 @@ public class MatchBoardController {
 	//매치등록, 수정
 	@PostMapping("/saveMatchBoard")
 	@ResponseBody
-	public void insertBoard(MatchBoard mb) {
+	public void insertBoard(@RequestBody Map<String, String> map) {
+		String mbDate;
+		LocalDateTime mbDateTime;
+		if(map.get("mbDate") == null){
+			mbDateTime = null;
+		}else{
+			mbDate = map.get("mbDate");
+			mbDate = mbDate.substring(0,19);
+			mbDate = mbDate.replace("T", " ");
+			mbDate = mbDate.replace("Z", "");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			mbDateTime = LocalDateTime.parse(mbDate, formatter);
+			System.out.println(mbDateTime);
+		}
+
+		MatchBoard mb = new MatchBoard();
+		Club c = new Club();
+//		c.setCNo(Integer.parseInt(map.get("homeClub")));
+		c.setCNo(1);
+		mb.setClub(c);
+		mb.setMbDate(mbDateTime);
+		mb.setMbType(map.get("mbType"));
+		mb.setMbLoc1(map.get("mbLoc1"));
+		mb.setMbLoc2(map.get("mbLoc2"));
+		mb.setMbStadium(map.get("mbStadium"));
+		mb.setMbFee(map.get("mbFee"));
+		mb.setHomeUcolor(map.get("homeUcolor"));
+		mb.setHomeLevel(map.get("homeLevel"));
+		mb.setHomeSay(map.get("homeSay"));
+		mb.setMbStat(map.get("mbStat"));
 		ms.saveBoard(mb);
 	}
 
@@ -89,5 +125,12 @@ public class MatchBoardController {
 	@ResponseBody
 	public List<MatchRecordDTO> matchRecord(@PathVariable int cNo){
 		return mrs.matchRecord(cNo);
+	}
+
+	// 날짜별 매치 수 조회
+	@GetMapping("/matchDate")
+	@ResponseBody
+	public List<MatchDateDTO> matchDate(){
+		return ms.matchDate();
 	}
 }

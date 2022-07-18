@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.goplay.demo.dao.MatchBoardDAOCustom;
 import com.goplay.demo.dto.MatchBoardDTO;
+import com.goplay.demo.dto.MatchDateDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
+import com.querydsl.core.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,5 +43,8 @@ public class MatchBoardService {
 	public List<MatchBoard> myMatch(String id){
 		return dao.myMatch(id);
 	}
+	
+	// 날짜별 매치 수 조회
+	public List<MatchDateDTO> matchDate(){return daoCustom.matchDate();}
 }
 	

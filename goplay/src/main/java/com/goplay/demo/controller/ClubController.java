@@ -1,32 +1,23 @@
 package com.goplay.demo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.goplay.demo.dao.MemberDAO;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.goplay.demo.dto.ClubDTO;
 import com.goplay.demo.searchCondition.ClubSearchCondition;
 import com.goplay.demo.service.ClubService;
-import com.goplay.demo.service.MatchBoardService;
 import com.goplay.demo.service.MemberService;
-import com.goplay.demo.vo.Club;
-
 import lombok.Setter;
+
+import java.util.List;
 
 @Controller
 @Setter
@@ -64,7 +55,6 @@ public class ClubController {
 		return clubDTOPage;
 	}
 
-
 	@GetMapping("/listClubPageing")
 	public String listClubPageing(Model model) {
 
@@ -73,18 +63,16 @@ public class ClubController {
 		model.addAttribute("clubDTOPage", clubDTOPage);
 		
 		return "listClubAll";
-		//return mav;
-
-	}
-
+	}	
+	
 	@GetMapping("/listClubRecommend")
 	public void listClubRecommend() {
-		
 	}
 
-	@GetMapping ("/findClub/{cNo}")
+	// 클럽번호로 클럽 검색(matchBoard에서 사용)
+	@GetMapping("/findClub/{cNo}")
 	@ResponseBody
-	public List<ClubDTO> findByCno(@PathVariable int cNo){
-		return cs.findByCno(cNo);
+	public List<ClubDTO> findClub(@PathVariable int cNo){
+		return cs.findClub(cNo);
 	}
 }
