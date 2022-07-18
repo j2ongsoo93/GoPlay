@@ -6,5 +6,4 @@ import com.goplay.demo.vo.Board;
 
 public interface BoardDAO extends JpaRepository<Board, Integer> {
 
-
 }

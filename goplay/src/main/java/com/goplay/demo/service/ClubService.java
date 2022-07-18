@@ -17,6 +17,8 @@ import lombok.Setter;
 @Service
 @Setter
 public class ClubService {
+
+
 	@Autowired
 	private ClubDAOCustom daoCustom;
 	
@@ -24,10 +26,4 @@ public class ClubService {
 	public Page<ClubDTO> listClubAll(Pageable pageable,ClubSearchCondition condition) {
 		return daoCustom.listClubAll(pageable, condition);
 	}
-	
-	//cNo로 클럽 검색
-	public List<ClubDTO> findClub(int cNo){
-		return daoCustom.findClub(cNo);
-	}
-	
 }

@@ -15,17 +15,17 @@ public class AddressDistrictDAO {
     private final JPAQueryFactory queryFactory;
     QAddressDistrict ad = QAddressDistrict.addressDistrict;
 
-    public List<AddressDistrictDTO> listDistrict(String acName){
+    public List<AddressDistrictDTO> listDistrict(int acNo){
         return queryFactory
                 .select(new QAddressDistrictDTO(
                         ad.adNo,
                         ad.adName,
                         ad.address_city.acNo))
                 .from(ad)
-                .where(acNameEq(acName))
+                .where(acNoEq(acNo))
                 .fetch();
     }
-    private BooleanExpression acNameEq(String acName){
-        return ad.address_city.acName.eq(acName);
+    private BooleanExpression acNoEq(int acNo){
+        return ad.address_city.acNo.eq(acNo);
     }
 }

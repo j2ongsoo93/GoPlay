@@ -20,4 +20,9 @@ public interface MemberDAO extends JpaRepository<Member, Long>{
 	@Query("select m from Member m where m.id=:id")
 	Member findByIdTypeLoc(@Param("id") String id);
 
+	@Query("select m from Member m where m.id = ?1 order by m.phone DESC")
+	List<Member> findByIdOrderByPhoneDesc(String id);
+
+
+
 }

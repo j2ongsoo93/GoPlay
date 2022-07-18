@@ -1,10 +1,7 @@
 package com.goplay.demo.dao;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import com.goplay.demo.dto.MatchDateDTO;
-import com.querydsl.core.Tuple;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 
