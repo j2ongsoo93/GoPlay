@@ -32,6 +32,7 @@ public class BoardService {
 		return daoCustom.listBoardAllCno(pageable, cNo);
 	}
 
+	//게시글 작성
 	public void saveBoard(Board b) {
 		dao.save(b);
 	}
