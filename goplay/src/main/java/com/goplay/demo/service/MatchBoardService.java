@@ -43,8 +43,13 @@ public class MatchBoardService {
 	public List<MatchBoard> myMatch(String id){
 		return dao.myMatch(id);
 	}
-	
+
 	// 날짜별 매치 수 조회
 	public List<MatchDateDTO> matchDate(){return daoCustom.matchDate();}
+
+	//클럽 번호로 매치 검색
+	public Page<MatchBoardDTO> listMatchCno(Pageable pageable,Integer cNo) {
+		return daoCustom.listMatchCno(pageable, cNo);
+	}
 }
 	

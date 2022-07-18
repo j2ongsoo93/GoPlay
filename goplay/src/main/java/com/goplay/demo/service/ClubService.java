@@ -19,15 +19,23 @@ import lombok.Setter;
 public class ClubService {
 	@Autowired
 	private ClubDAOCustom daoCustom;
-	
+
 	//클럽 검색 기능
 	public Page<ClubDTO> listClubAll(Pageable pageable,ClubSearchCondition condition) {
 		return daoCustom.listClubAll(pageable, condition);
 	}
-	
-	//cNo로 클럽 검색
-	public List<ClubDTO> findClub(int cNo){
-		return daoCustom.findClub(cNo);
+
+	//추천 동호회(지역, 종목)
+	public Page<ClubDTO> listRecommendClub(Pageable pageable, RecommentClubCondition condition) {
+		return daoCustom.listRecommendClub(pageable, condition);
 	}
-	
+
+	public List<ClubInfoDTO> getClubProfileResult(int cNo) {
+		return daoCustom.getClubProfileResult(cNo);
+	}
+
+
+	public List<ClubDTO> listAllClub(){
+		return daoCustom.listAllClub();
+	}
 }

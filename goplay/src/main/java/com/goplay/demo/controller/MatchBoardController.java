@@ -133,4 +133,12 @@ public class MatchBoardController {
 	public List<MatchDateDTO> matchDate(){
 		return ms.matchDate();
 	}
+
+	@GetMapping("/listMatchCno")
+	@ResponseBody
+	//동호회 커뮤니티 스케쥴 출력
+	public Page<MatchBoardDTO> listMatchCno(Pageable pageable) {
+		int cNo = 1; //현재 로그인 한 id의 동호회 cno 받아와아햠
+		return ms.listMatchCno(pageable, cNo);
+	}
 }

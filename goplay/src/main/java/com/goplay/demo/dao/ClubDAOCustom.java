@@ -43,7 +43,7 @@ public class ClubDAOCustom {
 				.offset(pageable.getOffset())
 				.limit(pageable.getPageSize())
 			    .fetchResults();
-		
+
 //		System.out.println("cTypeEq " + cTypeEq(condition.getC_type()));
 //		System.out.println("cLoc1Eq " + cLoc1Eq(condition.getC_loc1()));
 //		System.out.println("cLoc2Eq " + cLoc2Eq(condition.getC_loc2()));
@@ -61,30 +61,30 @@ public class ClubDAOCustom {
 	}
 
 
-    private BooleanExpression cTypeEq(String cType){
-        if(cType == null || cType.equals("")){
-            return null;
-        }
-        return qClub.cType.eq(cType);
-    }
-    
-    private BooleanExpression cLoc1Eq(String cLoc1){
-        if(cLoc1 == null || cLoc1.equals("")){
-            return null;
-        }
-        return qClub.cLoc1.eq(cLoc1);
-    }
-    
-    private BooleanExpression cLoc2Eq(String cLoc2){
-        if(cLoc2 == null || cLoc2.equals("")){
-            return null;
-        }
-        return qClub.cLoc2.eq(cLoc2);
-    }
+	private BooleanExpression cTypeEq(String cType){
+		if(cType == null || cType.equals("")){
+			return null;
+		}
+		return qClub.cType.eq(cType);
+	}
+
+	private BooleanExpression cLoc1Eq(String cLoc1){
+		if(cLoc1 == null || cLoc1.equals("")){
+			return null;
+		}
+		return qClub.cLoc1.eq(cLoc1);
+	}
+
+	private BooleanExpression cLoc2Eq(String cLoc2){
+		if(cLoc2 == null || cLoc2.equals("")){
+			return null;
+		}
+		return qClub.cLoc2.eq(cLoc2);
+	}
 
 	private BooleanExpression cNoEq(int cNo){
 		return qClub.cNo.eq(cNo);
 	}
-    
+
 
 }

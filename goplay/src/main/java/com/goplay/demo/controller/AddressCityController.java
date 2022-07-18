@@ -22,9 +22,9 @@ public class AddressCityController {
         return as.listAddress();
     }
 
-    @GetMapping("/listCity/{acName}")
+    @GetMapping("/listDistrict/{acName}")
     public List<AddressCity> findByAcName(@PathVariable String acName){
         return as.findByAcName(acName);
     }
-    
+
 }

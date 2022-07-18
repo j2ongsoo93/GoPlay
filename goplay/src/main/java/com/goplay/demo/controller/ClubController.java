@@ -17,8 +17,6 @@ import com.goplay.demo.service.ClubService;
 import com.goplay.demo.service.MemberService;
 import lombok.Setter;
 
-import java.util.List;
-
 @Controller
 @Setter
 public class ClubController {
@@ -26,22 +24,22 @@ public class ClubController {
 	private ClubService cs;
 	@Autowired
 	private MemberService ms;
-	
+
 	Page<ClubDTO> clubDTOPage;
 	int startPage;
 	int endpage;
 	//클럽 검색 기능(listClubAll)
 	@GetMapping("/listClubAll2")
 	@ResponseBody
-	public Page<ClubDTO> listClubAll(@PageableDefault(size=1) Pageable pageable, HttpSession session, Model model, 
-			@RequestParam(defaultValue = "") String searchText, 
+	public Page<ClubDTO> listClubAll(@PageableDefault(size=1) Pageable pageable, HttpSession session, Model model,
+			@RequestParam(defaultValue = "") String searchText,
 			@RequestParam(defaultValue = "축구") String cType,
 			@RequestParam(defaultValue = "") String cloc1,
 			@RequestParam(defaultValue = "") String cloc2,
 			@RequestParam(defaultValue = "") String size,
 			@RequestParam(defaultValue = "") String page
 			){
-		
+
 		System.out.println("cType " + cType);
 		System.out.println("cloc1 " + cloc1);
 		System.out.println("cloc2 " + cloc2);
@@ -61,10 +59,10 @@ public class ClubController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endpage);
 		model.addAttribute("clubDTOPage", clubDTOPage);
-		
+
 		return "listClubAll";
-	}	
-	
+	}
+
 	@GetMapping("/listClubRecommend")
 	public void listClubRecommend() {
 	}

@@ -2,6 +2,7 @@ package com.goplay.demo.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.goplay.demo.dto.BoardDTO;
@@ -30,7 +31,7 @@ public class BoardController {
 		int cNo=1;//tiger123  의 Cno
 		return bs.listBoardSch(pageable,cNo);
 	}
-	
+
 	//전체 게시물 띄우기
 	@GetMapping("/listBoardAllCno")
 	@ResponseBody

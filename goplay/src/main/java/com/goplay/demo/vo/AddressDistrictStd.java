@@ -23,7 +23,7 @@ public class AddressDistrictStd {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	adNo	;
 	private	String	adName	;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ac_no", insertable = true, updatable = true)
 	@JsonBackReference
