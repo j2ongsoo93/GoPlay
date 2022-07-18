@@ -15,30 +15,30 @@ import com.querydsl.core.types.Projections;
 @Repository
 @RequiredArgsConstructor
 public class ReplyDAOCustom {
-	private final JPAQueryFactory queryFactory;
-	QReply qr = QReply.reply;
-	QBoard qb = QBoard.board;
-	QReply Reply = QReply.reply;
-	QBoard Board = QBoard.board;
+    private final JPAQueryFactory queryFactory;
+    QReply qr = QReply.reply;
+    QBoard qb = QBoard.board;
+    QReply Reply = QReply.reply;
+    QBoard Board = QBoard.board;
 
-	//select * from reply where b_no in(select b_no from board where b_no=3)
-	public List<ReplyDTO> listReply(Integer bNo) {
-		return queryFactory
-				.select(new QReplyDTO(qr.rNo, qr.board.bNo, qr.rContent, qr.rDate, qr.member.id))
-				.from(Reply)
-				.where(Reply.board.bNo.in(
-						JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo))))
-				.fetch();
-	}
-	public List<ReplyDTO> listReply(String id){
-		return queryFactory
-				.select(new QReplyDTO(qr.rNo, qr.board.bNo, qr.rContent, qr.rDate, qr.member.id))
-				.from(qr)
-				.where(idEq(id))
-				.fetch();
-	}
+    //select * from reply where b_no in(select b_no from board where b_no=3)
+    public List<ReplyDTO> listReply(Integer bNo) {
+        return queryFactory
+                .select(Projections.fields(ReplyDTO.class, Reply.rNo, Reply.rContent, Reply.rDate, Reply.board.bNo, Reply.member.id))
+                .from(Reply)
+                .where(Reply.board.bNo.in(
+                        JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo))))
+                .fetch();
+    }
+    public List<ReplyDTO> listReply(String id){
+        return queryFactory
+                .select(new QReplyDTO(qr.rNo, qr.board.bNo, qr.rContent, qr.rDate, qr.member.id))
+                .from(qr)
+                .where(idEq(id))
+                .fetch();
+    }
 
-	private BooleanExpression idEq(String id) {
-		return qr.member.id.eq(id);
-	}
+    private BooleanExpression idEq(String id) {
+        return qr.member.id.eq(id);
+    }
 }

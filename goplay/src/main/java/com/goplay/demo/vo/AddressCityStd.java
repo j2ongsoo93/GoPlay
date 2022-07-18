@@ -22,7 +22,7 @@ public class AddressCityStd {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	int	acNo	;
 	private	String	acName	;
-	
+
 	@OneToMany(mappedBy = "address_city_std")
 	private List<AddressDistrictStd> address_district_std;
 }
