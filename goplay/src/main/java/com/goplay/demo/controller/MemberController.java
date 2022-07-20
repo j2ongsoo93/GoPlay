@@ -1,9 +1,12 @@
 package com.goplay.demo.controller;
 
+import java.security.Principal;
 import java.util.List;
 
+import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTOChangHee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,8 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 
+	@Autowired
+	private MemberDAO mdao;
 	@GetMapping("/listMember")
 	@ResponseBody
 	public List<Member> listMember(Model model){
@@ -54,11 +59,9 @@ public class MemberController {
 	@GetMapping("/asdf")
 	public String profilePrivacy(Model model){return "profile-privacy";}
 
-	//커뮤니티 게시판 동호회원 목록 출력
-	@GetMapping("/findClubMemberCno")
+	@GetMapping("/loginMemberID")
 	@ResponseBody
-	public List<MemberDTOChangHee> findClubMemberCno() {
-		int cNo=1;
-		return ms.findClubMemberCno(cNo);
+	public String loginmember(Principal principal) {
+		return mdao.findById(principal.getName()).getId();
 	}
 }

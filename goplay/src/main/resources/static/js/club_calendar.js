@@ -38,7 +38,7 @@ $(function(){
         }
 
         let calendarForm =
-            $("<div class='calendar'></div>")
+            $("<div class='calendar' style='margin-left:60px'></div>")
                 .append($("<div class='header'></div>")
                     .append($('<button class="calendar_btn" id="prevCal">&lt</button>'))
                     .append($('<div class="title"><span class="year">'+CDate.getFullYear()+'년 </span><span class="month"> '+(CDate.getMonth() + 1)+'월</span></div>'))

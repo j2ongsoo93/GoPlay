@@ -43,16 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		
 		//아래의 mavMAtchers에 따라 승인
-//		http.authorizeRequests()
-		
+
 		// 해당 서비스는 모두 사용 가능 (로그인 필요 X)
 //		.mvcMatchers("/", "/hello","/all/**", "/join").permitAll();
 		
 //		// 해당 서비스는 admin만 사용 가능
-//		.mvcMatchers("/admin/**").hasRole("admin") 
+//		.mvcMatchers("/admin/**").hasRole("admin")
 //		
 //		// 해당 서비스는 로그인 하면 사용 가능
-//		.anyRequest().authenticated(); 
+//		.anyRequest().authenticated();
 		
 		//로그인
 		//로그인 폼 명 /login

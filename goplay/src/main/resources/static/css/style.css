@@ -639,7 +639,8 @@ ul.sidebar-card-list {
 } 
 
 #recommendClub img{
-    top:-15px; 
+    top:-30px;
+    left:10px;
     position: relative;    
     max-width:150px;
     max-height:150px;

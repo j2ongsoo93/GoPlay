@@ -1,5 +1,6 @@
 package com.goplay.demo.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class MemberDTO {
 	private	String	mName	;
 	private	String	nickname	;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private	LocalDateTime	birth_date	;
+	private LocalDate birth_date	;
 	private	String	gender	;
 	private	Integer	soccer	;
 	private	Integer footsal	;

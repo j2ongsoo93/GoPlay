@@ -1,5 +1,6 @@
 package com.goplay.demo.vo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Member {
 	private	String	mName	;
 	private	String	nickname	;
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
-	private	LocalDateTime	birth_date	;
+	private LocalDate birth_date	;
 	private	String	gender	;
 	private	Integer	soccer	;
 	private	Integer footsal	;
