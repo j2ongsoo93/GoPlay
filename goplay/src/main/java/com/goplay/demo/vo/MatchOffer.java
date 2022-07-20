@@ -1,5 +1,6 @@
 package com.goplay.demo.vo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
 
@@ -39,6 +40,7 @@ public class MatchOffer {
 	private	String	moUcolor	;
 	private	String	moLevel	;
 	private	String	moSay	;
+	private LocalDateTime moDate;
 
 	@OneToMany(mappedBy = "match_offer")
 	private List<MatchMember> match_member;

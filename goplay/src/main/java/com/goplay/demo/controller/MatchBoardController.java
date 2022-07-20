@@ -2,8 +2,10 @@ package com.goplay.demo.controller;
 
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.dto.MatchDateDTO;
+import com.goplay.demo.dto.MatchOfferDTO;
 import com.goplay.demo.dto.MatchRecordDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
+import com.goplay.demo.service.MatchOfferService;
 import com.goplay.demo.service.MatchRecordService;
 import com.goplay.demo.vo.Club;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class MatchBoardController {
 	private MatchBoardService ms;
 	@Autowired
 	private MatchRecordService mrs;
+	@Autowired
+	private MatchOfferService mos;
 
 	//매치검색페이지로 이동
 	@GetMapping("/matchBoard")
@@ -114,8 +118,19 @@ public class MatchBoardController {
 
 	//매치수정화면으로 이동
 	@GetMapping("/updateMatchBoard")
-	public void updateBoard(){
-	}
+	public String updateBoard(){return "updateMatchBoard";}
+
+	//매치 상세정보(대기)로 이동
+	@GetMapping("/matchDetail")
+	public String detailMatch(Model model){return "detailMatchBoard";}
+
+	//매치 상세정보(성사)로 이동
+	@GetMapping("/matchDetailMatched")
+	public String detailMatchMatched(Model model){return "detailMatchBoardMatched";}
+
+	//매치 상세정보(종료)로 이동
+	@GetMapping("/matchDetailEnd")
+	public String detailMatchEnd(Model model){return "detailMatchBoardEnd";}
 
 	//내 매치 검색
 	@GetMapping("/myMatchEnd/{id}")
@@ -139,4 +154,15 @@ public class MatchBoardController {
 		return ms.matchDate();
 	}
 
+	// 매치 번호로 매치 조회
+	@GetMapping("/detailMatch/{mbNo}")
+	@ResponseBody
+	public List<MatchBoardDTO> findByMbNo(@PathVariable int mbNo){
+		return ms.findByMbNo(mbNo);
+	}
+
+	//매치 번호로 매치 신청내역 조회
+	@GetMapping("/listMatchOffer/{mbNo}")
+	@ResponseBody
+	public List<MatchOfferDTO> listMatchOffer(@PathVariable int mbNo){return mos.listMatchOffer(mbNo);}
 }

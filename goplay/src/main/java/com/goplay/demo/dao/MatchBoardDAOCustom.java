@@ -84,6 +84,32 @@ public class MatchBoardDAOCustom {
                 .fetch();
     }
 
+    public List<MatchBoardDTO> findByMbNo(int mbNo){
+        return queryFactory
+                .select(new QMatchBoardDTO(
+                        matchBoard.mb_no,
+                        matchBoard.club.cNo.as("homeClub"),
+                        matchBoard.awayClub,
+                        matchBoard.mbDate,
+                        matchBoard.mbType,
+                        matchBoard.mbLoc1,
+                        matchBoard.mbLoc2,
+                        matchBoard.mbStadium,
+                        matchBoard.mbFee,
+                        matchBoard.homeUcolor,
+                        matchBoard.awayUcolor,
+                        matchBoard.homeLevel,
+                        matchBoard.awayLevel,
+                        matchBoard.homeSay,
+                        matchBoard.awaySay,
+                        matchBoard.hScore,
+                        matchBoard.aScore,
+                        matchBoard.mbStat))
+                .from(matchBoard)
+                .where(mbNoEq(mbNo))
+                .fetch();
+    }
+
     //select * from match_board where away_club=1 or home_club=1
     //select * from match_board where away_club=1 or home_club=1
     public Page<MatchBoardDTO> listMatchCno(Pageable pageable, Integer cNo, String thisFirst, String thisLast) {
@@ -161,7 +187,7 @@ public class MatchBoardDAOCustom {
         if(mbDate == null){
             return null;
         }
-        return matchBoard.mbDate.eq(mbDate);
+        return matchBoard.mbDate.between(mbDate, mbDate.plusHours(24));
     }
 
     private BooleanExpression mbTypeEq(String mbType){
@@ -207,6 +233,10 @@ public class MatchBoardDAOCustom {
             return null;
         }
         return matchBoard.mbDate.loe(formatThisLast);
+    }
+
+    private BooleanExpression mbNoEq(int mbNo){
+        return matchBoard.mb_no.eq(mbNo);
     }
 }
 

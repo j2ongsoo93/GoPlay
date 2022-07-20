@@ -55,7 +55,9 @@ public class ClubService {
 	public List<ClubDTO> findClub(int cNo){
 		return daoCustom.findClub(cNo);
 	}
-
+	
+	//id로 클럽검색
+	public List<ClubDTO> findById(String id){return daoCustom.findById(id);}
 	public void saveClub(Club b, ClubMemberlist clubMemberlist) {
 		dao.save(b);
 		clubMemberlistDaoCH.save(clubMemberlist);

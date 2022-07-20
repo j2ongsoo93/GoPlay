@@ -85,8 +85,6 @@ $(function(){
     let size = 3;
     let page = 0;
 
-
-
     // 검색목록 출력 function
     let printPage = function(){
         let searchCondition = {
@@ -156,7 +154,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">매치 신청하기</button>').addClass("mbNo", this.mb_no)))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">매치 신청하기</button>').attr("mbNo", this.mb_no).addClass("matchDetail")))))
                                                     .append($('<div class=\"col-md-3\"></div>')
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(" 매칭 대기 중 ")))
@@ -202,7 +200,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기정보 상세보기</button>').addClass("mbNo", this.mb_no)))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기정보 상세보기</button>').attr("mbNo", this.mb_no).addClass("matchDetailME")))))
                                                     .append($("<div class=\"col-md-3\"></div>")
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(awayClubName)))
@@ -248,7 +246,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기결과 상세보기</button>').addClass("mbNo", this.mb_no)))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기결과 상세보기</button>').attr("mbNo", this.mb_no).addClass("matchDetailME")))))
                                                     .append($("<div class=\"col-md-3\"></div>")
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(awayClubName)))
@@ -286,7 +284,6 @@ $(function(){
         $("#mbLoc2").empty();
         page = 0;
         mbLoc2 = null;
-        console.log($(this).val());
         mbLoc1 = $(this).val();
         if(mbLoc1 == null){
             mbLoc2 = null;
@@ -312,9 +309,7 @@ $(function(){
     $(document).on("change", "#mbLoc2", function(){
         $("#matchContainer").empty();
         page = 0;
-        console.log($(this).val());
         mbLoc2 = $(this).val();
-        console.log(mbLoc2)
         printPage();
     });
 
@@ -322,7 +317,6 @@ $(function(){
     $(document).on("change", "input[name='mbStat']", function(){
         $("#matchContainer").empty();
         page = 0;
-        console.log($(this).is(":checked"))
         if($(this).is(":checked")) {
             if ($(this).val() == "대기") {
                 mbStat_wait = $(this).val();
@@ -348,7 +342,6 @@ $(function(){
         $("#matchContainer").empty();
         page = 0;
         mbDate = new Date($(this).attr("id")).toISOString();
-        console.log(mbDate);
         printPage();
     });
 
@@ -356,7 +349,14 @@ $(function(){
     $(document).on("change", "#size", function(){
         $("#matchContainer").empty();
         size = $(this).val();
-        console.log(size);
+        printPage();
+    });
+
+    // 날짜선택 초기화
+    $(document).on("click", "#resetDate", function(){
+        $("#matchContainer").empty();
+        page = 0;
+        mbDate = null;
         printPage();
     });
 
@@ -367,9 +367,22 @@ $(function(){
         let windowHeight = $window.height();
         let documentHeight = $(document).height();
         if (scrollTop + windowHeight + 10 > documentHeight) {
-            console.log("페이지 바닥 도착");
             page = page + 1;
             printPage();
         }
-    })
+    });
+
+    //버튼 선택 이벤트
+    $(document).on("click", ".matchDetail", function(){
+        let mbNo = $(this).attr("mbNo");
+        console.log(mbNo);
+        location.href = "matchDetail.html?"+mbNo;
+
+    });
+
+    $(document).on("click", ".matchDetailME", function(){
+        let mbNo = $(this).attr("mbNo");
+        console.log(mbNo);
+        location.href = "matchDetailME.html?"+mbNo;
+    });
 });

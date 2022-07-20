@@ -1,7 +1,10 @@
 package com.goplay.demo.controller;
 
+import java.security.Principal;
 import java.util.List;
 
+import com.goplay.demo.constant.Role;
+import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @Autowired
     private MemberService ms;
+    @Autowired
+    private MemberDAO dao;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -87,4 +92,9 @@ public class LoginController {
         return modelAndView;
     }
 
+    @GetMapping("/loginmember")
+    @ResponseBody
+    public String loginmember(Principal principal) {
+        return dao.findById(principal.getName()).getId();
+    }
 }

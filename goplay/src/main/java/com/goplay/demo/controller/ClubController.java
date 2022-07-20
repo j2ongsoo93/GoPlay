@@ -224,4 +224,10 @@ public class ClubController {
 		return cs.findClub(cNo);
 	}
 
+	@GetMapping("/findClubById/{id}")
+	@ResponseBody
+	public List<ClubDTO> findById(@PathVariable String id){
+		return cs.findById(id);
+	}
+
 }

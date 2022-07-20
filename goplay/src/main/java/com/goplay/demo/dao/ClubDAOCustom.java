@@ -120,11 +120,20 @@ public class ClubDAOCustom {
 //				.fetch();
 //	}
 
+	//정수 사용
 	public List<ClubDTO> findClub(int cNo){
 		return queryFactory
 				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 				.from(qClub)
 				.where(cNoEq(cNo))
+				.fetch();
+	}
+	//정수 사용
+	public List<ClubDTO> findById(String id){
+		return queryFactory
+				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
+				.from(qClub)
+				.where(idEq(id))
 				.fetch();
 	}
 
@@ -153,4 +162,5 @@ public class ClubDAOCustom {
         return qClub.cNo.eq(cNo);
     }
 
+	private BooleanExpression idEq(String id){return qClub.member.id.eq(id);}
 }
