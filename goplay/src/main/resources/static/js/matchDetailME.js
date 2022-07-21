@@ -1,9 +1,47 @@
 $(function(){
     let mbNo = $('#mbNo').val();
     let loginID;
-    let homeClub;
     let role;
     let mbStat;
+    let homeClub = null;
+    let awayClub = null;
+    let mbDate = null;
+    let mbType = null;
+    let mbLoc1 = null;
+    let mbLoc2 = null;
+    let mbStadium = null;
+    let mbFee = null;
+    let homeUcolor = null;
+    let homeLevel = null;
+    let homeSay = null;
+    let hScore = null;
+    let aScore = null;
+    let awayUcolor = null;
+    let awayLevel = null;
+    let awaySay = null;
+
+    // 경기정보 조회
+    $.ajax({
+        url:"/detailMatch/"+mbNo,
+        success: function(data){
+            let m = data[0]
+            console.log(m);
+            mbDate = m.mbDate;
+            mbType = m.mbType;
+            mbLoc1 = m.mbLoc1;
+            mbLoc2 = m.mbLoc2;
+            mbStadium = m.mbStadium;
+            mbFee = m.mbFee;
+            homeUcolor = m.homeUcolor;
+            homeLevel = m.homeLevel;
+            homeSay = m.homeSay;
+            awayClub = m.awayClub;
+            awayUcolor = m.awayUcolor;
+            awayLevel = m.awayLevel;
+            awaySay = m.awaySay;
+        },
+        async:false
+    });
 
     //로그인한 아이디 조회
     $.ajax({
@@ -26,7 +64,7 @@ $(function(){
 
     //회원 역할 구분 user: 동호회 회장이 아닌 회원, host: 해당 매치를 동호회장, manager: 타 동호회 동호회장
     $.ajax({
-        url: "/findClubById/hippo123",
+        url: "/findClubById/"+loginID,
         success: function(data) {
             if(data.length == 0){
                 role = "user"
@@ -91,8 +129,12 @@ $(function(){
             },
             async: false
         });
-        let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
-        return record;
+        if(recordData.win!=null){
+            let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
+            return record;
+        }else{
+            return "0승 0무 0패"
+        }
     }
 
     //동호회명 조회 function
@@ -208,7 +250,7 @@ $(function(){
                                                         .append($('<h4 class="mb-3 font-weight-bold"></h4>').html(" 경기종료 ")))
                                                     .append($('<div class="d-flex justify-content-center"></div>')
                                                         .append($('<ul class="list-group list-group-flush d-flex"></ul>')
-                                                            .append($('<h1 class="mt-4"></h1>').html(mb.hscore+" : "+mb.hscore)))))
+                                                            .append($('<h1 class="mt-4"></h1>').html(mb.hscore+" : "+mb.ascore)))))
                                                 .append($("<div class=\"col-md-4\"></div>")
                                                     .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                         .append($("<h6></h6>").html(awayClubName)))
@@ -230,13 +272,85 @@ $(function(){
         if(role == "host" && mbStat == "성사"){
             $('#scoreInput')
                 .append($('<h6 class="font-weight-bold mt-2">경기스코어</h6>&nbsp;&nbsp;\n' +
-                    '                        <input type="text" class="form-control" style="width:50px;">&nbsp;&nbsp;:&nbsp;&nbsp;\n' +
-                    '                        <input type="text" class="form-control" style="width:50px;">&nbsp;&nbsp;&nbsp;&nbsp;\n' +
-                    '                        <button class="btn btn-primary">경기 종료</button>'));
+                    '                        <input type="text" name="hScore" class="form-control" style="width:50px;">&nbsp;&nbsp;:&nbsp;&nbsp;\n' +
+                    '                        <input type="text" name="aScore" class="form-control" style="width:50px;">&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                    '                        <button class="btn btn-primary mr-2" id="endGame">경기 종료</button>'));
         }
     }
     printPage();
     printMatchInfo();
     printScoreBtn();
 
+    // 경기 종료 시 이벤트
+    $(document).on('click', '#endGame', function(){
+        hScore = $('input[name=hScore]').val();
+        aScore = $('input[name=aScore]').val();
+        console.log(hScore+":"+aScore);
+        if(hScore!="" && aScore!=""){
+            let gameData = {
+                "mbNo": mbNo,
+                "homeClub": homeClub,
+                "mbDate": mbDate,
+                "mbType": mbType,
+                "mbLoc1": mbLoc1,
+                "mbLoc2": mbLoc2,
+                "mbStadium": mbStadium,
+                "mbFee": mbFee,
+                "homeUcolor": homeUcolor,
+                "homeLevel": homeLevel,
+                "homeSay": homeSay,
+                "mbStat": "종료",
+                "awayClub": awayClub,
+                "awayUcolor": awayUcolor,
+                "awayLevel": awayLevel,
+                "awaySay": awaySay,
+                "hScore": hScore,
+                "aScore": aScore
+            }
+
+            $.ajax({
+                url:"/saveMatchBoard",
+                type: "POST",
+                data: JSON.stringify(gameData),
+                contentType: "application/json",
+                beforeSend: function (jqXHR, settings) {
+                    let header = $("meta[name='_csrf_header']").attr("content");
+                    let token = $("meta[name='_csrf']").attr("content");
+                    jqXHR.setRequestHeader(header, token);
+                },
+                success: function(){
+                    // location.href = "/matchDetailME/"+mbNo;
+                    console.log("성공");
+                }
+            });
+
+            let scoreData = {
+                "mbNo": mbNo,
+                "homeClub": homeClub,
+                "awayClub": awayClub,
+                "hScore": hScore,
+                "aScore": aScore
+            }
+
+            $.ajax({
+                url:"/insertScore",
+                type: "POST",
+                data: JSON.stringify(scoreData),
+                contentType: "application/json",
+                beforeSend: function (jqXHR, settings) {
+                    let header = $("meta[name='_csrf_header']").attr("content");
+                    let token = $("meta[name='_csrf']").attr("content");
+                    jqXHR.setRequestHeader(header, token);
+                },
+                success: function(){
+                    location.href = "/matchDetailME/"+mbNo;
+                    console.log("성공");
+                }
+            });
+
+        }else{
+            alert("경기스코어를 입력해 주세요");
+        }
+
+    });
 });

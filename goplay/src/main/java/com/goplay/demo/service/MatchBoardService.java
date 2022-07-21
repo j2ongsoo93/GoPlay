@@ -18,6 +18,7 @@ import com.goplay.demo.dao.MatchBoardDAO;
 import com.goplay.demo.vo.MatchBoard;
 
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
@@ -34,6 +35,7 @@ public class MatchBoardService {
 	}
 
 	//매치등록,매치수정
+	@Transactional
 	public void saveBoard(MatchBoard mb) {
 		dao.save(mb);
 	}

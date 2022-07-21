@@ -29,6 +29,7 @@ $(function() {
         url:"/loginmember",
         success:function(data){
             loginID = data;
+            console.log("id: "+data)
         },
         async:false
     });
@@ -53,13 +54,14 @@ $(function() {
 
     //회원 역할 구분 user: 동호회 회장이 아닌 회원, host: 해당 매치를 동호회장, manager: 타 동호회 동호회장
     $.ajax({
-        url: "/findClubById/hippo123",
+        url: "/findClubById/"+loginID,
         success: function(data) {
             if(data.length == 0){
                 role = "user"
             }else{
                 role = "manager"
                 awayClub = data[0].cno;
+                console.log("신청인의 cno: "+awayClub)
             }
         },
         async: false
@@ -158,9 +160,10 @@ $(function() {
             $("#mbFee").val(m.mbFee);
             $("#homeUcolor").val(m.homeUcolor);
             $("#homeLevel").val(m.homeLevel);
-            $("#homeSay").val(m.homeSay)
+            $("#homeSay").val(m.homeSay);
 
-            homeClub = m.cno;
+            homeClub = m.homeClub;
+            console.log("등록인의 cno: "+homeClub);
             mbDate = m.mbDate.substring(0,10);
             mbTime_hh = m.mbDate.substring(11,13);
             mbTime_mm = m.mbDate.substring(14,16);
@@ -191,27 +194,17 @@ $(function() {
         }else{
             let data = {
                 "mbNo": mbNo,
-                // "homeClub": homeClub,
-                // "mbDate": mbDate+"T"+mbTime_hh+":"+mbTime_mm+":"+"00.000Z",
-                // "mbType": mbType,
-                // "mbLoc1": mbLoc1,
-                // "mbLoc2": mbLoc2,
-                // "mbStadium": mbStadium,
-                // "mbFee": mbFee,
-                // "homeUcolor": homeUcolor,
-                // "homeLevel": homeLevel,
-                // "homeSay": homeSay,
-                // "mbStat": "대기",
-                // "mbNo": mbNo,
-                // "awayClub": awayClub,
-                // "awayUcolor": awayUcolor,
-                // "awayLevel": awayLevel,
-                // "awaySay": awaySay,
                 "cNo": awayClub,
                 "moUcolor": awayUcolor,
                 "moLevel": awayLevel,
                 "moSay": awaySay,
             }
+
+            console.log("DB에 입력될 data: "+"mbNo: "+mbNo+","+
+                "cNo: " +awayClub+
+                "moUcolor: "+awayUcolor+
+                "moLevel: " +awayLevel+
+                "moSay: " +awaySay);
 
             $.ajax({
                 url: "/insertMatchOffer",

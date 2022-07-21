@@ -1,12 +1,24 @@
 $(function(){
     let mbNo = $('#mbNo').val();
     let loginID;
-    let homeClub;
     let role;
-
+    let homeClub = null;
+    let awayClub = null;
+    let mbDate = null;
+    let mbType = null;
+    let mbLoc1 = null;
+    let mbLoc2 = null;
+    let mbStadium = null;
+    let mbFee = null;
+    let homeUcolor = null;
+    let homeLevel = null;
+    let homeSay = null;
+    let hScore = null;
+    let aScore = null;
     let awayUcolor = null;
     let awayLevel = null;
     let awaySay = null;
+
 
     //로그인한 아이디 조회
     $.ajax({
@@ -28,7 +40,7 @@ $(function(){
 
     //회원 역할 구분 user: 동호회 회장이 아닌 회원, host: 해당 매치를 동호회장, manager: 타 동호회 동호회장
     $.ajax({
-       url: "/findClubById/hippo123",
+       url: "/findClubById/"+loginID,
        success: function(data) {
            if(data.length == 0){
                role = "user"
@@ -50,6 +62,7 @@ $(function(){
         url:"/detailMatch/"+mbNo,
         success: function(data){
             let m = data[0]
+            console.log(m);
 
             let cName = getClubName(m.homeClub);
             $("#clubBtn").html(cName);
@@ -57,8 +70,8 @@ $(function(){
             let matchRecord = getMatchRecord(m.homeClub);
             $("#matchRecord").html(matchRecord);
 
-            let mbDate = printDate(m.mbDate)
-            $("#mbDate").append($('<td></td>').html(mbDate));
+            let mbDateTime = printDate(m.mbDate)
+            $("#mbDate").append($('<td></td>').html(mbDateTime));
 
             $("#mbType").append($('<td></td>').html(m.mbType));
             $("#mbLoc").append($('<td></td>').html(m.mbLoc1+" "+m.mbLoc2));
@@ -67,6 +80,17 @@ $(function(){
             $("#homeUcolor").append($('<td></td>').html(m.homeUcolor));
             $("#homeLevel").append($('<td></td>').html(m.homeLevel));
             $("#homeSay").append($('<td></td>').html(m.homeSay));
+
+            mbDate = m.mbDate;
+            mbType = m.mbType;
+            mbLoc1 = m.mbLoc1;
+            mbLoc2 = m.mbLoc2;
+            mbStadium = m.mbStadium;
+            mbFee = m.mbFee;
+            homeUcolor = m.homeUcolor;
+            homeLevel = m.homeLevel;
+            homeSay = m.homeSay;
+
         }
     });
 
@@ -78,16 +102,17 @@ $(function(){
             .append($('<button>삭제</button>').addClass("btn btn-primary").attr("mbNo", mbNo).attr("id", "deleteMatch"));
 
         $("#btnOffer")
-            .append($('<button>매치 수락</button>').addClass("btn btn-primary").attr("id", "acceptOffer"))
+            .append($('<button>매치 수락</button>').addClass("btn btn-primary mr-3").attr("id", "acceptOffer"))
     }else if(role == "manager"){
         $("#btnOffer")
-            .append($('<button>매치 신청</button>').addClass("btn btn-primary").attr("mbNo", mbNo).attr("id", "applyMatch"))
+            .append($('<button>매치 신청</button>').addClass("btn btn-primary mr-3").attr("mbNo", mbNo).attr("id", "applyMatch"))
     }
 
     // 매치 신청정보 출력
     $.ajax({
         url:"/listMatchOffer/"+mbNo,
         success: function(data){
+            console.log("매치 신청현황: "+data);
             $.each(data, function(){
                 let tr = $('<tr></tr>');
                 let td1 = $('<td><input id="'+this.moNo+'" name="matchOffer" value="'+this.moNo+'" type="radio"></td>')
@@ -125,8 +150,12 @@ $(function(){
             },
             async: false
         });
-        let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
-        return record;
+        if(recordData.win!=null){
+            let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
+            return record;
+        }else{
+            return "0승 0무 0패"
+        }
     }
 
     // 날짜 변환 function
@@ -164,6 +193,59 @@ $(function(){
 
     //매치수락 클릭 이벤트
     $(document).on("click", "#acceptOffer", function(){
+        let moNo = $('input[name=matchOffer]:checked').val();
+        if(moNo != null){
+            $.ajax({
+                url: "/findMatchOffer/"+moNo,
+                success: function(data){
+                    let mo = data[0];
+                    awayUcolor = mo.moUcolor;
+                    awayLevel = mo.moLevel;
+                    awaySay = mo.moSay;
+                    awayClub = mo.cno;
+                },
+                async: false
+            });
+
+            let moData = {
+                "mbNo": mbNo,
+                "homeClub": homeClub,
+                "mbDate": mbDate,
+                "mbType": mbType,
+                "mbLoc1": mbLoc1,
+                "mbLoc2": mbLoc2,
+                "mbStadium": mbStadium,
+                "mbFee": mbFee,
+                "homeUcolor": homeUcolor,
+                "homeLevel": homeLevel,
+                "homeSay": homeSay,
+                "mbStat": "성사",
+                "mbNo": mbNo,
+                "awayClub": awayClub,
+                "awayUcolor": awayUcolor,
+                "awayLevel": awayLevel,
+                "awaySay": awaySay,
+            }
+
+            $.ajax({
+                url:"/saveMatchBoard",
+                type: "POST",
+                data: JSON.stringify(moData),
+                contentType: "application/json",
+                beforeSend: function (jqXHR, settings) {
+                    let header = $("meta[name='_csrf_header']").attr("content");
+                    let token = $("meta[name='_csrf']").attr("content");
+                    jqXHR.setRequestHeader(header, token);
+                },
+                success: function(){
+                    location.href = "/matchDetailME/"+mbNo;
+                    console.log("성공");
+                }
+            });
+        }else{
+            alert("상대할 팀을 선택해 주세요");
+        }
+
 
     });
 });

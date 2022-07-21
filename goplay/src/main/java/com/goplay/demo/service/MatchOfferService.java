@@ -7,6 +7,7 @@ import com.goplay.demo.vo.MatchOffer;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,5 +23,12 @@ public class MatchOfferService {
         return daoCustom.listMatchOffer(mbNo);
     }
 
+    public List<MatchOfferDTO> moByMoNo(int moNo){
+        return daoCustom.moByMoNo(moNo);
+    }
+
+    @Transactional
     public void insertMatchOffer(MatchOffer mo){dao.save(mo);}
+
+
 }

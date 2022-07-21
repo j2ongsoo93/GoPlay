@@ -30,7 +30,25 @@ public class MatchOfferDAOCustom {
                 .fetch();
     }
 
+    public List<MatchOfferDTO> moByMoNo(int moNo){
+        return queryFactory
+                .select(new QMatchOfferDTO(
+                        mo.moNo,
+                        mo.match_board.mb_no,
+                        mo.club.cNo,
+                        mo.moUcolor,
+                        mo.moLevel,
+                        mo.moSay,
+                        mo.moDate))
+                .from(mo)
+                .where(moNoEq(moNo))
+                .fetch();
+    }
+
     private BooleanExpression mbNoEq(int mbNo){
         return mo.match_board.mb_no.eq(mbNo);
+    }
+    private BooleanExpression moNoEq(int moNo){
+        return mo.moNo.eq(moNo);
     }
 }

@@ -10,8 +10,12 @@ $(function(){
             },
             async: false
         });
-        let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
-        return record;
+        if(recordData.win!=null){
+            let record = recordData.win+"승 "+recordData.draw+"무 "+recordData.lose+"패";
+            return record;
+        }else{
+            return "0승 0무 0패"
+        }
     }
 
     //동호회명 조회 function
@@ -239,7 +243,7 @@ $(function(){
                                                                 .append($("<i class=\"feather-award mr-2 text-dark\"></i>").html(" "+homeRecord)))))
                                                     .append($("<div class=\"col-md-6\"></div>")
                                                         .append($("<div class=\"box-title d-flex justify-content-center\"></div>")
-                                                            .append($("<h1></h1>").html(this.hscore+" : "+this.hscore)))
+                                                            .append($("<h1></h1>").html(this.hscore+" : "+this.ascore)))
                                                         .append($('<div class="d-flex justify-content-center"></div>')
                                                             .append($('<ul class="list-group list-group-flush d-flex"></ul>')
                                                                 .append($('<i class="feather-target mr-2 mb-2 text-dark"></i>').html(" "+this.mbType))

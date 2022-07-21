@@ -9,6 +9,7 @@ import com.goplay.demo.service.MatchOfferService;
 import com.goplay.demo.service.MatchRecordService;
 import com.goplay.demo.vo.Club;
 import com.goplay.demo.vo.MatchOffer;
+import com.goplay.demo.vo.MatchRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -75,10 +76,11 @@ public class MatchBoardController {
 		return ms.searchMatchBoard(condition, pageRequest);
 	}
 
-	//매치등록, 수정
+	//매치등록
 	@PostMapping("/saveMatchBoard")
 	@ResponseBody
 	public void insertBoard(@RequestBody Map<String, String> map) {
+		//매치 등록 시 사용
 		String mbDate;
 		LocalDateTime mbDateTime;
 		if(map.get("mbDate") == null){
@@ -112,12 +114,22 @@ public class MatchBoardController {
 		mb.setHomeLevel(map.get("homeLevel"));
 		mb.setHomeSay(map.get("homeSay"));
 		mb.setMbStat(map.get("mbStat"));
+		
+		// 매치 수락 시 사용
 		if(map.get("awayClub") != null){
 			mb.setAwayClub(Integer.parseInt(map.get("awayClub")));
 		}
 		mb.setAwayUcolor(map.get("awayUcolor"));
 		mb.setAwayLevel(map.get("awayLevel"));
 		mb.setAwaySay(map.get("awaySay"));
+		
+		// 매치 종료 시 사용
+		if(map.get("hScore") != null){
+			mb.setHScore(Integer.parseInt(map.get("hScore")));
+		}
+		if(map.get("aScore") != null){
+			mb.setAScore(Integer.parseInt(map.get("aScore")));
+		}
 		ms.saveBoard(mb);
 	}
 
@@ -192,14 +204,14 @@ public class MatchBoardController {
 	//매치 신청 insert
 	@PostMapping("/insertMatchOffer")
 	@ResponseBody
-	public void insertMatchOffer(HashMap<String, String> map){
+	public void insertMatchOffer(@RequestBody HashMap<String, String> map){
 		MatchOffer mo = new MatchOffer();
 
 		MatchBoard mb = new MatchBoard();
 		if(map.get("mbNo") != null){
 			mb.setMb_no(Integer.parseInt(map.get("mbNo")));
+			mo.setMatch_board(mb);
 		}
-		mo.setMatch_board(mb);
 
 		Club c = new Club();
 		if(map.get("cNo") != null){
@@ -214,5 +226,66 @@ public class MatchBoardController {
 		LocalDateTime dt = LocalDateTime.now();
 		mo.setMoDate(dt);
 		mos.insertMatchOffer(mo);
+	}
+
+	//매치신청 번호로 매치 신청내역 조회
+	@GetMapping("/findMatchOffer/{moNo}")
+	@ResponseBody
+	public List<MatchOfferDTO> moByMoNo(@PathVariable int moNo){return mos.moByMoNo(moNo);}
+
+	//매치 종료 후 스코어 입력
+	@PostMapping("/insertScore")
+	@ResponseBody
+	public void insertRecord(@RequestBody HashMap<String, String> map){
+		MatchRecord mr1 = new MatchRecord();
+		MatchRecord mr2 = new MatchRecord();
+
+		Club c1 = new Club();
+		if(map.get("homeClub")!=null){
+			c1.setCNo(Integer.parseInt(map.get("homeClub")));
+			mr1.setClub(c1);
+		}
+		Club c2 = new Club();
+		if(map.get("awayClub")!=null){
+			c2.setCNo(Integer.parseInt(map.get("awayClub")));
+			mr2.setClub(c2);
+		}
+
+		MatchBoard mb = new MatchBoard();
+		if(map.get("mbNo")!=null){
+			mb.setMb_no(Integer.parseInt(map.get("mbNo")));
+			mr1.setMatch_board(mb);
+			mr2.setMatch_board(mb);
+		}
+		int hScore = 0;
+		int aScore = 0;
+		if(map.get("hScore") != null && map.get("aScore") != null){
+			hScore = Integer.parseInt(map.get("hScore"));
+			aScore = Integer.parseInt(map.get("aScore"));
+		}
+		if(hScore > aScore){
+			mr1.setWin(1);
+			mr1.setDraw(0);
+			mr1.setLose(0);
+			mr2.setWin(0);
+			mr2.setDraw(0);
+			mr2.setLose(1);
+		}else if(hScore < aScore){
+			mr1.setWin(0);
+			mr1.setDraw(0);
+			mr1.setLose(1);
+			mr2.setWin(1);
+			mr2.setDraw(0);
+			mr2.setLose(0);
+		}else{
+			mr1.setWin(0);
+			mr1.setDraw(1);
+			mr1.setLose(0);
+			mr2.setWin(0);
+			mr2.setDraw(1);
+			mr2.setLose(0);
+		}
+		mrs.insertRecord(mr1);
+		mrs.insertRecord(mr2);
 	}
 }
