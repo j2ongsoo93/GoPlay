@@ -51,7 +51,7 @@
          url: "/loginMemberID",
          success: function (data) {
             currentid = data
-            console.log(currentid)
+            console.log("로그인 아이디: ", currentid)
          }
       });
 
@@ -80,16 +80,15 @@
 	 //게시글 동적 생성
       let boardContent;
       function boardContentAdd(data){
-         console.log(data)
-         if(data.schDate !== null){
-            var newbDate = data.bdate.substring(0,19).replace("T", " ");
-         }
+         //console.log(data)
+         var newbDate = data.bdate.substring(0,19).replace("T", " ");
 
          //if문은 img가 null일 경우와 null이 아닐 경우를 위해 각각 동작하도록 하기 위함
          if(data.bimg == null){
             boardContent = $("#profile").append($("<div></div").addClass("box shadow-sm border rounded bg-white mb-3 osahan-post")
                     .append($("<div></div>").addClass("p-3 d-flex align-items-center border-bottom osahan-post-header")
                             .append($("<div></div>").addClass("dropdown-list-image mr-3")
+                                    //.append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' class='rounded-circle'>")
                                     .append($("<img></img>").addClass("rounded-circle").attr("src", "img/p5.png"))
                                     .append($("<div></div>").addClass("status-indicator bg-success"))
                             )
@@ -105,15 +104,14 @@
                     .append($("<div></div>").addClass("p-3 border-bottom osahan-post-footer box shadow-sm border rounded bg-white mb-3 osahan-post")
                             .append($("<a></a>").addClass("mr-3 text-secondary")
                                     .append("<i></i>").addClass("feather-message-square").html("댓글").addClass("replyBtn").attr("bNo",data.bno))
-
-                            .append($("<div></div>").attr({"idx":data.bno, "id":"replyMain"}))))//빈 값(댓글이 나중에 여기 들어가야함.)
+                            .append($("<div></div>").attr({"idx":data.bno, "id":"replyMain"}).css({"cursor":"pointer"}))))//빈 값(댓글이 나중에 여기 들어가야함.)
          }
          else{
             boardContent = $("#profile").append($("<div></div").addClass("box shadow-sm border rounded bg-white mb-3 osahan-post")
                     .append($("<div></div>").addClass("p-3 d-flex align-items-center border-bottom osahan-post-header")
                             .append($("<div></div>").addClass("dropdown-list-image mr-3")
-                                    .append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' class='rounded-circle'>")
-                                    //.append($("<img></img>").addClass("rounded-circle").attr("src", "img/p5.png"))
+                                    //.append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' class='rounded-circle'>")
+                                    .append($("<img></img>").addClass("rounded-circle").attr("src", "img/p5.png"))
                                     .append($("<div></div>").addClass("status-indicator bg-success"))
                             )
                             .append($("<div></div>").addClass("font-weight-bold")
@@ -123,53 +121,61 @@
 
                     .append($("<div></div>").addClass("p-3 border-bottom osahan-post-body")
                             .append($("<p></p>").addClass("mb-0").html(data.bcontent))
-                            .append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' >")
+                            .append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' >") //게시글 내용 이미지
                     )
 
                     .append($("<div></div>").addClass("p-3 border-bottom osahan-post-footer box shadow-sm border rounded bg-white mb-3 osahan-post")
                             .append($("<a></a>").addClass("mr-3 text-secondary")
                                     .append("<i></i>").addClass("feather-message-square").html("댓글").addClass("replyBtn").attr("bNo",data.bno))
-                            .append($("<div></div>").attr({"idx":data.bno, "id":"replyMain"}))))//빈 값(댓글이 나중에 여기 들어가야함.)
+                            .append($("<div></div>").attr({"idx":data.bno, "id":"replyMain"}).css({"cursor":"pointer"}))))//빈 값(댓글이 나중에 여기 들어가야함.)
          }
-
     }
-      var replyContainer; // next() 값이 담겨있음
+
+
+      var replyContainer; // next()로 댓글이 담길 div가 담겨있음
 	 //댓글 생성
-	 var allReply;
-	 function boardReplyAdd(data,bNo){
-		allReply=$(replyContainer).css("padding-top", 20).append($("<div></div>").addClass("box mb-0 shadow-sm border rounded bg-white osahan-post")
+	 //var allReply;
+	 function boardReplyAdd(data, bNo){
+        if(data.rdate !== null){
+           var newRdate = data.rdate.substring(0,19).replace("T", " ");
+        }
+		$(replyContainer).css("padding-top", 20)
+                .append($("<div></div>").addClass("box mb-0 shadow-sm border rounded bg-white osahan-post")
 				 	.append($("<div></div>").addClass("p-3 d-flex align-items-top border-bottom osahan-post-comment")
 				 		.append($("<div></div>").addClass("dropdown-list-image mr-3")
 				 				.append($("<img></img>").addClass("rounded-circle").attr("src","img/p7.png"))
                                // .append("<img src='/display?fileName="+data.bimg+"' style='width: 100%' class='rounded-circle'>")
 				 				.append($("<div></div>").addClass("status-indicator bg-success"))
 				 		)
-				 		.append($("<div></div>").addClass("font-weight-bold")
+				 		.append($("<div></div>").addClass("font-weight-bold").css({"width":"100%"})
 				 				.append($("<div></div>").addClass("text-truncate").html(data.id+" ")
-				 						.append($("<span></span>").addClass("float-right small").html(data.rdate)))
-				 				.append($("<div></div>").addClass("small text-gray-500").html(data.rcontent))
-				 		))
+                                        .append($("<span></span>").addClass("ml-auto small").html(newRdate).css({"float":"right"})))
+                                .append($("<div></div>").addClass("small text-gray-500").html(data.rcontent))
+                                )
+				 		)
 				 	)
 	 }
+
+
 	//댓글 입력하는 comment창
 	function replyComment(){
-       // $(".replyBtn").append($("<div></div>").addClass("p-3 bg-white box mb-0 shadow-sm border rounded bg-white osahan-post")
-       //         .append($("<textarea></textarea>")
-       //                 .addClass("form-control border-0 p-0 shadow-none ")
-       //                 .attr({"placeholder": "Add Comment...","rows":1})))
-        $(allReply).append($("<div></div>").addClass("p-3 bg-white box mb-0 shadow-sm border rounded bg-white osahan-post")
-                             .append($("<textarea></textarea>")
-                                     .addClass("form-control border-0 p-0 shadow-none ")
-                                     .attr({"placeholder": "Add Comment...","rows":1})))
+       $(replyContainer).append($("<div></div>").addClass("p-3 bg-white box mb-0 shadow-sm border rounded bg-white osahan-post")
+               .attr({"id":"commentAddBtn"})
+               //.append($("<textarea></textarea>")
+               .append($("<textarea style='resize: none')></textarea>")
+                       .addClass("form-control border-0 p-0 shadow-none ")
+                       .attr({"placeholder": "Add Comment...","rows":2, "id":"commentInputBox"}))
+               .append("<button type='button' class='btn btn-primary btn-sm' id='replyAddBtn' style='float:right;margin-right:-15px;margin:-15px'>댓글 작성</button>"))
+
+       if (joinMID !=1 && joinID !=1){
+          $("#commentAddBtn").hide();
+       }
 	 }
-
-
-
-
 	   //최초로 경기일정 띄우기
 	   //schMatchBtn();
 	   $.ajax({
 		   url:"/getClubProfileResult",
+           async: false,
 		   success:function(data){
               if (data[0].cimg===null){
                  data[0].cimg="noimageClub.png";
@@ -202,27 +208,26 @@
 
                 //동호회장 ID
                 clubManager=data[0].id;
-
-              // $("#cNameUpdate").html(data[0].cname);
-              // $("#cTypeUpdate").html(data[0].cType);
-              // $("#cLoc1Update").html(data[0].cloc1)
-              // $("#cLoc2Update").html(data[0].cloc2)
-              // $("#cIntroUpdate").html(data[0].cintro)
 		   }
 	   })
 
+      // 댓글 입력 창 숨기기 위한 flag 값
+      // 1 == 비 동호회원 일 경우에 hide
+      let currentStateReply =0;
+      let noJoinID=0;
+      let joinID=0;
+      let joinMID=0;
       //동호회원 목록 출력
       $.ajax({
          url:"/findClubMemberCno",
          success:function(data){
             $.each(data, function(){
-               console.log(this)
                if (this.mimg===null){
                   this.mimg="noimage.png";
                }
                var newbBirth_date = this.birth_date.substring(0,11).replace("T", " ");
 
-               //동호회원 뿌릴 때 동호회장 일 경우 닉네임 옆에 이미지추가(동호회장을 나타냄)
+               //if문 = 동호회원 뿌릴 때 동호회장 일 경우 닉네임 옆에 이미지추가(동호회장을 나타냄)
                if(this.id==clubManager){
                   $("#retro-comments")
                           .append($("<div></div>").addClass(("reviews-members"))
@@ -262,41 +267,61 @@
                                   )
                           )
                }
+
                //로그인 한 아이디가 동호회장일 경우
                //동호회 관리 버튼, 게시글 쓰기 활성화
+
                if(currentid==clubManager){
                   console.log("회장일 경우")
-                  $("#clubSetting").show();
-                  $("#clubJoinBtn").hide();
-                  $("#clubOutBtn").hide();
-                  $("#insertMainDiv").show();
+                  joinMID=1;
                }
                //로그인 한 아이디가 동호회원일 경우
                //동호회 탈퇴 버튼, 게시글 쓰기 활성화
                else if(currentid==this.id){
-                  console.log("동호회원일 경우")
-                  $("#clubSetting").hide();
-                  $("#clubJoinBtn").hide();
-                  $("#clubOutBtn").show();
-                  $("#insertMainDiv").show();
-
+                 console.log("동호회원일 경우")
+                  joinID=1;
                }
                // 로그인 한 아이디가 회원도 아니고 회장도 아닌 일반회원
                // 동호회 가입하기만 활성화
-               else{
+               else {
                   console.log("미가입 일반 회원일 경우")
-                  $("#clubSetting").hide();
-                  $("#clubJoinBtn").show();
-                  $("#clubOutBtn").hide();
-                  $("#insertMainDiv").hide();
-
+                  noJoinID=1;
                }
                console.log("currentid  ", currentid)
                console.log("this.id  ", this.id)
                console.log("clubManager  ", clubManager)
             })
+
+            if(joinMID==1){
+               //회장일 경우
+               console.log("joinMID " , joinMID)
+               $("#clubSetting").show();
+               $("#clubJoinBtn").hide();
+               $("#clubOutBtn").hide();
+               $("#insertMainDiv").show();
+               $("#commentAddBtn").show();
+            }else if(joinID==1){
+               //일반 회원의 경우
+               console.log("joinID " , joinID)
+               $("#clubSetting").hide();
+               $("#clubJoinBtn").hide();
+               $("#clubOutBtn").show();
+               $("#insertMainDiv").show();
+               $("#commentAddBtn").show();
+            }else {
+               //비가입 회원
+               console.log("noJoinID " , noJoinID)
+               $("#clubSetting").hide();
+               $("#clubJoinBtn").show();
+               $("#clubOutBtn").hide();
+               $("#insertMainDiv").hide();
+               $("#commentAddBtn").hide();
+            }
          }
+
       })
+
+
 
       //게시글 불러오기
 	   $.ajax({
@@ -312,6 +337,7 @@
       //행사-매치 일정 띄우기
       schMatchBtn();
       schMeetBtn();
+      //매치 일정 확인 버튼
       function schMatchBtn(){
          $("#scheduleTable").empty();
          $.ajax({
@@ -324,7 +350,7 @@
             },
             success:function(data){
                $.each(data['content'],function(){
-                  var newMbDate = this.mbDate.substring(0,19).replace("T", " ");
+                  var newMbDate = (this.mbDate.toString()).substring(0,19).replace("T", " ");
                   $("#scheduleTable")
                           .append($("<tr></tr>")
                                   .append($("<td></td>").attr("scope","row").html("경기"))
@@ -337,6 +363,8 @@
             }
          })
       }
+
+      //행사일정 확인버튼
       function schMeetBtn(){
          $("#scheduleTable").empty();
          $.ajax({
@@ -369,7 +397,7 @@
                url:"/clubJoin",
                data:{"currentid": currentid},
                success:function(data){
-                  console.log(data);
+                  //console.log(data);
                   window.location.reload();
                }
             })
@@ -381,7 +409,7 @@
                url:"/clubDeleteSingle",
                data:{"currentid": currentid},
                success:function(data){
-                  console.log(data);
+                  //console.log(data);
                   window.location.reload();
                }
             })
@@ -391,14 +419,39 @@
       $("#datetimepicker1").hide();
       $("#placeInput").hide();
       $(document).on("click", "#schNomalAddBtn", function(){
-         console.log("schNomalAddBtn");
+         //console.log("schNomalAddBtn");
          $("#datetimepicker1").hide();
          $("#placeInput").hide();
       })
       $(document).on("click", "#schMeetAddBtn", function(){
-         console.log("schMeetAddBtn");
+         //console.log("schMeetAddBtn");
          $("#datetimepicker1").show();
          $("#placeInput").show();
+      })
+
+      $(document).on("click", "#replyAddBtn", function(){
+         let textAreaValue = $(this).prev().val() //textarea 영역 - 댓글 입력 창
+         let nowBoardNum = $(this).parent().parent().attr("idx") // 현재 게시글 번호
+         //console.log(textAreaValue)
+        //console.log(nowBoardNum)
+         $.ajax({
+            url:"/addReply",
+            type: "POST",
+            async: false,
+            data:{"currentid": currentid,
+                  "textAreaValue": textAreaValue,
+                  "nowBoardNum": nowBoardNum},
+            beforeSend: function (jqXHR, settings) {
+               let header = $("meta[name='_csrf_header']").attr("content");
+               let token = $("meta[name='_csrf']").attr("content");
+               jqXHR.setRequestHeader(header, token);
+            },
+            success:function(){
+
+               //작성한 댓글 실시간으로 화면에 반영하기 위한 함수
+               replyBtnStick(nowBoardNum);
+            }
+         })
       })
 
       //경기정보
@@ -412,10 +465,28 @@
          $("#scheduleTable").empty();
          schMeetBtn();
       })
-	   
+
+
+      //댓글 작성 후 바로 화면에 반영하기 위한 함수
+      function replyBtnStick(nowBoardNum){
+         $(replyContainer).empty();
+         $.ajax({
+            url:"/listReply?&bNo="+nowBoardNum,
+            async: false,
+            success:function(data1){
+               $.each(data1,function(){
+                  boardReplyAdd(this, nowBoardNum);
+               })
+            }
+         })
+         //댓글 입력 창을 댓글 맨 아래 붙이기
+         replyComment();
+      }
+
+      let replyBtnFlag=0;
       //댓글 보기 버튼 클릭
       $(document).on("click", ".replyBtn", function(){
-        $(allReply).empty();
+        //$(allReply).empty();
         $(replyContainer).empty();
         replyContainer = $(this).next();//댓글이 들어갈 위치
         bNo=$(this).attr("bno")
@@ -439,7 +510,7 @@
 
          //formData를 객체와 String을 각기 다른 타입을 파라미터로 넘길건데, type을 다르게 주기 위해 Blob을 사용
          for (var i = 0; i < files.length; i++) {
-            console.log(files[i]);
+            //console.log(files[i]);
             formData.append("uploadFiles", files[i]);                         //업로드 정보(MultipartFile 타입)
             formData.append("bImg", files[i]);                               //업로드 정보(MultipartFile 타입)
          }
