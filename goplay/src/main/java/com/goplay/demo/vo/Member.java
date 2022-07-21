@@ -32,12 +32,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-	
+	@Id
 	@Column(name="memberid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private	Long memberid;
 	
-	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private	String	id	;
 	
 	private	String	pwd	;

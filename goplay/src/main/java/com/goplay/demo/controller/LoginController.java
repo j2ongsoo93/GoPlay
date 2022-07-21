@@ -1,6 +1,8 @@
 package com.goplay.demo.controller;
 
+import java.io.Serializable;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 
 import com.goplay.demo.constant.Role;
@@ -8,6 +10,7 @@ import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -23,10 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class LoginController {
     @Autowired
-    private MemberService ms;
-    @Autowired
     private MemberDAO dao;
-
+    @Autowired
+    private final MemberService ms;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -77,18 +79,18 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public ModelAndView loginMember() {
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("sign-in.html");
+        modelAndView.setViewName("sign-in");
         return modelAndView;
     }
 
     @GetMapping("/login/error")
-    public ModelAndView loginError(Model model) {
+    public ModelAndView loginError() {
         ModelAndView modelAndView = new ModelAndView();
         //model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         modelAndView.addObject("loginErrorMsg","아이디 또는 비밀번호를 확인해주세요");
-        modelAndView.setViewName("sign-in.html");
+        modelAndView.setViewName("sign-in");
         return modelAndView;
     }
 
