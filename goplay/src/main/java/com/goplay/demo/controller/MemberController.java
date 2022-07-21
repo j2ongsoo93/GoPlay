@@ -32,18 +32,18 @@ public class MemberController {
 		return ms.getById(id);
 	}
 
-	@PostMapping("/updateMember")
+/*	@PostMapping("/updateMember")
 	@ResponseBody
 	public String saveMember(Member m) {
 		ms.saveMember(m);
 		return "redirect/edit-profile";
-	}
+	}*/
 
 	@PostMapping("/profile-update")
 	@ResponseBody
-	public ModelAndView update(@RequestBody HashMap<String, String> map, Model model ) {
-		List<String> mc = new ArrayList<>();
-		mc.add(map.get("memberNickName"));
+	public ModelAndView saveMember(@RequestBody HashMap<String, String> map, Model model ) {
+		List<String> mbStat = new ArrayList<>();
+		mbStat.add(map.get("memberNickName"));
 		/*model.addAttribute("m", ms.getById(id));*/
 		System.out.println(map);
 		System.out.println(map.get("id"));
