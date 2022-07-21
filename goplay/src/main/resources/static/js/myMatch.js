@@ -49,46 +49,30 @@ $(function(){
     $.ajax({
         url:"/listCity",
         success: function(data){
+            $("#mbLoc1").append($('<option value="">전체</option>'));
             $.each(data,function(){
                 let option = $("<option></option>");
                 option.html(this.acName);
                 option.attr("value",this.acName);
+                option.attr("acNo", this.acNo);
                 $("#mbLoc1").append(option);
             });
         }
     });
 
-    //시도 지역분류 선택 시 세부지역 출력
-    $(document).on("change", "#loc1", function (){
-        $("#mbLoc2").empty();
-        let acName = $(this).val()
-        $.ajax({
-            url:"/listDistrict/"+acName,
-            success: function(data) {
-                let district = data[0].address_district;
-                $.each(district,function(){
-                    let option = $("<option></option>");
-                    option.html(this.adName);
-                    option.attr("value",this.adName);
-                    $("#mbLoc2").append(option);
-                });
-            }
-        });
-    });
-
-    //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-    $.ajax({
-        url:"/listDistrict/"+"서울특별시",
-        success: function(data) {
-            let district = data[0].address_district;
-            $.each(district,function(){
-                let option = $("<option></option>");
-                option.html(this.adName);
-                option.attr("value",this.adName);
-                $("#mbLoc2").append(option);
-            });
-        }
-    });
+    // //시도 지역선택 초기 값에 따라 서울시 세부지역 표시
+    // $.ajax({
+    //     url:"/listDistrict/"+"서울",
+    //     success: function(data) {
+    //         let district = data[0].address_district;
+    //         $.each(district,function(){
+    //             let option = $("<option></option>");
+    //             option.html(this.adName);
+    //             option.attr("value",this.adName);
+    //             $("#mbLoc2").append(option);
+    //         });
+    //     }
+    // });
 
     // 검색조건 전역 변수
     let mbDate=null;
@@ -98,7 +82,7 @@ $(function(){
     let mbStat_wait=null;
     let mbStat_matched=null;
     let mbStat_end=null;
-    let size = 6;
+    let size = 3;
     let page = 0;
 
 
@@ -116,8 +100,11 @@ $(function(){
             "size" : size,
             "page" : page};
 
+        var id = "rabbit123";
+
         $.ajax({
-            url: "/findMatch",
+            /*url: "/findMatch",*/
+            url: "/myMatchEnd/"+id,
             type:"POST",
             data: JSON.stringify(searchCondition),
             contentType: "application/json",
@@ -141,7 +128,7 @@ $(function(){
                     let mbDate;
 
                     if(mbStat == '대기'){
-                        homeClubName = getClubName(this.homeClub)
+                        homeClubName = getClubName(this.homeClub);
                         homeRecord = getMatchRecord(this.homeClub);
                         mbDate = printDate(this.mbDate);
 
@@ -287,30 +274,57 @@ $(function(){
     // 종목선택 시 이벤트
     $(document).on("change", "input[name='mbType']", function(){
         $("#matchContainer").empty();
-        console.log($(this).val())
-        mbType = $(this).val();
+        page = 0;
+        if($(this).val()=="all"){
+            mbType = null;
+        }else{
+            mbType = $(this).val();
+        }
         printPage();
     });
 
     // 지역 선택 시 이벤트
     $(document).on("change", "#mbLoc1", function(){
         $("#matchContainer").empty();
-        console.log($(this).val())
+        $("#mbLoc2").empty();
+        page = 0;
+        mbLoc2 = null;
+        console.log($(this).val());
         mbLoc1 = $(this).val();
+        if(mbLoc1 == null){
+            mbLoc2 = null;
+        }else{
+            //시도 지역분류 선택 시 세부지역 출력
+            $.ajax({
+                url:"/listDistrict/"+mbLoc1,
+                success: function(data) {
+                    $("#mbLoc2").append($('<option value="">전체</option>'));
+                    $.each(data,function(){
+                        let option = $("<option></option>");
+                        option.html(this.adName);
+                        option.attr("value",this.adName);
+                        $("#mbLoc2").append(option);
+                    });
+                }
+            });
+        }
         printPage();
     });
 
     // 세부지역 선택 시 이벤트
     $(document).on("change", "#mbLoc2", function(){
         $("#matchContainer").empty();
+        page = 0;
         console.log($(this).val());
         mbLoc2 = $(this).val();
+        console.log(mbLoc2)
         printPage();
     });
 
     //매치상태 선택 시 이벤트
     $(document).on("change", "input[name='mbStat']", function(){
         $("#matchContainer").empty();
+        page = 0;
         console.log($(this).is(":checked"))
         if($(this).is(":checked")) {
             if ($(this).val() == "대기") {
@@ -331,4 +345,34 @@ $(function(){
         }
         printPage();
     });
+
+    // 달력 날짜 선택 시 이벤트
+    $(document).on("click", ".matchDate", function(){
+        $("#matchContainer").empty();
+        page = 0;
+        mbDate = new Date($(this).attr("id")).toISOString();
+        console.log(mbDate);
+        printPage();
+    });
+
+    // pageSize 선택 시 이벤트
+    $(document).on("change", "#size", function(){
+        $("#matchContainer").empty();
+        size = $(this).val();
+        console.log(size);
+        printPage();
+    });
+
+    //무한 스크롤 이벤트
+    $(window).scroll(function(){
+        let $window = $(this);
+        let scrollTop = $(window).scrollTop();
+        let windowHeight = $window.height();
+        let documentHeight = $(document).height();
+        if (scrollTop + windowHeight + 10 > documentHeight) {
+            console.log("페이지 바닥 도착");
+            page = page + 1;
+            printPage();
+        }
+    })
 });

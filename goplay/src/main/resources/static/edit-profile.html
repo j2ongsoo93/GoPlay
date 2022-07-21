@@ -5,6 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="description" content="">
    <meta name="author" content="">
+   <meta name="_csrf" th:content="${_csrf.token}">
+   <meta name="_csrf_header" th:content="${_csrf.headerName}">
    <link rel="icon" type="image/png" href="img/fav.png">
    <title>Olink - Job Portal & Social Network HTML</title>
    <!-- Slick Slider -->
@@ -236,29 +238,12 @@
                      <!--<div class="form-group mb-0">-->
                      <a href="edit-profile.html" style="font-size: 20px">마이페이지</a><br>
                      <a href="profile-Board.html" style="font-size: 20px">게시판 이용 내역</a><br>
-                     <a href="/asdf" style="font-size: 20px">개인정보 관리</a><br>
-                     <a href="profile-MyMatch.html" style="font-size: 20px">내 경기</a><br>
-                     <!--<div class="custom-control custom-checkbox d-inline mr-3">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">JavaScript, jQuery</label>
-                     </div>
-                     <div class="custom-control custom-checkbox d-inline">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                        <label class="custom-control-label" for="customCheck2">HTML5, CSS3</label>
-                     </div>-->
-                     <!--</div>-->
+                    <!-- <a href="/ProfilePrivacy" style="font-size: 20px">개인정보 관리</a><br>-->
+                     <a href="/MyMatch" style="font-size: 20px">내 경기</a><br>
                   </div>
-                  <!--<div class="overflow-hidden text-center p-3">
-                     <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> SAVE </a>
-                  </div>-->
                </div>
             </div>
-            <!--                  <div class="border rounded bg-white mb-3">-->
-            <!--<div class="box-title border-bottom p-3">
-               <h6 class="m-0">Social profiles</h6>
-               <p class="mb-0 mt-0 small">Add elsewhere links to your profile.
-               </p>
-            </div>-->
+
             <div class="box-body">
                <!-- <div class="p-3 border-bottom">
                    <div class="position-relative icon-form-control mb-2">
@@ -322,7 +307,7 @@
                                  <span class="text-danger"></span>
                               </label>
                               <div class="form-group">
-                                 <input type="text" id="memberNickName" class="form-control" name="username" value="" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success">
+                                 <input type="text" id="memberNickName" class="form-control" name="username" value="" placeholder="Enter your username" aria-label="Enter your username" required="" aria-describedby="usernameLabel" data-msg="Please enter your username." data-error-class="u-has-error" data-success-class="u-has-success" readonly>
                               </div>
                            </div>
                         </div>
@@ -553,7 +538,7 @@
                                  <span class="text-danger"></span>
                               </label>
                               <div class="form-group">
-                                 <input type="email" id="memberEmail" class="form-control" name="email" value="" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success">
+                                 <input type="email" id="memberEmail" class="form-control" name="email" value="" placeholder="Enter your email address" aria-label="Enter your email address" required="" aria-describedby="emailLabel" data-msg="Please enter a valid email address." data-error-class="u-has-error" data-success-class="u-has-success" readonly>
                                  <small class="form-text text-muted"></small>
                               </div>
                            </div>
@@ -599,7 +584,7 @@
                                  <span class="text-danger">*</span>
                               </label>
                               <div class="form-group">
-                                 <select class="custom-select" id="mbLoc1">
+                                 <select class="custom-select" id="mbLoc1" readonly="">
 
                                  </select>
                               </div>
@@ -686,7 +671,7 @@
                   </form>
                </div>
             </div>
-            <div class="border rounded bg-white mb-3">
+            <!--<div class="border rounded bg-white mb-3">
                <div class="box-title border-bottom p-3">
                   <h6 class="m-0">Experience
                   </h6>
@@ -697,46 +682,46 @@
                   <div class="row">
                      <div class="col-sm-6 mb-4">
                         <label id="FROM" class="form-label">FROM</label>
-                        <!-- Input -->
+                        &lt;!&ndash; Input &ndash;&gt;
                         <div class="input-group">
                            <input type="text" class="form-control" placeholder="From" aria-label="FROM" aria-describedby="FROM">
                         </div>
-                        <!-- End Input -->
+                        &lt;!&ndash; End Input &ndash;&gt;
                      </div>
                      <div class="col-sm-6 mb-4">
                         <label id="TO" class="form-label">TO</label>
-                        <!-- Input -->
+                        &lt;!&ndash; Input &ndash;&gt;
                         <div class="input-group">
                            <input type="text" class="form-control" placeholder="TO" aria-label="TO" aria-describedby="TO">
                         </div>
-                        <!-- End Input -->
+                        &lt;!&ndash; End Input &ndash;&gt;
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-sm-6 mb-4">
                         <label id="companyLabel" class="form-label">Company</label>
-                        <!-- Input -->
+                        &lt;!&ndash; Input &ndash;&gt;
                         <div class="input-group">
                            <input type="text" class="form-control" placeholder="Enter your company title" aria-label="Enter your company title" aria-describedby="companyLabel">
                         </div>
-                        <!-- End Input -->
+                        &lt;!&ndash; End Input &ndash;&gt;
                      </div>
                      <div class="col-sm-6 mb-4">
                         <label id="positionLabel" class="form-label">Position</label>
-                        <!-- Input -->
+                        &lt;!&ndash; Input &ndash;&gt;
                         <div class="input-group">
                            <input type="text" class="form-control" placeholder="Enter your position" aria-label="Enter your position" aria-describedby="positionLabel">
                         </div>
-                        <!-- End Input -->
+                        &lt;!&ndash; End Input &ndash;&gt;
                      </div>
                   </div>
                </div>
-            </div>
+            </div>-->
             <div class="mb-3 text-right">
                <!-- <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </a>
                 <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </a>-->
-               <button class="font-weight-bold btn btn-link rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </button>
-               <button id="update" class="font-weight-bold btn btn-primary rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </button>
+               <!--<button class="font-weight-bold btn btn-link rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </button>-->
+               <a href="/ProfileUpdate"><button id="update" name="update" class="font-weight-bold btn btn-primary rounded p-3"> &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </button></a>
 
             </div>
          </main>
@@ -809,7 +794,7 @@
       url:"/listCity",
       success: function(data){
          $.each(data,function(index){
-            let option = $('<option class="op' + index +'"></option>');
+            let option = $('<option class="op' + index +'" disabled="disabled"></option>');
             option.html(this.acName);
             option.attr("id",this.acName);
             option.attr("value",this.acName);
@@ -851,7 +836,7 @@
       success: function(data) {
          let district = data[0].address_district;
          $.each(district,function(index){
-            let option = $('<option class="ops' + index +'"></option>');
+            let option = $('<option class="ops' + index +'" disabled="disabled"></option>');
             option.html(this.adName);
             option.attr("id",this.adName);
             option.attr("value",this.adName);
