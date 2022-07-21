@@ -21,17 +21,13 @@ public class ReplyDAOCustom {
     QReply Reply = QReply.reply;
     QBoard Board = QBoard.board;
 
-	//1. select * from reply where b_no in(select b_no from board where b_no=2)
-	//2. select * from reply where b_no =2
-	//왜 1번 쿼리문으로 작성했는지 기억이 안남...
+	//select * from reply where b_no in(select b_no from board where b_no=3)
 	public List<ReplyDTO> listReply(Integer bNo) {
-		System.out.println("11111111111");
 		return queryFactory
 				.select(new QReplyDTO(qr.rNo, qr.board.bNo, qr.rContent, qr.rDate, qr.member.id))
 				.from(Reply)
 				.where(Reply.board.bNo.in(
-						JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo)))
-						).orderBy(Reply.rDate.desc())
+						JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo))))
 				.fetch();
 	}
 	public List<ReplyDTO> listReply(String id){

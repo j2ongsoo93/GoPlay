@@ -23,53 +23,33 @@
       		var totalRecords=1;		//전체레코드 수
       		var totalPage=1;		//전체페이지 수	
       		var pageSize=3;			//한화면에 보여줄 레코드 수
-      		var pageGroup = 2;		//한화면에 보여줄 페이지 수
+      		var pageGroup = 3;		//한화면에 보여줄 페이지 수
       		
-     		let acName=""; 	//시 도 지역 초기 값
+     		let acName="인천"; 	//시 도 지역 초기 값
       		let ctype="축구";  		//종목 초기 값
-      		let acName2=""; 	//도 구 지역 초기 값
-      		let searchText="";
-
+      		let acName2="계양구"; 	//도 구 지역 초기 값
+      		
       		var listdata; 			//전체 동호회 정보를 담는 json
       		var span;				// 페이지 버튼
       		var startPage;
       		var endPage;
-
-           //추천 클럽
+      		
       		var recommendClub =$("#recommendClub");
       		function recommendClubFunc(data){
-               if (data.cimg===null){
-                  data.cimg="noimageClub.png";
-               }
-          		recommendClub.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-1 blog-card border-0")
-                        .append($("<div></div>").css({"width":"100%", "height":"130px", "cursor":"pointer"}).attr({"id":"clubListSingle","cNo": data.cno})
-                        .append("<img src='/display?fileName="+data.cimg+"' style='width: 100%;height:110px' >").addClass("card-img-top")
+          		recommendClub.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-3 blog-card border-0")
+          				//.append($("<a></a>")
+          				.append($("<img></img>").attr({"src": "img/blog/7.png"}).addClass("card-img-top"))
           	      		.append($("<div></div>").attr({'id':"mainData", "style":"display:inline-block"})
 	          	      		.append($("<h3></h3>").attr('id',"recommendClubCname").html(data.cname))
 	          	      		.append($("<ul></ul>").attr('id', "recommendClubLoc1").html(data.cloc1))
-	          	      		.append($("<p></p>").attr('id','recommendClubIntro').html(data.cintro))))
+	          	      		.append($("<p></p>").attr('id','recommendClubIntro').html(data.cintro)))
           				)
       		}
-
-           let currentid = 'null'; //로그인 한 id
-           $.ajax({
-              url: "/loginMemberID",
-              async: false,
-              success: function (data) {
-                 currentid = data
-                 console.log("----")
-                 console.log(currentid)
-              }
-           });
-           //console.log(currentid)
       		$.ajax({
       			url:"/listRecommendClub",
-                data:{"currentid": currentid},
       			success:function(data){
-                     console.log("이게먼저?")
       				count = 1;
       				if (data['content'].length==0){
-                         console.log("******")
       					$.ajax({
       						url:"/listAllClub",
       						success:function(data){
@@ -85,9 +65,10 @@
       					})
       				}else{
       					$.each(data['content'],function(){
-                              if(count===3){
-                                 return false
-                              }
+          					if(count===3){
+          						return false
+          					}
+          					
           					console.log(this.id);
           					console.log(this.cname);
           					console.log(this.cloc1);
@@ -110,7 +91,6 @@
     					cType : ctype,
     					cloc1 : acName,
     					cloc2 : acName2,
-                        searchText : searchText
     				},
           			success:function(data){
           				console.log(acName2)
@@ -128,29 +108,20 @@
       		
       		//동호회 리스트 출력
       		initPrint();
-
-           //동호회 리스트 클릭 시
-           $(document).on("click", "#clubListSingle", function (){
-               location.href="/clubMain?cNo=" + $(this).attr("cNo");//현재 클릭한 cNo를 담고 있음
-           })
+      		
             // 동호회 리스트 동적 노드 생성
             function listAppend(data){
-               if (data.cimg===null){
-                  data.cimg="noimageClub.png";
-               }
-      			$("#clubList").append($("<div></div>").addClass("col-lg-4 col-md-4").css("cursor","pointer")
-          					.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-3 blog-card border-0").attr({"id":"clubListSingle","cNo": data.cno})
+      			$("#clubList").append($("<div></div>").addClass("col-lg-4 col-md-4")
+          					.append($("<div></div>").addClass("box shadow-sm rounded bg-white mb-3 blog-card border-0")
           	      					.append($("<a></a>")
-                                    .append($("<div></div>").css({"width":"100%", "height":"96px"})
-                                    .append("<img src='/display?fileName="+data.cimg+"' style='width: 100%;height:96px'>").addClass("card-img-top"))
-          	      					//.append($("<img></img>").addClass("card-img-top").attr("src","img/blog/7.png"))
+          	      					.append($("<img></img>").addClass("card-img-top").attr("src","img/blog/7.png"))
           	      					.append($("<div></div>").addClass("card-body")
           	      					.append($("<span></span>").addClass("badge badge-success").html(data.ctype))
-          	      					.append($("<h6></h6>").addClass("text-dark").html(data.cname))
+          	      					.append($("<h6></h6>").addClass("text-dark").html(data.id))
           	      					.append($("<p></p>").addClass("mb-0").html(data.cintro)))
           	      					.append($("<div></div>").addClass("card-footer border-0")
           	      					.append($("<p></p>").addClass("mb-0")
-          	      					//.append($("<img></img>").addClass("rounded-circle").attr("src","img/user/3.jpg"))
+          	      					.append($("<img></img>").addClass("rounded-circle").attr("src","img/user/3.jpg"))
           	      					.append($("<strong></strong>").html(data.cloc1))
           	      					.append($("<strong></strong>").html(" "+ data.cloc2))
           	      					)
@@ -167,8 +138,19 @@
         			endPage = totalPage;
         		}
 
+        		//맨 앞으로
+//         		if(startPage!=1){
+//         			var span = $("<span></span>").addClass("pageing").html("[맨 앞으로]");
+//         			$(span).attr("page", 1);
+//         			$("#pageNumberMain").append(span);
+//         		}
+        		console.log("startPage " , startPage)
         		if(startPage > 1){
+        			
         			span = $("<a></a>").addClass("pageing").addClass("page-link").html("Previous");
+//         			if(startPage > 1){
+//         				$(span).attr("disabled", true)
+//         			}
         			$(span).attr({
         				"page":startPage - 1,
         				"style":"display:inline-block",
@@ -196,6 +178,14 @@
         			});
         			$("#pageNumberMain").append(span);
         		}
+        		
+        		//맨 끝으로
+        		//맨 마지막 페이지 그룹에 출력할 시작 페이지와 마지막 페이지를 구해야함.
+//         		if(endPage < totalPage){
+//         			var span = $("<span></span>").addClass("pageing").html("[맨 끝으로]");
+//         			span.attr("page", totalPage);
+//         			$("#pageNumberMain").append(span);
+//         		}
         	}
             
             //페이지에 레코드 출력
@@ -203,16 +193,20 @@
             	$("#clubList").empty();
   				$("#pageNumberMain").empty();
         		var start = (pageNUM-1)*pageSize + 1; 
-        		//console.log("pageNUM " + pageNUM);
+        		console.log("pageNUM " + pageNUM);
         		var end = start + pageSize -1; 
         		
         		if(end > totalRecords){
         			end = totalRecords;
         		}
-        		for(var i=start-1; i<end; i++){
+        		console.log("start ", start);
+        		console.log("end ", end);
+        		
+        		for(var i=start-1; i<end; i++){ 
         			
         			listAppend(listdata[i]);
         		}
+        		
         	}//end pringPage
         	
         	$.ajax({
@@ -226,19 +220,6 @@
                    });
                 }
              });
-
-           //시도 지역선택 초기 값에 따라 서울특별시 세부지역 표시
-           $.ajax({
-              url: "/listDistrict/서울",
-              success: function (data) {
-                 $.each(data, function () {
-                    let option = $("<option></option>");
-                    option.html(this.adName);
-                    option.attr("value", this.adName);
-                    $("#cLoc2").append(option);
-                 });
-              }
-           });
         	
             //페이지 버튼 클릭
             $(document).on("click", ".pageing", function(){
@@ -257,7 +238,6 @@
 						cType : ctype,
 						cloc1 : acName,
 						cloc2 : acName2,
-                       searchText : searchText
 					},
       			  success: function(data){
       				
@@ -276,7 +256,7 @@
              //지역1 선택 - '시/도' 선택 시 '도/구' 받아옴
              $(document).on("change", "#cloc1", function (){
                  $("#cloc2").empty();
-                 acName = $(this).val();
+                 acName = $(this).val()
                  $.ajax({
                     url:"/listDistrict/"+acName,
                     success: function(data) {
@@ -294,9 +274,8 @@
                     		url:"/listClubAll3",
         					data : {
         						cType : ctype,
-        						cloc1 : acName,
+        						cloc1 : acName+"시",
         						cloc2 : acName2,
-                               searchText : searchText
         					},
         					 success: function(data){
         						 $("#clubList").empty();
@@ -312,14 +291,13 @@
 
              //지역2 선택
              $(document).on("change", "#cloc2", function (){
-               acName2 = $(this).val();
+               acName2 = $(this).val()
           	   $.ajax({
           		   url:"/listClubAll3",
 					 data : {
 						cType : ctype,
 						cloc1 : acName,
 						cloc2 : acName2,
-                        searchText : searchText
 					},
           		   success: function(item) {
           			console.log("LoadLoc2");
@@ -327,22 +305,6 @@
           		   }
           	   });
              });
-           $(document).on("click", "#searchBtn", function (){
-              searchText = $("#searchText").val();
-              console.log(searchText)
-              $.ajax({
-                 url:"/listClubAll3",
-                 data : {
-                    cType : ctype,
-                    cloc1 : acName,
-                    cloc2 : acName2,
-                    searchText : searchText
-                 },
-                 success: function(item) {
-                    initPrint();
-                 }
-              })
-           })
       	})
       </script>
    </head>
@@ -533,14 +495,21 @@
             </ul>
          </div>
       </nav>
-      <div class="py-2 bg-light">
+      <div class="py-5 bg-light">
          <div class="container">
+         
             <div class="row">
                <div class="col-md-12 mx-auto"  style="padding-right:90px">
-				<div class="movie" id="recommendClub" style="display:inline-block; margin:40px;  margin-left: 80px" >
+               
+<!--                   <h1 class="text-white font-weight-light"><span class="font-weight-bold">Olink</span> Blog</h1> -->
+<!--                   <p class="mb-2 text-white-50">Last modified: March 27, 202 (view archived versions) -->
+<!--                   </p> -->
+				<div class="movie" id="recommendClub" style="display:inline-block">
+					
+					
 				</div>
-				<div style="float:right; border:solid 1px; padding:20px; margin:20px; margin-right: 10px">
-					<form method="GET" th:action="@{/listClubAll3}">
+				<div style="float:right; border:solid 1px; padding:20px"> 
+					<form method="GET" th:action="@{/listClubAll}">
 							<!-- 라디오버튼   -->
 							<div data-role="fieldcontain" >
 								<fieldset data-role="controlgroup" data-type="horizontal">
@@ -583,7 +552,7 @@
 								<input type="text" id="searchText" name="searchText" style="width:200px;display:inline-block" class="form-control" placeholder="키워드 입력" >
 							</span>
 							<span>
-							 	<button type="button" style="width:100px"class="btn btn-primary mb-3" id="searchBtn">검색</button>
+							 	<button type="submit" style="width:100px"class="btn btn-primary mb-3">검색</button>
 							</span>
 						</form>
 					</div>
@@ -598,19 +567,19 @@
             <div class="row">
 			<div class="col-lg-12 col-md-12">
 
-<!--		&lt;!&ndash; 개수 만큼 띄우기 버튼&ndash;&gt;-->
-<!--			 <div class="btn-group">-->
-<!--                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                  Action-->
-<!--                  </button>-->
-<!--                  <div class="dropdown-menu" style="">-->
-<!--                     <a class="dropdown-item" href="#">3개씩 보기</a>-->
-<!--                     <a class="dropdown-item" href="#">6개씩 보기</a>-->
-<!--                     <a class="dropdown-item" href="#">9개씩 보기</a>-->
-<!--                     <div class="dropdown-divider"></div>-->
-<!--                     <a class="dropdown-item" href="#">Separated link</a>-->
-<!--                  </div>-->
-<!--			 </div>-->
+		<!-- 개수 만큼 띄우기 버튼-->
+			 <div class="btn-group">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Action
+                  </button>
+                  <div class="dropdown-menu" style="">
+                     <a class="dropdown-item" href="#">3개씩 보기</a>
+                     <a class="dropdown-item" href="#">6개씩 보기</a>
+                     <a class="dropdown-item" href="#">9개씩 보기</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+			 </div>
 			 
 			<!-- 동호회 리스트 화면에 띄우기 -->
 			<div class="row" id="clubList"> 
@@ -624,7 +593,7 @@
     <li class="page-item" id="pageNumberMain">
 	    	<a class="page-link" href="#" 
 	    		th:text="${i}" 
-	    		th:href="@{/listClubAll3(page=${i-1})}">
+	    		th:href="@{/listClubAll(page=${i-1})}"> 
 	    	</a>
     </li>
   </ul>

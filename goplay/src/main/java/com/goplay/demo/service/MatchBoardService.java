@@ -55,10 +55,5 @@ public class MatchBoardService {
 	public Page<MatchBoardDTO> listMatchCno(Pageable pageable, Integer cNo, @RequestParam @Nullable String thisFirst, @RequestParam @Nullable String thisLast) {
 		return daoCustom.listMatchCno(pageable, cNo,thisFirst,thisLast);
 	}
-
-	//매치번호로 매치 검색
-	public List<MatchBoardDTO> findByMbNo(int mbNo){
-		return daoCustom.findByMbNo(mbNo);
-	}
 }
 	

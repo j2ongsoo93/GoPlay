@@ -3,12 +3,8 @@ package com.goplay.demo.service;
 import java.util.List;
 
 import com.goplay.demo.dao.ClubDAO;
-import com.goplay.demo.dao.ClubMemberListDAOChangHee;
-import com.goplay.demo.dao.ClubMemberlistDAO;
 import com.goplay.demo.dto.ClubInfoDTO;
 import com.goplay.demo.searchCondition.RecommentClubCondition;
-import com.goplay.demo.vo.Board;
-import com.goplay.demo.vo.ClubMemberlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +24,6 @@ public class ClubService {
 	private ClubDAO dao;
 	@Autowired
 	private ClubDAOCustom daoCustom;
-
-	@Autowired
-	private ClubMemberListDAOChangHee clubMemberlistDaoCH;
 
 	//클럽 검색 기능
 	public Page<ClubDTO> listClubAll(Pageable pageable,ClubSearchCondition condition) {
@@ -55,14 +48,5 @@ public class ClubService {
 	public List<ClubDTO> findClub(int cNo){
 		return daoCustom.findClub(cNo);
 	}
-	
-	//id로 클럽검색
-	public List<ClubDTO> findById(String id){return daoCustom.findById(id);}
-	public void saveClub(Club b, ClubMemberlist clubMemberlist) {
-		dao.save(b);
-		clubMemberlistDaoCH.save(clubMemberlist);
-	}
-	public void joinClub(ClubMemberlist clubMemberlist) {
-		clubMemberlistDaoCH.save(clubMemberlist);
-	}
+
 }

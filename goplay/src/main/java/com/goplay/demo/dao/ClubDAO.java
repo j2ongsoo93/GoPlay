@@ -6,4 +6,5 @@ import com.goplay.demo.vo.Club;
 
 public interface ClubDAO extends JpaRepository<Club, Integer> {
 
+    
 }

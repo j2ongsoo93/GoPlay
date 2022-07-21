@@ -1,12 +1,11 @@
 package com.goplay.demo.controller;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTOChangHee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,6 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 
-	@Autowired
-	private MemberDAO mdao;
 	@GetMapping("/listMember")
 	@ResponseBody
 	public List<Member> listMember(Model model){
@@ -42,10 +39,15 @@ public class MemberController {
 		return "redirect/edit-profile";
 	}
 
-	@PostMapping("/profile-update/{id}")
+	@PostMapping("/profile-update")
 	@ResponseBody
-	public ModelAndView update(@PathVariable String id, Model model) {
-		model.addAttribute("m", ms.getById(id));
+	public ModelAndView update(@RequestBody HashMap<String, String> map, Model model ) {
+		List<String> mc = new ArrayList<>();
+		mc.add(map.get("memberNickName"));
+		/*model.addAttribute("m", ms.getById(id));*/
+		System.out.println(map);
+		System.out.println(map.get("id"));
+		System.out.println(map.get("memberNickName"));
 		ModelAndView mav = new ModelAndView("profile-update");
 		return mav;
 	}
@@ -72,9 +74,11 @@ public class MemberController {
 	@GetMapping("ProfileUpdate")
 	public String prifileUpdate(Model model){return "profile-update";}
 
-	@GetMapping("/loginMemberID")
+	//커뮤니티 게시판 동호회원 목록 출력
+	@GetMapping("/findClubMemberCno")
 	@ResponseBody
-	public String loginmember(Principal principal) {
-		return mdao.findById(principal.getName()).getId();
+	public List<MemberDTOChangHee> findClubMemberCno() {
+		int cNo=1;
+		return ms.findClubMemberCno(cNo);
 	}
 }

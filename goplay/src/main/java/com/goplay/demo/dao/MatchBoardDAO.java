@@ -19,7 +19,5 @@ public interface MatchBoardDAO extends JpaRepository<MatchBoard, Integer>{
 			"WHERE cm.member.id = :id))")
 	List<MatchBoard> myMatch(@Param("id") String id);
 
-	@Query("select m from MatchBoard m where m.mb_no = ?1")
-	MatchBoard findByMbNo(int mb_no);
 
 }

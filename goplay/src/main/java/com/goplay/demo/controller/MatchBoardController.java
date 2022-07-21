@@ -2,10 +2,8 @@ package com.goplay.demo.controller;
 
 import com.goplay.demo.dto.MatchBoardDTO;
 import com.goplay.demo.dto.MatchDateDTO;
-import com.goplay.demo.dto.MatchOfferDTO;
 import com.goplay.demo.dto.MatchRecordDTO;
 import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
-import com.goplay.demo.service.MatchOfferService;
 import com.goplay.demo.service.MatchRecordService;
 import com.goplay.demo.vo.Club;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +31,6 @@ public class MatchBoardController {
 	private MatchBoardService ms;
 	@Autowired
 	private MatchRecordService mrs;
-	@Autowired
-	private MatchOfferService mos;
 
 	//매치검색페이지로 이동
 	@GetMapping("/matchBoard")
@@ -93,14 +89,10 @@ public class MatchBoardController {
 		}
 
 		MatchBoard mb = new MatchBoard();
-		if(map.get("mbNo") != null){
-			mb.setMb_no(Integer.parseInt(map.get("mbNo")));
-		}
 		Club c = new Club();
-		if(map.get("homeClub") != null){
-			c.setCNo(Integer.parseInt(map.get("homeClub")));
-			mb.setClub(c);
-		}
+//		c.setCNo(Integer.parseInt(map.get("homeClub")));
+		c.setCNo(1);
+		mb.setClub(c);
 		mb.setMbDate(mbDateTime);
 		mb.setMbType(map.get("mbType"));
 		mb.setMbLoc1(map.get("mbLoc1"));
@@ -111,12 +103,6 @@ public class MatchBoardController {
 		mb.setHomeLevel(map.get("homeLevel"));
 		mb.setHomeSay(map.get("homeSay"));
 		mb.setMbStat(map.get("mbStat"));
-		if(map.get("awayClub") != null){
-			mb.setAwayClub(Integer.parseInt(map.get("awayClub")));
-		}
-		mb.setAwayUcolor(map.get("awayUcolor"));
-		mb.setAwayLevel(map.get("awayLevel"));
-		mb.setAwaySay(map.get("awaySay"));
 		ms.saveBoard(mb);
 	}
 
@@ -127,31 +113,8 @@ public class MatchBoardController {
 	}
 
 	//매치수정화면으로 이동
-	@GetMapping("/editMatch/{mbNo}")
-	public String updateBoard(Model model, @PathVariable int mbNo){
-		model.addAttribute("mbNo", mbNo);
-		return "editMatch";
-	}
-
-	//매치 상세정보(대기)로 이동
-	@GetMapping("/matchDetail/{mbNo}")
-	public String detailMatch(Model model, @PathVariable int mbNo){
-		model.addAttribute("mbNo", mbNo);
-		return "matchDetail";
-	}
-
-	//매치 상세정보(성사, 종료)로 이동
-	@GetMapping("/matchDetailME/{mbNo}")
-	public String detailMatchMatched(Model model, @PathVariable int mbNo){
-		model.addAttribute("mbNo", mbNo);
-		return "matchDetailME";
-	}
-
-	//매치 신청으로 이동
-	@GetMapping("/matchOffer/{mbNo}")
-	public String offerMatch(Model model, @PathVariable int mbNo){
-		model.addAttribute("mbNo", mbNo);
-		return "offerMatch";
+	@GetMapping("/updateMatchBoard")
+	public void updateBoard(){
 	}
 
 	//내 매치 검색
@@ -168,6 +131,15 @@ public class MatchBoardController {
 		return mrs.matchRecord(cNo);
 	}
 
+	@PostMapping("/listMatchCno")
+	@ResponseBody
+	//동호회 커뮤니티 경기 일정 스케쥴 출력
+	public Page<MatchBoardDTO> listMatchCno(Pageable pageable, @RequestParam @Nullable String thisFirstISO, @RequestParam @Nullable String thisLastISO) {
+
+		int cNo = 1; //현재 로그인 한 id의 동호회 cno 받아와아햠
+
+		return ms.listMatchCno(pageable, cNo, thisFirstISO, thisLastISO);
+	}
 
 	// 날짜별 매치 수 조회
 	@GetMapping("/matchDate")
@@ -176,15 +148,4 @@ public class MatchBoardController {
 		return ms.matchDate();
 	}
 
-	// 매치 번호로 매치 조회
-	@GetMapping("/detailMatch/{mbNo}")
-	@ResponseBody
-	public List<MatchBoardDTO> findByMbNo(@PathVariable int mbNo){
-		return ms.findByMbNo(mbNo);
-	}
-
-	//매치 번호로 매치 신청내역 조회
-	@GetMapping("/listMatchOffer/{mbNo}")
-	@ResponseBody
-	public List<MatchOfferDTO> listMatchOffer(@PathVariable int mbNo){return mos.listMatchOffer(mbNo);}
 }

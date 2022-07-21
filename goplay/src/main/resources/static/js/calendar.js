@@ -47,8 +47,7 @@ $(function(){
                 .append($('<div class="day"></div>')
                     .append($('<div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>')))
                 .append($('<div class="dates"></div>')
-                    .append($(htmlDates)))
-                .append($('<button class="btn-primary" id="resetDate">날짜선택 초기화</button>'));
+                    .append($(htmlDates)));
 
         $('#calendarContainer').append(calendarForm);
 
@@ -94,4 +93,5 @@ $(function(){
         CDate.setMonth(CDate.getMonth()+1);
         printCalendar();
     });
+
 });

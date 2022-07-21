@@ -66,11 +66,6 @@ $(function() {
         });
     });
 
-    // 인원 선택 후 저장 시 이벤트
-    $("#saveMatchMember").click(function(){
-
-    });
-
     let mbNo = null;
     let homeClub = null;
     let awayClub = null;
@@ -118,6 +113,7 @@ $(function() {
         let data = {
             "mbNo": mbNo,
             "homeClub": homeClub,
+            //2022-07-28T00:00:00.000Z
             "mbDate": mbDate+"T"+mbTime_hh+":"+mbTime_mm+":"+"00.000Z",
             "mbType": mbType,
             "mbLoc1": mbLoc1,

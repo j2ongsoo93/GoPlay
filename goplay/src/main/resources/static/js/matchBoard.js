@@ -85,6 +85,8 @@ $(function(){
     let size = 3;
     let page = 0;
 
+
+
     // 검색목록 출력 function
     let printPage = function(){
         let searchCondition = {
@@ -135,7 +137,7 @@ $(function(){
                                             // 홈 클럽 정보
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2 clubBtn").attr("cNo", this.homeClub).html("팀 정보")))
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.homeClub).html("팀 정보")))
                                             // 매치 정보
                                             .append($("<div></div>").addClass("col-md-8")
                                                 .append($("<div class='row'><div/>")
@@ -154,7 +156,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">매치 신청하기</button>').attr("mbNo", this.mb_no).addClass("matchDetail")))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">매치 신청하기</button>').addClass("mbNo", this.mb_no)))))
                                                     .append($('<div class=\"col-md-3\"></div>')
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(" 매칭 대기 중 ")))
@@ -163,7 +165,7 @@ $(function(){
                                                                 .append($("<li class=\"d-flex flex-row text-dark\">")))))))
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").html("매칭 중"))))));
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.awayClub).html("팀 정보"))))));
 
                         $("#matchContainer").append(searchForm_wait);
                     }else if(mbStat == '성사'){
@@ -181,7 +183,7 @@ $(function(){
                                             // 홈 클럽 정보
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2 clubBtn").attr("cNo", this.homeClub).html("팀 정보")))
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.homeClub).html("팀 정보")))
                                             // 매치 정보
                                             .append($("<div></div>").addClass("col-md-8")
                                                 .append($("<div class='row'><div/>")
@@ -200,7 +202,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기정보 상세보기</button>').attr("mbNo", this.mb_no).addClass("matchDetailME")))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기정보 상세보기</button>').addClass("mbNo", this.mb_no)))))
                                                     .append($("<div class=\"col-md-3\"></div>")
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(awayClubName)))
@@ -210,7 +212,7 @@ $(function(){
                                                                     .append($("<i class=\"feather-award mr-2 text-dark\">").html(" "+awayRecord))))))))
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2 clubBtn").attr("cNo", this.awayClub).html("팀 정보"))))));
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.awayClub).html("팀 정보"))))));
 
                         $("#matchContainer").append(searchForm_matched);
                     }else if(mbStat == "종료"){
@@ -227,7 +229,7 @@ $(function(){
                                             // 홈 클럽 정보
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2 clubBtn").attr("cNo", this.homeClub).html("팀 정보")))
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.homeClub).html("팀 정보")))
                                             // 매치 정보
                                             .append($("<div></div>").addClass("col-md-8")
                                                 .append($("<div class='row'><div/>")
@@ -246,7 +248,7 @@ $(function(){
                                                                 .append($('<i class="feather-calendar mr-2 mb-2 text-dark"></i>').html(" "+mbDate))
                                                                 .append($('<i class="feather-clock mr-2 mb-2 text-dark"></i>').html(" "+this.mbLoc1+" "+this.mbLoc2))
                                                                 .append($('<i class="feather-map-pin mr-2 mb-2 text-dark"></i>').html(" "+this.mbStadium))
-                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기결과 상세보기</button>').attr("mbNo", this.mb_no).addClass("matchDetailME")))))
+                                                                .append($('<button class="btn btn-primary mr-auto ml-auto" style="height: 30px; width: 135px">경기결과 상세보기</button>').addClass("mbNo", this.mb_no)))))
                                                     .append($("<div class=\"col-md-3\"></div>")
                                                         .append($("<div class=\"box-title d-flex justify-content-end\"></div>")
                                                             .append($("<h6></h6>").html(awayClubName)))
@@ -257,7 +259,7 @@ $(function(){
                                             // 어웨이 클럽 정보
                                             .append($("<div></div>").addClass("col-md-2")
                                                 .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src","img/clogo.png"),
-                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2 clubBtn").attr("cNo", this.awayClub).html("팀 정보"))))));
+                                                    $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", this.awayClub).html("팀 정보"))))));
                         $("#matchContainer").append(searchForm_end);
                     }
                 });
@@ -284,6 +286,7 @@ $(function(){
         $("#mbLoc2").empty();
         page = 0;
         mbLoc2 = null;
+        console.log($(this).val());
         mbLoc1 = $(this).val();
         if(mbLoc1 == null){
             mbLoc2 = null;
@@ -309,7 +312,9 @@ $(function(){
     $(document).on("change", "#mbLoc2", function(){
         $("#matchContainer").empty();
         page = 0;
+        console.log($(this).val());
         mbLoc2 = $(this).val();
+        console.log(mbLoc2)
         printPage();
     });
 
@@ -317,6 +322,7 @@ $(function(){
     $(document).on("change", "input[name='mbStat']", function(){
         $("#matchContainer").empty();
         page = 0;
+        console.log($(this).is(":checked"))
         if($(this).is(":checked")) {
             if ($(this).val() == "대기") {
                 mbStat_wait = $(this).val();
@@ -342,6 +348,7 @@ $(function(){
         $("#matchContainer").empty();
         page = 0;
         mbDate = new Date($(this).attr("id")).toISOString();
+        console.log(mbDate);
         printPage();
     });
 
@@ -349,14 +356,7 @@ $(function(){
     $(document).on("change", "#size", function(){
         $("#matchContainer").empty();
         size = $(this).val();
-        printPage();
-    });
-
-    // 날짜선택 초기화
-    $(document).on("click", "#resetDate", function(){
-        $("#matchContainer").empty();
-        page = 0;
-        mbDate = null;
+        console.log(size);
         printPage();
     });
 
@@ -367,35 +367,9 @@ $(function(){
         let windowHeight = $window.height();
         let documentHeight = $(document).height();
         if (scrollTop + windowHeight + 10 > documentHeight) {
+            console.log("페이지 바닥 도착");
             page = page + 1;
             printPage();
         }
-    });
-
-    //매치신청버튼 선택 이벤트
-    $(document).on("click", ".matchDetail", function(){
-        let mbNo = $(this).attr("mbNo");
-        console.log(mbNo);
-        location.href = "/matchDetail/"+mbNo;
-
-    });
-
-    //매치상세버튼 선택 이벤트
-    $(document).on("click", ".matchDetailME", function(){
-        let mbNo = $(this).attr("mbNo");
-        console.log(mbNo);
-        location.href = "/matchDetailME/"+mbNo;
-    });
-
-    //팀정보버튼 선택 이벤트
-    $(document).on("click", ".clubBtn", function(){
-        let cNo = $(this).attr("cNo");
-        console.log(cNo);
-        location.href = "/clubMain?cNo="+cNo;
-    });
-
-    //매치등록버튼 선택 이벤트
-    $(document).on("click", "#insertMatch", function(){
-        location.href = "/insertMatchBoard";
-    });
+    })
 });

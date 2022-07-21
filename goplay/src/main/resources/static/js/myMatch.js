@@ -103,8 +103,8 @@ $(function(){
         var id = "rabbit123";
 
         $.ajax({
-            /*url: "/findMatch",*/
-            url: "/myMatchEnd/"+id,
+            url: "/findMatch",
+   /*         url: "/myMatchEnd/"+id,*/
             type:"POST",
             data: JSON.stringify(searchCondition),
             contentType: "application/json",

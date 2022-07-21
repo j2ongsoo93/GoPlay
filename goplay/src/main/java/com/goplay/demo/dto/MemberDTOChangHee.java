@@ -7,7 +7,6 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,7 +19,7 @@ public class MemberDTOChangHee {
 	private	String	email	;
 	private	String	mName	;
 	private	String	nickname	;
-	private LocalDate birth_date	;
+	private	LocalDateTime	birth_date	;
 	private	String	gender	;
 	private	Integer	soccer	;
 	private	Integer footsal	;
@@ -33,7 +32,7 @@ public class MemberDTOChangHee {
 	private	String role	;
 
 	@QueryProjection
-	public MemberDTOChangHee(Long memberid, String id, String pwd, String phone, String email, String mName, String nickname, LocalDate birth_date, String gender, Integer soccer, Integer footsal, Integer bascketball, Integer footvalleyball, String mImg, String mLoc1, String mLoc2, String mStat, String role) {
+	public MemberDTOChangHee(Long memberid, String id, String pwd, String phone, String email, String mName, String nickname, LocalDateTime birth_date, String gender, Integer soccer, Integer footsal, Integer bascketball, Integer footvalleyball, String mImg, String mLoc1, String mLoc2, String mStat, String role) {
 		this.memberid = memberid;
 		this.id = id;
 		this.pwd = pwd;

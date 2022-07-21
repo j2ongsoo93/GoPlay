@@ -107,33 +107,20 @@ public class ClubDAOCustom {
 										.or(qClub.cType.contains(condition.getC_keyword())))
 				).offset(pageable.getOffset()).limit(pageable.getPageSize())
 				.fetchResults();
+
+//		System.out.println("cTypeEq " + cTypeEq(condition.getC_type()));
+//		System.out.println("cLoc1Eq " + cLoc1Eq(condition.getC_loc1()));
+//		System.out.println("cLoc2Eq " + cLoc2Eq(condition.getC_loc2()));
 		List<ClubDTO> content = results.getResults();
 		long total = results.getTotal();
 		return new PageImpl<>(content, pageable, total);
 	}
 
-//	public List<ClubDTO> findClubNoCname(String cName){
-//		return queryFactory
-//				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
-//				.from(qClub)
-//				.where(cNoEq(cNo))
-//				.fetch();
-//	}
-
-	//정수 사용
 	public List<ClubDTO> findClub(int cNo){
 		return queryFactory
 				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
 				.from(qClub)
 				.where(cNoEq(cNo))
-				.fetch();
-	}
-	//정수 사용
-	public List<ClubDTO> findById(String id){
-		return queryFactory
-				.select(new QClubDTO(qClub.cNo, qClub.member.id, qClub.cName, qClub.cType, qClub.cLoc1, qClub.cLoc2, qClub.cImg, qClub.cIntro, qClub.cStat))
-				.from(qClub)
-				.where(idEq(id))
 				.fetch();
 	}
 
@@ -162,5 +149,4 @@ public class ClubDAOCustom {
         return qClub.cNo.eq(cNo);
     }
 
-	private BooleanExpression idEq(String id){return qClub.member.id.eq(id);}
 }

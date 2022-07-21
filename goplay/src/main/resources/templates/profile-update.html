@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <link rel="icon" type="image/png" href="img/fav.png">
     <title>Olink - Job Portal & Social Network HTML</title>
     <!-- Slick Slider -->
@@ -210,7 +212,7 @@
         <div class="row">
             <!-- Main Content -->
             <aside class="col-md-4">
-                <div class="mb-3 border rounded bg-white profile-box text-center w-10">
+                <!--<div class="mb-3 border rounded bg-white profile-box text-center w-10">
                     <div class="p-4 d-flex align-items-center">
                         <img src="img/p13.png" class="img-fluid rounded-circle" alt="Responsive image">
                         <div class="p-4">
@@ -221,7 +223,7 @@
                             <button data-toggle="tooltip" data-placement="top" data-original-title="Delete" type="submit" class="btn btn-danger"><i class="feather-trash-2"></i></button>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="border rounded bg-white mb-3">
                     <div class="box-title border-bottom p-3">
                         <h5 class="m-0" style="text-align: center">My Page</h5>
@@ -237,7 +239,7 @@
                             <a href="edit-profile.html" style="font-size: 20px">마이페이지</a><br>
                             <a href="profile-Board.html" style="font-size: 20px">게시판 이용 내역</a><br>
                             <!--<a href="/ProfilePrivacy" style="font-size: 20px">개인정보 관리</a><br>-->
-                            <a href="/MyMatch" style="font-size: 20px">내 경기</a><br>
+                            <a href="/MyMatch" style="font-size: 20px">경기</a><br>
                             <!--<div class="custom-control custom-checkbox d-inline mr-3">
                                <input type="checkbox" class="custom-control-input" id="customCheck1">
                                <label class="custom-control-label" for="customCheck1">JavaScript, jQuery</label>
@@ -735,7 +737,7 @@
                 <div class="mb-3 text-right">
                     <!-- <a class="font-weight-bold btn btn-link rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </a>
                      <a class="font-weight-bold btn btn-primary rounded p-3" href="#"> &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </a>-->
-                    <button class="font-weight-bold btn btn-link rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </button>
+                    <!--<button class="font-weight-bold btn btn-link rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp; 취소 &nbsp;&nbsp;&nbsp;&nbsp; </button>-->
                     <button id="update" name="update" class="font-weight-bold btn btn-primary rounded p-3" > &nbsp;&nbsp;&nbsp;&nbsp;  수정 &nbsp;&nbsp;&nbsp;&nbsp; </button>
 
                 </div>
@@ -868,22 +870,48 @@
     $("#서울시").attr("selected", "true");
     $("#강서구").attr("selected", "true");
 
-/*    $(document).ready(function(){*/
+   $(document).ready(function(){
         $("#update").on("click",function(event){
+
+            let nickName = $("#memberNickName").val();
+            let data = {
+                "id":id,
+                "memberNickName":nickName
+            }
+
             $.ajax({
-                /*url: "/profile-update?id="+id,*/
-                url : "/profile-update/"+id,
-                type: "POST",
-                dataType : "json",
+                url: "/profile-update",
+                type:"POST",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                beforeSend: function (jqXHR, settings) {
+                    let header = $("meta[name='_csrf_header']").attr("content");
+                    let token = $("meta[name='_csrf']").attr("content");
+                    jqXHR.setRequestHeader(header, token);
+                },
+                error: function(){
+                    console.log("error")
+                },
+                success: function(data) {
+                }
+            });
+            /*$.ajax({
+                url: "/profile-update?id="+id,
+                /!*url : "/profile-update",*!/
+                /!*data : idVal,*!/
+                type: "GET",
+                /!*contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType : "json",*!/
                 success: function(data){
                     alert("작동합니다");
                     console.log("작동합니다.");
-                   /* $("#memberNickName").val();*/
-
                 }
-            });
+            });*/
         });
-   /* });*/
+    });
+
+
+
 
 </script>
 </html>
