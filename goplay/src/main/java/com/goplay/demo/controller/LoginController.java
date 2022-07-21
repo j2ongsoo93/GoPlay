@@ -1,9 +1,6 @@
 package com.goplay.demo.controller;
 
 import java.security.Principal;
-import java.util.List;
-
-import com.goplay.demo.constant.Role;
 import com.goplay.demo.dao.MemberDAO;
 import com.goplay.demo.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
@@ -97,4 +94,5 @@ public class LoginController {
     public String loginmember(Principal principal) {
         return dao.findById(principal.getName()).getId();
     }
+
 }

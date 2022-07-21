@@ -64,4 +64,10 @@ public class MemberController {
 	public String loginmember(Principal principal) {
 		return mdao.findById(principal.getName()).getId();
 	}
+
+	@GetMapping("/loginMemberNickname")
+	@ResponseBody
+	public String loginmemberNickname(Principal principal) {
+		return mdao.findById(principal.getName()).getNickname();
+	}
 }

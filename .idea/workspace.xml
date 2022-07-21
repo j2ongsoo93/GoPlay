@@ -5,35 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72833b34-facc-4ecc-8166-922493e7b11c" name="변경" comment="[박정수] 20:32">
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchOfferDAOCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/profile-MyMatch.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/constant/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/constant/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MatchBoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/controller/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/BoardDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/BoardDAOCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchOfferDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/MatchOfferDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAOCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/dao/ReplyDAOCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchOfferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/MatchOfferService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/service/ReplyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/java/com/goplay/demo/vo/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/edit-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/edit-profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/insertMatchBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/insertMatchBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/insertMember.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/matchDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/myMatch.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/myMatch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/js/offerMatch.js" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/offerMatch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/blog-single.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/blog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/static/js/navBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/coming-soon.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/company-profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/components.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/connection.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/editMatch_static.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/faq.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/forgot-password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/job-profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/jobs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/maintence.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/messages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/not-found.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/notifications.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/pricing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/sign-in.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/sign-up.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/static/terms.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/clubMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/clubMain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/error.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/offerMatch.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/offerMatch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/profile-MyMatch.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/profile-privacy.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/profile-privacy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/profile-update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/goplay/src/main/resources/templates/matchBoard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +48,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="PJS_0721_3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -99,40 +100,41 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gyh03/OneDrive/file/GitHub/GoPlay/goplay&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;5bf396b10038348453209c8033c86e34&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/박정수/Documents/GitHub/GoPlay/goplay/src/main/resources/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "spring.configuration.checksum": "5bf396b10038348453209c8033c86e34"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
+      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\templates" />
       <recent name="C:\Users\gyh03\OneDrive\file\GitHub\GoPlay\goplay" />
       <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static\js" />
       <recent name="C:\Users\gyh03\OneDrive\file\GitHub\GoPlay\goplay\src\main\resources\static\js" />
       <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\resources" />
       <recent name="C:\Users\ChangHee\Documents\GitHub\GoPlay\goplay\src\main\java\com\goplay\demo\searchCondition" />
       <recent name="C:\Users\HOME\Documents\GitHub\GoPlay\goplay\src\main\resources" />
-      <recent name="C:\Users\박정수\Documents\GitHub\GoPlay\goplay\src\main\resources\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gyh03\OneDrive\file\GitHub\GoPlay\goplay\src\main\resources\static\js" />

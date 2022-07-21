@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		http.formLogin()
 		.loginPage("/login")  //로그인 페이지
-		.defaultSuccessUrl("/main.html")//로그인 성공 url
-		.loginProcessingUrl("/login")
+		.defaultSuccessUrl("/matchBoard")//로그인 성공 url
+		.loginProcessingUrl("/login/action")
 		.usernameParameter("id")
 		.passwordParameter("pwd")
 		.failureUrl("/login/error")
