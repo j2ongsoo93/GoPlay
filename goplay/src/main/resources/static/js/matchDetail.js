@@ -1,5 +1,5 @@
 $(function(){
-    let mbNo = location.href.split("?")[1]
+    let mbNo = $('#mbNo').val();
     let loginID;
     let homeClub;
     let role;
@@ -69,7 +69,7 @@ $(function(){
     //버튼 출력
     if(role == "host"){
         $("#btnContainer")
-            .append($('<button>수정</button>').addClass("btn btn-primary").attr("mbNo", mbNo).attr("id", "upDateMatch"))
+            .append($('<button>수정</button>').addClass("btn btn-primary").attr("mbNo", mbNo).attr("id", "updateMatch"))
             .append($('<span>&nbsp;&nbsp;</span>'))
             .append($('<button>삭제</button>').addClass("btn btn-primary").attr("mbNo", mbNo).attr("id", "deleteMatch"));
 
@@ -103,6 +103,7 @@ $(function(){
         $.ajax({
             url:"/findClub/"+cNo,
             success: function(data){
+                console.log(data)
                 cName = data[0].cname;
             },
             async: false
@@ -142,4 +143,19 @@ $(function(){
         let mbDate = year+'년 '+month+'월 '+day+'일 ('+dayOfWeek+') '+time;
         return mbDate;
     }
+
+    //수정버튼 클릭 이벤트
+    $(document).on("click", "#updateMatch", function(){
+       location.href = "/editMatch/"+mbNo
+    });
+
+    //삭제버튼 클릭 이벤트
+    $(document).on("click", "#deleteMatch", function(){
+
+    });
+
+    //매치신청 클릭 이벤트
+    $(document).on("click", "#applyMatch", function(){
+        location.href = "/matchOffer/"+mbNo
+    });
 });

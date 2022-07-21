@@ -1,8 +1,9 @@
 $(function() {
     //TODO: 입력값 validation
+
+    let mbNo = $('#mbNo').val();
     let loginID;
     let role;
-    let mbNo = null;
     let homeClub = null;
     let awayClub = null;
     let mbDate = null;
@@ -32,9 +33,27 @@ $(function() {
         async:false
     });
 
+    // 날짜 변환 function
+    let printDate = function(datetime){
+        //2022-06-11T00:00:00
+        let mbDateData = datetime;
+        let date = new Date(mbDateData.substring(0,10));
+        // 년 월 일
+        let year = date.getFullYear();
+        let month = date.getMonth()+1;
+        let day = date.getDate();
+        //요일
+        let week = ['일','월','화','수','목','금','토']
+        let dayOfWeek = week[date.getDay()];
+        //시간
+        let time = mbDateData.substring(11,16);
+        let mbDate = year+'년 '+month+'월 '+day+'일 ('+dayOfWeek+') '+time;
+        return mbDate;
+    }
+
     //회원 역할 구분 user: 동호회 회장이 아닌 회원, host: 해당 매치를 동호회장, manager: 타 동호회 동호회장
     $.ajax({
-        url: "/findClubById/tuttle123",
+        url: "/findClubById/hippo123",
         success: function(data) {
             if(data.length == 0){
                 role = "user"
@@ -56,6 +75,7 @@ $(function() {
                 option.html(this.acName);
                 option.attr("value", this.acName);
                 option.attr("acNo", this.acNo);
+                option.attr("id", this.acName);
                 $("#mbLoc1").append(option);
             });
         }
@@ -74,6 +94,7 @@ $(function() {
                     let option = $("<option></option>");
                     option.html(this.adName);
                     option.attr("value", this.adName);
+                    option.attr("id", this.adName);
                     $("#mbLoc2").append(option);
                 });
             }
@@ -117,6 +138,31 @@ $(function() {
 
     });
 
+    // 등록된 정보 입력
+    $.ajax({
+        url:"/detailMatch/"+mbNo,
+        success: function(data){
+            let m = data[0]
+            console.log(m);
+            //"2022-07-18T18:00:00"
+            let hh = m.mbDate.substring(11,13);
+            let mm = m.mbDate.substring(14,16);
+            console.log(hh+" "+mm);
+            $("#mbDate").val(m.mbDate.substring(0,10));
+            $("#"+hh+"h").attr("selected", "true");
+            $("#"+mm+"m").attr("selected", "true");
+            $("#"+m.mbType).attr("selected", "true");
+            $("#"+m.mbLoc1).attr("selected", "true");
+            $("#"+m.mbLoc2).attr("selected", "true");
+            $("#mbStadium").val(m.mbStadium);
+            $("#mbFee").val(m.mbFee);
+            $("#homeUcolor").val(m.homeUcolor);
+            $("#homeLevel").val(m.homeLevel);
+            $("#homeSay").val(m.homeSay);
+
+        }
+    });
+
     // 매치 등록 클릭 시 이벤트
     $('#insertMatch').click(function () {
         mbDate = $("#mbDate").val();
@@ -130,6 +176,7 @@ $(function() {
         homeUcolor = $('#homeUcolor').val();
         homeLevel = $('#homeLevel').val();
         homeSay = $('#homeSay').val();
+
 
         if(mbDate=="" || mbType=="" || homeUcolor=="" || homeLevel=="" || homeSay==""){
             alert("입력하지 않은 사항이 있습니다");

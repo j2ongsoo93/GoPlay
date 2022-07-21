@@ -1,8 +1,9 @@
 $(function(){
-    let mbNo = location.href.split("?")[1]
+    let mbNo = $('#mbNo').val();
     let loginID;
     let homeClub;
     let role;
+    let mbStat;
 
     //로그인한 아이디 조회
     $.ajax({
@@ -17,7 +18,8 @@ $(function(){
     $.ajax({
         url: "/detailMatch/"+mbNo,
         success: function(data){
-            homeClub = data[0].homeClub
+            homeClub = data[0].homeClub;
+            mbStat = data[0].mbStat;
         },
         async: false
     });
@@ -149,7 +151,7 @@ $(function(){
                                     .append($("<div></div>").addClass("row mt-2")
                                         // 홈 클럽 정보
                                         .append($("<div></div>").addClass("col-md-3")
-                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "img/clogo.png"),
+                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "../img/clogo.png"),
                                                 $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", mb.homeClub).html("팀 정보")))
                                         // 매치 정보
                                         .append($("<div></div>").addClass("col-md-6")
@@ -174,7 +176,7 @@ $(function(){
                                                             .append($("<li class=\"d-flex flex-row text-dark\">")
                                                                 .append($("<i class=\"feather-award mr-2 text-dark\">").html(" " + awayRecord))))))))
                                         .append($("<div></div>").addClass("col-md-3")
-                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "img/clogo.png"),
+                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "../img/clogo.png"),
                                                 $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", mb.awayClub).html("팀 정보"))))));
 
                     $("#matchInfoContainer").append(searchForm_matched);
@@ -190,7 +192,7 @@ $(function(){
                                     .append($("<div></div>").addClass("row mt-2")
                                         // 홈 클럽 정보
                                         .append($("<div></div>").addClass("col-md-3")
-                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "img/clogo.png"),
+                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "../img/clogo.png"),
                                                 $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", mb.homeClub).html("팀 정보")))
                                         // 매치 정보
                                         .append($("<div></div>").addClass("col-md-6")
@@ -215,7 +217,7 @@ $(function(){
                                                             .append($("<li class=\"d-flex flex-row text-dark\">")
                                                                 .append($("<i class=\"feather-award mr-2 text-dark\">").html(" " + awayRecord))))))))
                                         .append($("<div></div>").addClass("col-md-3")
-                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "img/clogo.png"),
+                                            .append($("<img></img>").addClass("rounded").attr("width", "100%").attr("src", "../img/clogo.png"),
                                                 $("<button></button>").attr("type", "button").addClass("btn btn-outline-primary btn-block pt-2").addClass("cNo", mb.awayClub).html("팀 정보"))))));
 
                     $("#matchInfoContainer").append(searchForm_end);
@@ -225,7 +227,7 @@ $(function(){
     }
 
     let printScoreBtn = function(){
-        if(role == "host"){
+        if(role == "host" && mbStat == "성사"){
             $('#scoreInput')
                 .append($('<h6 class="font-weight-bold mt-2">경기스코어</h6>&nbsp;&nbsp;\n' +
                     '                        <input type="text" class="form-control" style="width:50px;">&nbsp;&nbsp;:&nbsp;&nbsp;\n' +

@@ -93,10 +93,14 @@ public class MatchBoardController {
 		}
 
 		MatchBoard mb = new MatchBoard();
+		if(map.get("mbNo") != null){
+			mb.setMb_no(Integer.parseInt(map.get("mbNo")));
+		}
 		Club c = new Club();
-//		c.setCNo(Integer.parseInt(map.get("homeClub")));
-		c.setCNo(1);
-		mb.setClub(c);
+		if(map.get("homeClub") != null){
+			c.setCNo(Integer.parseInt(map.get("homeClub")));
+			mb.setClub(c);
+		}
 		mb.setMbDate(mbDateTime);
 		mb.setMbType(map.get("mbType"));
 		mb.setMbLoc1(map.get("mbLoc1"));
@@ -107,6 +111,12 @@ public class MatchBoardController {
 		mb.setHomeLevel(map.get("homeLevel"));
 		mb.setHomeSay(map.get("homeSay"));
 		mb.setMbStat(map.get("mbStat"));
+		if(map.get("awayClub") != null){
+			mb.setAwayClub(Integer.parseInt(map.get("awayClub")));
+		}
+		mb.setAwayUcolor(map.get("awayUcolor"));
+		mb.setAwayLevel(map.get("awayLevel"));
+		mb.setAwaySay(map.get("awaySay"));
 		ms.saveBoard(mb);
 	}
 
@@ -117,20 +127,32 @@ public class MatchBoardController {
 	}
 
 	//매치수정화면으로 이동
-	@GetMapping("/updateMatchBoard")
-	public String updateBoard(){return "updateMatchBoard";}
+	@GetMapping("/editMatch/{mbNo}")
+	public String updateBoard(Model model, @PathVariable int mbNo){
+		model.addAttribute("mbNo", mbNo);
+		return "editMatch";
+	}
 
 	//매치 상세정보(대기)로 이동
-	@GetMapping("/matchDetail")
-	public String detailMatch(Model model){return "detailMatchBoard";}
+	@GetMapping("/matchDetail/{mbNo}")
+	public String detailMatch(Model model, @PathVariable int mbNo){
+		model.addAttribute("mbNo", mbNo);
+		return "matchDetail";
+	}
 
-	//매치 상세정보(성사)로 이동
-	@GetMapping("/matchDetailMatched")
-	public String detailMatchMatched(Model model){return "detailMatchBoardMatched";}
+	//매치 상세정보(성사, 종료)로 이동
+	@GetMapping("/matchDetailME/{mbNo}")
+	public String detailMatchMatched(Model model, @PathVariable int mbNo){
+		model.addAttribute("mbNo", mbNo);
+		return "matchDetailME";
+	}
 
-	//매치 상세정보(종료)로 이동
-	@GetMapping("/matchDetailEnd")
-	public String detailMatchEnd(Model model){return "detailMatchBoardEnd";}
+	//매치 신청으로 이동
+	@GetMapping("/matchOffer/{mbNo}")
+	public String offerMatch(Model model, @PathVariable int mbNo){
+		model.addAttribute("mbNo", mbNo);
+		return "offerMatch";
+	}
 
 	//내 매치 검색
 	@GetMapping("/myMatchEnd/{id}")
