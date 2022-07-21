@@ -79,7 +79,7 @@ public class LoginController {
     @GetMapping("/login")
     public ModelAndView loginMember() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("sign-in.html");
+        modelAndView.setViewName("sign-in");
         return modelAndView;
     }
 
@@ -88,7 +88,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         //model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         modelAndView.addObject("loginErrorMsg","아이디 또는 비밀번호를 확인해주세요");
-        modelAndView.setViewName("sign-in.html");
+        modelAndView.setViewName("sign-in");
         return modelAndView;
     }
 

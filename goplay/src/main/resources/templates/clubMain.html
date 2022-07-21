@@ -51,7 +51,7 @@
          url: "/loginMemberID",
          success: function (data) {
             currentid = data
-            //console.log("로그인 아이이: ", currentid)
+            console.log("로그인 아이디: ", currentid)
          }
       });
 
@@ -167,15 +167,15 @@
                        .attr({"placeholder": "Add Comment...","rows":2, "id":"commentInputBox"}))
                .append("<button type='button' class='btn btn-primary btn-sm' id='replyAddBtn' style='float:right;margin-right:-15px;margin:-15px'>댓글 작성</button>"))
 
-       if (currentStateReply===1){
+       if (joinMID !=1 && joinID !=1){
           $("#commentAddBtn").hide();
        }
 	 }
-
 	   //최초로 경기일정 띄우기
 	   //schMatchBtn();
 	   $.ajax({
 		   url:"/getClubProfileResult",
+           async: false,
 		   success:function(data){
               if (data[0].cimg===null){
                  data[0].cimg="noimageClub.png";
@@ -214,7 +214,9 @@
       // 댓글 입력 창 숨기기 위한 flag 값
       // 1 == 비 동호회원 일 경우에 hide
       let currentStateReply =0;
-
+      let noJoinID=0;
+      let joinID=0;
+      let joinMID=0;
       //동호회원 목록 출력
       $.ajax({
          url:"/findClubMemberCno",
@@ -268,41 +270,58 @@
 
                //로그인 한 아이디가 동호회장일 경우
                //동호회 관리 버튼, 게시글 쓰기 활성화
-               if(currentid==clubManager){
-                  //console.log("회장일 경우")
-                  $("#clubSetting").show();
-                  $("#clubJoinBtn").hide();
-                  $("#clubOutBtn").hide();
-                  $("#insertMainDiv").show();
-                  currentStateReply=0;
 
+               if(currentid==clubManager){
+                  console.log("회장일 경우")
+                  joinMID=1;
                }
                //로그인 한 아이디가 동호회원일 경우
                //동호회 탈퇴 버튼, 게시글 쓰기 활성화
                else if(currentid==this.id){
-                 //console.log("동호회원일 경우")
-                  $("#clubSetting").hide();
-                  $("#clubJoinBtn").hide();
-                  $("#clubOutBtn").show();
-                  $("#insertMainDiv").show();
-                  currentStateReply=0;
+                 console.log("동호회원일 경우")
+                  joinID=1;
                }
                // 로그인 한 아이디가 회원도 아니고 회장도 아닌 일반회원
                // 동호회 가입하기만 활성화
-               else{
-                  //console.log("미가입 일반 회원일 경우")
-                  $("#clubSetting").hide();
-                  $("#clubJoinBtn").show();
-                  $("#clubOutBtn").hide();
-                  $("#insertMainDiv").hide();
-                  currentStateReply=1;
+               else {
+                  console.log("미가입 일반 회원일 경우")
+                  noJoinID=1;
                }
-               //console.log("currentid  ", currentid)
-               //console.log("this.id  ", this.id)
-               //console.log("clubManager  ", clubManager)
+               console.log("currentid  ", currentid)
+               console.log("this.id  ", this.id)
+               console.log("clubManager  ", clubManager)
             })
+
+            if(joinMID==1){
+               //회장일 경우
+               console.log("joinMID " , joinMID)
+               $("#clubSetting").show();
+               $("#clubJoinBtn").hide();
+               $("#clubOutBtn").hide();
+               $("#insertMainDiv").show();
+               $("#commentAddBtn").show();
+            }else if(joinID==1){
+               //일반 회원의 경우
+               console.log("joinID " , joinID)
+               $("#clubSetting").hide();
+               $("#clubJoinBtn").hide();
+               $("#clubOutBtn").show();
+               $("#insertMainDiv").show();
+               $("#commentAddBtn").show();
+            }else {
+               //비가입 회원
+               console.log("noJoinID " , noJoinID)
+               $("#clubSetting").hide();
+               $("#clubJoinBtn").show();
+               $("#clubOutBtn").hide();
+               $("#insertMainDiv").hide();
+               $("#commentAddBtn").hide();
+            }
          }
+
       })
+
+
 
       //게시글 불러오기
 	   $.ajax({
@@ -331,7 +350,7 @@
             },
             success:function(data){
                $.each(data['content'],function(){
-                  var newMbDate = this.mbDate.substring(0,19).replace("T", " ");
+                  var newMbDate = (this.mbDate.toString()).substring(0,19).replace("T", " ");
                   $("#scheduleTable")
                           .append($("<tr></tr>")
                                   .append($("<td></td>").attr("scope","row").html("경기"))
