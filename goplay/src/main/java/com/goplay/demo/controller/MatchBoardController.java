@@ -8,6 +8,7 @@ import com.goplay.demo.searchCondition.MatchBoardSearchCondition;
 import com.goplay.demo.service.MatchOfferService;
 import com.goplay.demo.service.MatchRecordService;
 import com.goplay.demo.vo.Club;
+import com.goplay.demo.vo.MatchOffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -187,4 +188,31 @@ public class MatchBoardController {
 	@GetMapping("/listMatchOffer/{mbNo}")
 	@ResponseBody
 	public List<MatchOfferDTO> listMatchOffer(@PathVariable int mbNo){return mos.listMatchOffer(mbNo);}
+
+	//매치 신청 insert
+	@PostMapping("/insertMatchOffer")
+	@ResponseBody
+	public void insertMatchOffer(HashMap<String, String> map){
+		MatchOffer mo = new MatchOffer();
+
+		MatchBoard mb = new MatchBoard();
+		if(map.get("mbNo") != null){
+			mb.setMb_no(Integer.parseInt(map.get("mbNo")));
+		}
+		mo.setMatch_board(mb);
+
+		Club c = new Club();
+		if(map.get("cNo") != null){
+			c.setCNo(Integer.parseInt(map.get("cNo")));
+			mo.setClub(c);
+		}
+
+		mo.setMoUcolor(map.get("moUcolor"));
+		mo.setMoLevel(map.get("moLevel"));
+		mo.setMoSay(map.get("moSay"));
+
+		LocalDateTime dt = LocalDateTime.now();
+		mo.setMoDate(dt);
+		mos.insertMatchOffer(mo);
+	}
 }

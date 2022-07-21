@@ -34,7 +34,7 @@ $(function() {
 
     //회원 역할 구분 user: 동호회 회장이 아닌 회원, host: 해당 매치를 동호회장, manager: 타 동호회 동호회장
     $.ajax({
-        url: "/findClubById/tuttle123",
+        url: "/findClubById/rabbit123",
         success: function(data) {
             if(data.length == 0){
                 role = "user"

@@ -4,6 +4,10 @@ $(function(){
     let homeClub;
     let role;
 
+    let awayUcolor = null;
+    let awayLevel = null;
+    let awaySay = null;
+
     //로그인한 아이디 조회
     $.ajax({
         url:"/loginmember",
@@ -86,14 +90,13 @@ $(function(){
         success: function(data){
             $.each(data, function(){
                 let tr = $('<tr></tr>');
-                let td1 = $('<td><input id="'+this.moNo+'" name="matchOffer" type="radio"></td>')
+                let td1 = $('<td><input id="'+this.moNo+'" name="matchOffer" value="'+this.moNo+'" type="radio"></td>')
                 let td2 = $('<td></td>').html(getClubName(this.cno));
                 let td3 = $('<td></td>').html(this.moSay);
                 let td4 = $('<td></td>').html(printDate(this.moDate));
                 $(tr).append(td1, td2, td3, td4);
                 $("#matchOfferContainer").append(tr);
             });
-
         }
     });
 
@@ -157,5 +160,10 @@ $(function(){
     //매치신청 클릭 이벤트
     $(document).on("click", "#applyMatch", function(){
         location.href = "/matchOffer/"+mbNo
+    });
+
+    //매치수락 클릭 이벤트
+    $(document).on("click", "#acceptOffer", function(){
+
     });
 });

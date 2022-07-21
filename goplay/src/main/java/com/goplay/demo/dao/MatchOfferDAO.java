@@ -1,39 +1,11 @@
 package com.goplay.demo.dao;
-import com.goplay.demo.dto.AddressDistrictDTO;
-import com.goplay.demo.dto.MatchOfferDTO;
-import com.goplay.demo.dto.QAddressDistrictDTO;
-import com.goplay.demo.dto.QMatchOfferDTO;
-import com.goplay.demo.vo.QAddressDistrict;
-import com.goplay.demo.vo.QMatchOffer;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
+
+import com.goplay.demo.vo.MatchOffer;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-public class MatchOfferDAO {
-    private final JPAQueryFactory queryFactory;
-    QMatchOffer mo = QMatchOffer.matchOffer;
+public interface MatchOfferDAO extends JpaRepository<MatchOffer, Integer>{
 
-    public List<MatchOfferDTO> listMatchOffer(int mbNo){
-        return queryFactory
-                .select(new QMatchOfferDTO(
-                        mo.moNo,
-                        mo.match_board.mb_no,
-                        mo.club.cNo,
-                        mo.moUcolor,
-                        mo.moLevel,
-                        mo.moSay,
-                        mo.moDate))
-                .from(mo)
-                .where(mbNoEq(mbNo))
-                .fetch();
-    }
-
-    private BooleanExpression mbNoEq(int mbNo){
-        return mo.match_board.mb_no.eq(mbNo);
-    }
 }

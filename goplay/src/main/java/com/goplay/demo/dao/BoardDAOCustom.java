@@ -31,7 +31,7 @@ public class BoardDAOCustom {
                 .select(new QBoardDTO(Board.bNo, Board.bTitle, Board.bContent, Board.bImg, Board.bVideo, Board.bFile, Board.bDate, Board.bHit, Board.schDate, Board.schPlace, Board.club.cNo, Board.bType, Board.member.id))
                 .from(Board)
                 .where(Board.club.cNo.eq(cNo)
-				).orderBy(Board.bDate.desc())
+				)
 					//.orderBy(Board.bDate.desc())
 			    .fetchResults();
 		List<BoardDTO> content = results.getResults();

@@ -183,6 +183,7 @@ $(function() {
         awayUcolor = $('#awayUcolor').val();
         awayLevel = $('#awayLevel').val();
         awaySay = $('#awaySay').val();
+        console.log(awayClub)
 
 
         if(awayUcolor=="" || awayLevel=="" || awaySay==""){
@@ -190,26 +191,30 @@ $(function() {
         }else{
             let data = {
                 "mbNo": mbNo,
-                "homeClub": homeClub,
-                "mbDate": mbDate+"T"+mbTime_hh+":"+mbTime_mm+":"+"00.000Z",
-                "mbType": mbType,
-                "mbLoc1": mbLoc1,
-                "mbLoc2": mbLoc2,
-                "mbStadium": mbStadium,
-                "mbFee": mbFee,
-                "homeUcolor": homeUcolor,
-                "homeLevel": homeLevel,
-                "homeSay": homeSay,
-                "mbStat": "대기",
-                "mbNo": mbNo,
-                "awayClub": awayClub,
-                "awayUcolor": awayUcolor,
-                "awayLevel": awayLevel,
-                "awaySay": awaySay,
+                // "homeClub": homeClub,
+                // "mbDate": mbDate+"T"+mbTime_hh+":"+mbTime_mm+":"+"00.000Z",
+                // "mbType": mbType,
+                // "mbLoc1": mbLoc1,
+                // "mbLoc2": mbLoc2,
+                // "mbStadium": mbStadium,
+                // "mbFee": mbFee,
+                // "homeUcolor": homeUcolor,
+                // "homeLevel": homeLevel,
+                // "homeSay": homeSay,
+                // "mbStat": "대기",
+                // "mbNo": mbNo,
+                // "awayClub": awayClub,
+                // "awayUcolor": awayUcolor,
+                // "awayLevel": awayLevel,
+                // "awaySay": awaySay,
+                "cNo": awayClub,
+                "moUcolor": awayUcolor,
+                "moLevel": awayLevel,
+                "moSay": awaySay,
             }
 
             $.ajax({
-                url: "/saveMatchBoard",
+                url: "/insertMatchOffer",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",

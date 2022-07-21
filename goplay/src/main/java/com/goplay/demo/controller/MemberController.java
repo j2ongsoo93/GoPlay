@@ -39,22 +39,15 @@ public class MemberController {
 	@ResponseBody
 	public String saveMember(Member m) {
 		ms.saveMember(m);
-		return "redirect/edit-profile";
+		return "redirect:/edit-profile";
 	}
 
-	@PostMapping("/profile-update/{id}")
-	@ResponseBody
-	public ModelAndView update(@PathVariable String id, Model model) {
-		model.addAttribute("m", ms.getById(id));
-		ModelAndView mav = new ModelAndView("profile-update");
-		return mav;
-	}
-	/*@PostMapping("/updateMember/{id}")
+	@GetMapping("/updateMember/{id}")
 	@ResponseBody
 	public String update(@PathVariable String id, Model model) {
 		model.addAttribute("m", ms.getById(id));
 		return "updateMember";
-	}*/
+	}
 
 	//해당 로그인 멤버의 종목 4개와 위치2개를 받아옴
 	@GetMapping("/findByIdTypeLoc")
@@ -63,14 +56,8 @@ public class MemberController {
 		return ms.findByIdTypeLoc(id);
 	}
 
-	@GetMapping("/ProfilePrivacy")
+	@GetMapping("/asdf")
 	public String profilePrivacy(Model model){return "profile-privacy";}
-
-	@GetMapping("/MyMatch")
-	public String profileMyMatch(Model model){return  "profile-MyMatch";}
-
-	@GetMapping("ProfileUpdate")
-	public String prifileUpdate(Model model){return "profile-update";}
 
 	@GetMapping("/loginMemberID")
 	@ResponseBody

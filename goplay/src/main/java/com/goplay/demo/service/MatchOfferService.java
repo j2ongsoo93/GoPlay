@@ -1,9 +1,9 @@
 package com.goplay.demo.service;
 
-import com.goplay.demo.dao.AddressDistrictDAO;
 import com.goplay.demo.dao.MatchOfferDAO;
-import com.goplay.demo.dto.AddressDistrictDTO;
+import com.goplay.demo.dao.MatchOfferDAOCustom;
 import com.goplay.demo.dto.MatchOfferDTO;
+import com.goplay.demo.vo.MatchOffer;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,13 @@ import java.util.List;
 @Setter
 public class MatchOfferService {
     @Autowired
+    private MatchOfferDAOCustom daoCustom;
+    @Autowired
     private MatchOfferDAO dao;
 
     public List<MatchOfferDTO> listMatchOffer(int mbNo){
-        return dao.listMatchOffer(mbNo);
+        return daoCustom.listMatchOffer(mbNo);
     }
+
+    public void insertMatchOffer(MatchOffer mo){dao.save(mo);}
 }

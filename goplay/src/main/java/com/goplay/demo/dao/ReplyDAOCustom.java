@@ -30,8 +30,7 @@ public class ReplyDAOCustom {
 				.select(new QReplyDTO(qr.rNo, qr.board.bNo, qr.rContent, qr.rDate, qr.member.id))
 				.from(Reply)
 				.where(Reply.board.bNo.in(
-						JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo)))
-						).orderBy(Reply.rDate.desc())
+						JPAExpressions.select(Board.bNo).from(Board).where(Board.bNo.eq(bNo))))
 				.fetch();
 	}
 	public List<ReplyDTO> listReply(String id){
