@@ -17,42 +17,41 @@ import com.goplay.demo.service.MemberService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	MemberService ms;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.headers().frameOptions().disable();
-		http.formLogin()
-		.loginPage("/login")  //로그인 페이지
-		.defaultSuccessUrl("/main.html")//로그인 성공 url
-		.loginProcessingUrl("/login")
-		.usernameParameter("id")
-		.passwordParameter("pwd")
-		.failureUrl("/login/error")
-		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login")
-		.and()
-		.sessionManagement()
-		.maximumSessions(1)
-		.maxSessionsPreventsLogin(true);
+		http
+				.authorizeRequests()
 
-		
+				// 해당 서비스는 모두 사용 가능 (로그인 필요 X)
+				.mvcMatchers("/listCity","/listDistrict/**","/login","/login/error","/insertMember","/js/**","/vendor/**","/sass/**","/css/**","/img/**","/calendar.scss.bootstrap/**").permitAll()
+				.anyRequest().authenticated()
+				//.mvcMatchers("/admin/**").hasRole("admin")
+
+				.and()
+				.formLogin()
+				.loginPage("/login")  //로그인 페이지
+				.defaultSuccessUrl("/main.html")//로그인 성공 url
+				.loginProcessingUrl("/login")
+				.usernameParameter("id")
+				.passwordParameter("pwd")
+				.failureUrl("/login/error")
+				.and()
+				.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login")
+				.and()
+				.sessionManagement()
+				.maximumSessions(1)
+				.maxSessionsPreventsLogin(true);
 		//아래의 mavMAtchers에 따라 승인
 
-		// 해당 서비스는 모두 사용 가능 (로그인 필요 X)
-//		.mvcMatchers("/", "/hello","/all/**", "/join").permitAll();
-		
-//		// 해당 서비스는 admin만 사용 가능
-//		.mvcMatchers("/admin/**").hasRole("admin")
-//		
-//		// 해당 서비스는 로그인 하면 사용 가능
-//		.anyRequest().authenticated();
-		
+
 		//로그인
 		//로그인 폼 명 /login
 //		http.formLogin().loginPage("/login")
@@ -65,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //					.invalidateHttpSession(true)
 //					.logoutSuccessUrl("/login");
-//		
+//
 		http.httpBasic();
 	}
 	@Bean
@@ -77,5 +76,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(ms)
 				.passwordEncoder(passwordEncoder());
 	}
-	
+
 }
